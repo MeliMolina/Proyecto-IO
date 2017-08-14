@@ -1,0 +1,11 @@
+Integrantes:
+	- Marvin Carranza
+	- Benjamín Lewis
+
+Instrucciones para ejecutar:
+	
+	1) Instalar GTK 3: sudo apt-get install libgtk-3-dev
+	2) Instalar Glade: sudo apt-get install glade
+	3) ejecutar makefile
+
+ 
