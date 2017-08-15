@@ -14,11 +14,11 @@
             <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="pixbuf">Azul2.jpg</property>
+            <property name="pixbuf">16-130R4094516-51.jpg</property>
           </object>
           <packing>
-            <property name="x">-8</property>
-            <property name="y">-1</property>
+            <property name="x">-430</property>
+            <property name="y">-290</property>
           </packing>
         </child>
         <child>
@@ -29,7 +29,7 @@
             <property name="can_focus">False</property>
           </object>
           <packing>
-            <property name="x">15</property>
+            <property name="x">-51</property>
             <property name="y">58</property>
           </packing>
         </child>
@@ -46,19 +46,19 @@
             </attributes>
           </object>
           <packing>
-            <property name="x">185</property>
+            <property name="x">117</property>
             <property name="y">59</property>
           </packing>
         </child>
         <child>
           <object class="GtkSeparator" id="separator8">
-            <property name="width_request">175</property>
+            <property name="width_request">130</property>
             <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
           </object>
           <packing>
-            <property name="x">543</property>
+            <property name="x">439</property>
             <property name="y">60</property>
           </packing>
         </child>
@@ -75,7 +75,7 @@
             </attributes>
           </object>
           <packing>
-            <property name="x">291</property>
+            <property name="x">201</property>
             <property name="y">139</property>
           </packing>
         </child>
@@ -92,7 +92,7 @@
             </attributes>
           </object>
           <packing>
-            <property name="x">318</property>
+            <property name="x">242</property>
             <property name="y">191</property>
           </packing>
         </child>
@@ -109,8 +109,8 @@
             </attributes>
           </object>
           <packing>
-            <property name="x">318</property>
-            <property name="y">262</property>
+            <property name="x">243</property>
+            <property name="y">269</property>
           </packing>
         </child>
         <child>
@@ -129,8 +129,8 @@
             </attributes>
           </object>
           <packing>
-            <property name="x">323</property>
-            <property name="y">329</property>
+            <property name="x">249</property>
+            <property name="y">360</property>
           </packing>
         </child>
         <child>
@@ -146,8 +146,8 @@
             </attributes>
           </object>
           <packing>
-            <property name="x">310</property>
-            <property name="y">370</property>
+            <property name="x">235</property>
+            <property name="y">431</property>
           </packing>
         </child>
         <child>
@@ -161,8 +161,8 @@
             <signal name="clicked" handler="on_Button_cerrar_clicked" swapped="no"/>
           </object>
           <packing>
-            <property name="x">582</property>
-            <property name="y">452</property>
+            <property name="x">421</property>
+            <property name="y">551</property>
           </packing>
         </child>
       </object>
