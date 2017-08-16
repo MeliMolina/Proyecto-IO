@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
+<interface>
+  <requires lib="gtk+" version="3.12"/>
+  <object class="GtkWindow" id="window1">
+    <property name="can_focus">False</property>
+    <property name="window_position">center</property>
+    <child>
+      <object class="GtkFixed" id="fixed1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkImage" id="image1">
+            <property name="width_request">100</property>
+            <property name="height_request">317</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="opacity">0.93999999999999995</property>
+            <property name="halign">end</property>
+            <property name="xalign">0.059999998658895493</property>
+            <property name="pixbuf">fondo_principal.jpg</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_pending">
+            <property name="label" translatable="yes">Salir</property>
+            <property name="width_request">100</property>
+            <property name="height_request">35</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="margin_top">3</property>
+            <property name="margin_bottom">12</property>
+            <property name="xalign">0.51999998092651367</property>
+            <property name="yalign">0.40999999642372131</property>
+            <signal name="clicked" handler="on_btn_pending_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">443</property>
+            <property name="y">509</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="image2">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">pending.png</property>
+          </object>
+          <packing>
+            <property name="x">27</property>
+            <property name="y">96</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
