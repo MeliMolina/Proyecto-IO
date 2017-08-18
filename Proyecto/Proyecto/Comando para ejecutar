@@ -1,3 +1,0 @@
-gcc -Wall -export-dynamic -g main_menu.c -o Menu_Principal `pkg-config --cflags --libs gtk+-3.0`
-
-./Menu_Principal

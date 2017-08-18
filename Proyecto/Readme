@@ -1,0 +1,25 @@
+************************************************************************
+ 
+ Instituto Tecnológico de Costa Rica
+ Investigación de Operaciones
+ II Semestre 2017
+
+ Proyecto 0. Menú de Programas de Programación Dinámica
+
+ Profesor: Dr.Francisco J.Torres Rojas
+
+ Melissa Molina Corrales
+ Edwin Cen Xu
+
+ ************************************************************************
+
+Instrucciones para correr el programa
+	
+	1) Instalar GTK 3: sudo apt-get install libgtk-3-dev.
+	2) Instalar Glade: sudo apt-get install glade.
+	3) Ejecutar el makefile con el comando make.
+
+
+Al ejecutar el makefile se mostrará la interfaz del proyecto con una ventana principal con el menú
+de programas de programación dinámica.
+

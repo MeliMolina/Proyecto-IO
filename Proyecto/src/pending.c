@@ -1,3 +1,18 @@
+/************************************************************************
+ 
+ Instituto Tecnológico de Costa Rica
+ Investigación de Operaciones
+ II Semestre 2017
+
+ Proyecto 0.Menú de Programas de Programación Dinámica
+
+ Profesor: Dr.Francisco J.Torres Rojas
+
+ Melissa Molina Corrales
+ Edwin Cen Xu
+
+ ************************************************************************/
+
 #include <gtk/gtk.h>
  
 GtkWidget *btn_pending;
@@ -23,7 +38,7 @@ int main(int argc, char *argv[])
     return 0;
 } 
  
-// called when window is closed
+
 void on_window_pending_destroy()
 {
     gtk_main_quit();

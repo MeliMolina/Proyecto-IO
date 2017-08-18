@@ -1,3 +1,18 @@
+/************************************************************************
+ 
+ Instituto Tecnológico de Costa Rica
+ Investigación de Operaciones
+ II Semestre 2017
+
+ Proyecto 0.Menú de Programas de Programación Dinámica
+
+ Profesor: Dr.Francisco J.Torres Rojas
+
+ Melissa Molina Corrales
+ Edwin Cen Xu
+
+ ************************************************************************/
+
 #include <gtk/gtk.h>
 
 GtkBuilder      *builder_about; 
@@ -39,10 +54,6 @@ int main(int argc, char *argv[])
     gtk_widget_set_tooltip_text(btn_Programa4, "Descripción del Programa 4");
     gtk_widget_set_tooltip_text(btn_Programa5, "Descripción del Programa 5");
 
-
-
-   
-  
 
     g_object_unref(builder);
  
