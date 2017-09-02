@@ -90,7 +90,7 @@ void on_Button_cerrar_clicked(){
 }
 
 void on_Button_Programa1_clicked(){
-    system("./Pending &");
+    system("./Series_Deportivas &");
 
 
 }

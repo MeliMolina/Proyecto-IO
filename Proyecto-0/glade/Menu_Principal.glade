@@ -334,7 +334,7 @@
                   <object class="GtkLabel" id="label_programa2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Programa 1</property>
+                    <property name="label" translatable="yes">Series Deportivas</property>
                     <attributes>
                       <attribute name="font-desc" value="Abyssinica SIL 10"/>
                       <attribute name="style" value="italic"/>

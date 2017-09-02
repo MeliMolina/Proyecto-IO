@@ -25,12 +25,14 @@ OBJS=    main_menu.o
 all: $(OBJS)
 	$(LD) -o $(TARGET) $(OBJS) $(LDFLAGS)
 	$(CC) -o Pending src/pending.c $(LDFLAGS)
+	$(CC) -o Series_Deportivas src/series_deportivas.c $(LDFLAGS)
 	./main_menu
     
 
     
 main_menu.o: src/main_menu.c
 	$(CC) -c $(CCFLAGS) src/main_menu.c $(GTKLIB) -o main_menu.o
+
     
 clean:
 	rm -f *.o $(TARGET) 
