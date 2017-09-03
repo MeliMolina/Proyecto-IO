@@ -73,22 +73,24 @@ int main(int argc, char *argv[])
     btn_Salir = GTK_WIDGET(gtk_builder_get_object(builder, "Button_Salir"));
     btn_About = GTK_WIDGET(gtk_builder_get_object(builder, "Button_info"));
 
-    gtk_widget_set_tooltip_text(Programa1, "Dado el número de juegos de una serie, la probabilidad de ganar en casa y la probabilidad de ganar como visita del equipo A, calcula la probabilidad de que el equipo A gane la serie contra el equipo B");
-    gtk_widget_set_tooltip_text(Programa2, "Descripción del Programa 2");
-    gtk_widget_set_tooltip_text(Programa3, "Descripción del Programa 3");
-    gtk_widget_set_tooltip_text(Programa4, "Descripción del Programa 4");
-    gtk_widget_set_tooltip_text(Programa5, "Descripción del Programa 5");
-    gtk_widget_set_tooltip_text(Programa6, "Descripción del Programa 6");
+    gtk_widget_set_tooltip_text(Programa1, "Dado el número de juegos de una serie, la probabilidad de ganar en casa y la probabilidad de ganar como visita del equipo A, el algoritmo calcula la probabilidad de que el equipo A gane la serie contra el equipo B.");
+    gtk_widget_set_tooltip_text(Programa2, "Conocido como Algoritmo de Floyd, el cual determina determina la ruta más corta entre dos nodos cualquiera de la red.");
+    gtk_widget_set_tooltip_text(Programa3, "Determina un plan de reemplazos óptimo para un equipo en un determinado tiempo a partir del costo incicial del equipo, el plazo del proyecto,la vida útil del equipo, basándose en el precio de reventa y costo del mantenimiento para cada unidad de tiempo de uso del equipo.");
+    gtk_widget_set_tooltip_text(Programa4, "Conocido como Knapsack problem, el cual busca la mejor solución entre un conjunto finito de posibles soluciones a un problema. Modela una situación en la cual hay que llenar una mochila, incapaz de soportar más de un peso determinado, cada objeto a colocar en la mochila tiene un peso y valor específicos,los objetos colocados en la mochila deben maximizar el valor total sin exceder el peso máximo.");
+    gtk_widget_set_tooltip_text(Programa5, "Este algoritmo indicará como hacer el árbol binario de búsqueda de costo promedio mı́nimo, a partir de una serie de llaves con un respectivo peso.");
+    gtk_widget_set_tooltip_text(Programa6, "Este algoritmo indicará de que manera multiplicar una cadena de matrices mostrando una hilera con paréntesis en los lugares apropiados, a partir de un número de matrices indicado por el usuario.");
     gtk_widget_set_tooltip_text(button_1, "Dado el número de juegos de una serie, la probabilidad de ganar en casa y la probabilidad de ganar como visita del equipo A, calcula la probabilidad de que el equipo A gane la serie contra el equipo B");
-    gtk_widget_set_tooltip_text(button_2, "Descripción del Programa 2");
-    gtk_widget_set_tooltip_text(button_3, "Descripción del Programa 3");
-    gtk_widget_set_tooltip_text(button_4, "Descripción del Programa 4");
-    gtk_widget_set_tooltip_text(button_5, "Descripción del Programa 5");
-    gtk_widget_set_tooltip_text(button_6, "Descripción del Programa 6");
+    gtk_widget_set_tooltip_text(button_2, "Conocido como el algoritmo de Floyd, el cual determina determina la ruta más corta entre dos nodos cualquiera de la red.");
+    gtk_widget_set_tooltip_text(button_3, "Determina un plan de reemplazos óptimo para un equipo en un determinado tiempo, a partir del costo incicial del equipo, el plazo del proyecto,la vida útil del equipo\n basándose en el precio de reventa y costo del mantenimiento para cada unidad de tiempo de uso del equipo.");
+    gtk_widget_set_tooltip_text(button_4, "Conocido como Knapsack problem, el cual busca la mejor solución entre un conjunto finito de posibles soluciones a un problema. Modela una situacion en la cual hay que llenar una mochila, incapaz de soportar más de un peso determinado, cada objeto a colocar en la mochila tiene un peso y valor específicos,los objetos colocados en la mochila deben maximizar el valor total sin exceder el peso máximo.");
+    gtk_widget_set_tooltip_text(button_5, "Este algoritmo indicará como hacer el árbol binario de búsqueda de costo promedio mı́nimo, a partir de una serie de llaves con un respectivo peso.");
+    gtk_widget_set_tooltip_text(button_6, "Este algoritmo indicará de que manera multiplicar una cadena de matrices mostrando una hilera con paréntesis en los lugares apropiados, a partir de un número de matrices indicado por el usuario.");
 
-    gtk_widget_set_tooltip_text(btn_Salir, "Salir del programa");
-    gtk_widget_set_tooltip_text(btn_About, "Información del programa");
+    gtk_widget_set_tooltip_text(btn_Salir, "Cierra el programa");
+    gtk_widget_set_tooltip_text(btn_About, "Muestra información del programa y sus creadores");
    
+
+
   
     g_object_unref(builder);
  

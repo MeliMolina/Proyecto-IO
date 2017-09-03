@@ -28,15 +28,15 @@
             <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Proyecto 0: Menú de Programas de Programación Dinámica</property>
+            <property name="label" translatable="yes"> Programas de Programación Dinámica</property>
             <attributes>
-              <attribute name="font-desc" value="Abyssinica SIL Bold 11"/>
+              <attribute name="font-desc" value="DejaVu Serif Bold Italic 11"/>
               <attribute name="style" value="italic"/>
               <attribute name="weight" value="bold"/>
             </attributes>
           </object>
           <packing>
-            <property name="x">41</property>
+            <property name="x">128</property>
             <property name="y">59</property>
           </packing>
         </child>
@@ -48,7 +48,7 @@
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Investigación de Operaciones</property>
             <attributes>
-              <attribute name="font-desc" value="Abyssinica SIL Bold 10"/>
+              <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
               <attribute name="style" value="italic"/>
               <attribute name="weight" value="bold"/>
             </attributes>
@@ -66,7 +66,7 @@
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">II Semestre 2017</property>
             <attributes>
-              <attribute name="font-desc" value="Abyssinica SIL Bold 10"/>
+              <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
               <attribute name="style" value="italic"/>
               <attribute name="weight" value="bold"/>
             </attributes>
@@ -84,7 +84,7 @@
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Realizado por:</property>
             <attributes>
-              <attribute name="font-desc" value="Abyssinica SIL Bold 10"/>
+              <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
               <attribute name="style" value="italic"/>
               <attribute name="weight" value="bold"/>
             </attributes>
@@ -105,7 +105,7 @@
 
 </property>
             <attributes>
-              <attribute name="font-desc" value="Abyssinica SIL Bold 10"/>
+              <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
               <attribute name="style" value="italic"/>
               <attribute name="weight" value="bold"/>
             </attributes>
@@ -123,13 +123,13 @@
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Melissa Molina Corrales</property>
             <attributes>
-              <attribute name="font-desc" value="Abyssinica SIL Bold 10"/>
+              <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
               <attribute name="style" value="italic"/>
               <attribute name="weight" value="bold"/>
             </attributes>
           </object>
           <packing>
-            <property name="x">191</property>
+            <property name="x">193</property>
             <property name="y">427</property>
           </packing>
         </child>
@@ -168,7 +168,7 @@
             <property name="can_focus">False</property>
           </object>
           <packing>
-            <property name="x">-7</property>
+            <property name="x">-8</property>
             <property name="y">80</property>
           </packing>
         </child>
