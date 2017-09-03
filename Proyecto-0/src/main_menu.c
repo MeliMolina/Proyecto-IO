@@ -21,12 +21,25 @@ GtkWidget       *about_window;
 GtkBuilder      *builder_Programa1; 
 GtkWidget       *window_Programa1;
 
-GtkWidget *btn_Programa1;
-GtkWidget *btn_Programa2;
-GtkWidget *btn_Programa3;
-GtkWidget *btn_Programa4;
-GtkWidget *btn_Programa5;
+GtkWidget *Programa1;
+GtkWidget *Programa2;
+GtkWidget *Programa3;
+GtkWidget *Programa4;
+GtkWidget *Programa5;
+GtkWidget *Programa6;
+
 GtkWidget *btn_Salir;
+GtkWidget *btn_About;
+
+GtkWidget *button_1;
+GtkWidget *button_2;
+GtkWidget *button_3;
+GtkWidget *button_4;
+GtkWidget *button_5;
+GtkWidget *button_6;
+
+
+
 
 int main(int argc, char *argv[])
 {
@@ -42,19 +55,41 @@ int main(int argc, char *argv[])
     gtk_builder_connect_signals(builder, NULL);
 
 
-    btn_Programa1 = GTK_WIDGET(gtk_builder_get_object(builder, "control_fijo_1"));
-    btn_Programa2 = GTK_WIDGET(gtk_builder_get_object(builder, "control_fijo_2"));
-    btn_Programa3 = GTK_WIDGET(gtk_builder_get_object(builder, "control_fijo_3"));
-    btn_Programa4 = GTK_WIDGET(gtk_builder_get_object(builder, "control_fijo_4"));
-    btn_Programa5 = GTK_WIDGET(gtk_builder_get_object(builder, "control_fijo_5"));
-
-    gtk_widget_set_tooltip_text(btn_Programa1, "Descripción del Programa 1");
-    gtk_widget_set_tooltip_text(btn_Programa2, "Descripción del Programa 2");
-    gtk_widget_set_tooltip_text(btn_Programa3, "Descripción del Programa 3");
-    gtk_widget_set_tooltip_text(btn_Programa4, "Descripción del Programa 4");
-    gtk_widget_set_tooltip_text(btn_Programa5, "Descripción del Programa 5");
+    Programa1 = GTK_WIDGET(gtk_builder_get_object(builder, "control_fijo_1"));
+    Programa2 = GTK_WIDGET(gtk_builder_get_object(builder, "control_fijo_2"));
+    Programa3 = GTK_WIDGET(gtk_builder_get_object(builder, "control_fijo_3"));
+    Programa4 = GTK_WIDGET(gtk_builder_get_object(builder, "control_fijo_4"));
+    Programa5 = GTK_WIDGET(gtk_builder_get_object(builder, "control_fijo_5"));
+    Programa6 = GTK_WIDGET(gtk_builder_get_object(builder, "control_fijo_6"));
 
 
+    button_1 = GTK_WIDGET(gtk_builder_get_object(builder, "Button_Programa1"));
+    button_2 = GTK_WIDGET(gtk_builder_get_object(builder, "Button_Programa2"));
+    button_3 = GTK_WIDGET(gtk_builder_get_object(builder, "Button_Programa3"));
+    button_4 = GTK_WIDGET(gtk_builder_get_object(builder, "Button_Programa4"));
+    button_5 = GTK_WIDGET(gtk_builder_get_object(builder, "Button_Programa5"));
+    button_6 = GTK_WIDGET(gtk_builder_get_object(builder, "Button_Programa6"));
+
+    btn_Salir = GTK_WIDGET(gtk_builder_get_object(builder, "Button_Salir"));
+    btn_About = GTK_WIDGET(gtk_builder_get_object(builder, "Button_info"));
+
+    gtk_widget_set_tooltip_text(Programa1, "Dado el número de juegos de una serie, la probabilidad de ganar en casa y la probabilidad de ganar como visita del equipo A, calcula la probabilidad de que el equipo A gane la serie contra el equipo B");
+    gtk_widget_set_tooltip_text(Programa2, "Descripción del Programa 2");
+    gtk_widget_set_tooltip_text(Programa3, "Descripción del Programa 3");
+    gtk_widget_set_tooltip_text(Programa4, "Descripción del Programa 4");
+    gtk_widget_set_tooltip_text(Programa5, "Descripción del Programa 5");
+    gtk_widget_set_tooltip_text(Programa6, "Descripción del Programa 6");
+    gtk_widget_set_tooltip_text(button_1, "Descripción del Programa 1");
+    gtk_widget_set_tooltip_text(button_2, "Descripción del Programa 2");
+    gtk_widget_set_tooltip_text(button_3, "Descripción del Programa 3");
+    gtk_widget_set_tooltip_text(button_4, "Descripción del Programa 4");
+    gtk_widget_set_tooltip_text(button_5, "Descripción del Programa 5");
+    gtk_widget_set_tooltip_text(button_6, "Descripción del Programa 6");
+
+    gtk_widget_set_tooltip_text(btn_Salir, "Salir del programa");
+    gtk_widget_set_tooltip_text(btn_About, "Información del programa");
+   
+  
     g_object_unref(builder);
  
     gtk_widget_show(window);                
@@ -117,6 +152,12 @@ void on_Button_Programa4_clicked(){
 void on_Button_Programa5_clicked(){
 
 	system("./Pending &");
+
+}
+
+void on_Button_Programa6_clicked(){
+    system("./Pending &");
+	
 
 }
 
