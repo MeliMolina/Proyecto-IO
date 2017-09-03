@@ -16,11 +16,10 @@
             <property name="height_request">94</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="pixbuf">fondo2.jpg</property>
           </object>
           <packing>
-            <property name="x">-1838</property>
-            <property name="y">-1166</property>
+            <property name="x">-296</property>
+            <property name="y">-131</property>
           </packing>
         </child>
         <child>
@@ -56,7 +55,7 @@
                     <property name="label" translatable="yes">Algoritmo Series Deportivas</property>
                     <property name="justify">center</property>
                     <attributes>
-                      <attribute name="font-desc" value="Abyssinica SIL 10"/>
+                      <attribute name="font-desc" value="DejaVu Serif Bold Italic 11"/>
                       <attribute name="weight" value="bold"/>
                       <attribute name="foreground" value="#000000000000"/>
                     </attributes>
@@ -94,7 +93,7 @@
                 <property name="can_focus">False</property>
                 <child>
                   <object class="GtkFixed" id="tabla_SD">
-                    <property name="width_request">19</property>
+                    <property name="width_request">32</property>
                     <property name="height_request">32</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -104,11 +103,11 @@
                         <property name="height_request">253</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">fondo_principal.jpg</property>
+                        <property name="pixbuf">fondo4.jpg</property>
                       </object>
                       <packing>
-                        <property name="x">-152</property>
-                        <property name="y">-140</property>
+                        <property name="x">-44</property>
+                        <property name="y">-17</property>
                       </packing>
                     </child>
                     <child>
@@ -675,13 +674,13 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="x">31</property>
+                    <property name="x">53</property>
                     <property name="y">20</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkFixed" id="tabla_SD1">
-                    <property name="width_request">32</property>
+                    <property name="width_request">0</property>
                     <property name="height_request">32</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -691,11 +690,11 @@
                         <property name="height_request">80</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">fondo_principal.jpg</property>
+                        <property name="pixbuf">fondo4.jpg</property>
                       </object>
                       <packing>
-                        <property name="x">-103</property>
-                        <property name="y">-140</property>
+                        <property name="x">90</property>
+                        <property name="y">-17</property>
                       </packing>
                     </child>
                     <child>
@@ -706,13 +705,13 @@
                         <property name="can_focus">False</property>
                       </object>
                       <packing>
-                        <property name="x">43</property>
+                        <property name="x">107</property>
                         <property name="y">5</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
-                    <property name="x">505</property>
+                    <property name="x">510</property>
                     <property name="y">20</property>
                   </packing>
                 </child>
@@ -884,7 +883,6 @@
           </object>
           <packing>
             <property name="x">-2</property>
-            <property name="y">-3</property>
           </packing>
         </child>
       </object>

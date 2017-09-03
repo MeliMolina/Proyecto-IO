@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
     gtk_widget_set_tooltip_text(Programa4, "Descripción del Programa 4");
     gtk_widget_set_tooltip_text(Programa5, "Descripción del Programa 5");
     gtk_widget_set_tooltip_text(Programa6, "Descripción del Programa 6");
-    gtk_widget_set_tooltip_text(button_1, "Descripción del Programa 1");
+    gtk_widget_set_tooltip_text(button_1, "Dado el número de juegos de una serie, la probabilidad de ganar en casa y la probabilidad de ganar como visita del equipo A, calcula la probabilidad de que el equipo A gane la serie contra el equipo B");
     gtk_widget_set_tooltip_text(button_2, "Descripción del Programa 2");
     gtk_widget_set_tooltip_text(button_3, "Descripción del Programa 3");
     gtk_widget_set_tooltip_text(button_4, "Descripción del Programa 4");

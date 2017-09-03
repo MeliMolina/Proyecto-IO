@@ -227,7 +227,7 @@
             <property name="label" translatable="yes">Programas de Programación Dinámica</property>
             <property name="justify">center</property>
             <attributes>
-              <attribute name="font-desc" value="Abyssinica SIL Bold Semi-Condensed 11"/>
+              <attribute name="font-desc" value="DejaVu Serif Bold Italic 11"/>
               <attribute name="style" value="italic"/>
               <attribute name="weight" value="ultraheavy"/>
               <attribute name="foreground" value="#000000000000"/>
@@ -252,31 +252,6 @@
           <packing>
             <property name="x">514</property>
             <property name="y">578</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSeparator" id="separator3">
-            <property name="width_request">628</property>
-            <property name="height_request">80</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="x">-3</property>
-            <property name="y">255</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSeparator" id="separator6">
-            <property name="name">296</property>
-            <property name="width_request">623</property>
-            <property name="height_request">80</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="x">2</property>
-            <property name="y">469</property>
           </packing>
         </child>
         <child>
@@ -313,7 +288,7 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Series Deportivas</property>
                     <attributes>
-                      <attribute name="font-desc" value="Abyssinica SIL 10"/>
+                      <attribute name="font-desc" value="DejaVu Serif 10"/>
                       <attribute name="style" value="italic"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -358,7 +333,7 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Rutas Óptimas</property>
                     <attributes>
-                      <attribute name="font-desc" value="Abyssinica SIL Bold 10"/>
+                      <attribute name="font-desc" value="DejaVu Serif Italic 10"/>
                       <attribute name="style" value="italic"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -403,7 +378,7 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Reemplazo de Equipos</property>
                     <attributes>
-                      <attribute name="font-desc" value="Abyssinica SIL Bold 10"/>
+                      <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
                       <attribute name="style" value="italic"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -447,7 +422,7 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Problema de la Mochila</property>
                     <attributes>
-                      <attribute name="font-desc" value="Abyssinica SIL Bold 10"/>
+                      <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
                       <attribute name="style" value="italic"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -493,7 +468,7 @@
                     <property name="label" translatable="yes">Árboles Binarios de 
 Búsqueda Óptimos</property>
                     <attributes>
-                      <attribute name="font-desc" value="Abyssinica SIL Bold 10"/>
+                      <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
                       <attribute name="style" value="italic"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -576,7 +551,7 @@ Búsqueda Óptimos</property>
           </object>
           <packing>
             <property name="x">59</property>
-            <property name="y">386</property>
+            <property name="y">397</property>
           </packing>
         </child>
         <child>
@@ -591,7 +566,7 @@ Búsqueda Óptimos</property>
           </object>
           <packing>
             <property name="x">259</property>
-            <property name="y">396</property>
+            <property name="y">397</property>
           </packing>
         </child>
         <child>
@@ -613,7 +588,7 @@ Búsqueda Óptimos</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Multiplicación de Matrices</property>
                     <attributes>
-                      <attribute name="font-desc" value="Abyssinica SIL Bold 10"/>
+                      <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
                       <attribute name="style" value="italic"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -640,45 +615,6 @@ Búsqueda Óptimos</property>
           </packing>
         </child>
         <child>
-          <object class="GtkSeparator" id="separator4">
-            <property name="width_request">100</property>
-            <property name="height_request">395</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-          </object>
-          <packing>
-            <property name="x">169</property>
-            <property name="y">114</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSeparator" id="separator5">
-            <property name="width_request">100</property>
-            <property name="height_request">394</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-          </object>
-          <packing>
-            <property name="x">350</property>
-            <property name="y">115</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSeparator" id="separator8">
-            <property name="width_request">628</property>
-            <property name="height_request">80</property>
-            <property name="visible">True</property>
-            <property name="app_paintable">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="x">-3</property>
-            <property name="y">74</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkButton" id="Button_Programa6">
             <property name="label" translatable="yes">Seleccionar</property>
             <property name="width_request">92</property>
@@ -690,7 +626,7 @@ Búsqueda Óptimos</property>
           </object>
           <packing>
             <property name="x">455</property>
-            <property name="y">396</property>
+            <property name="y">397</property>
           </packing>
         </child>
       </object>
