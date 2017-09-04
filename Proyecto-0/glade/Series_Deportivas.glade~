@@ -124,6 +124,19 @@
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <child>
+                              <object class="GtkLabel" id="respuesta_SD">
+                                <property name="width_request">470</property>
+                                <property name="height_request">40</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
                               <object class="GtkFixed" id="datos_SD">
                                 <property name="width_request">470</property>
                                 <property name="height_request">430</property>
@@ -200,6 +213,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
+                                    <signal name="clicked" handler="on_calcProbabilidad_clicked" swapped="no"/>
                                   </object>
                                   <packing>
                                     <property name="x">278</property>
@@ -207,11 +221,35 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkFixed" id="fixed1">
+                                  <object class="GtkFixed" id="prob">
                                     <property name="width_request">160</property>
                                     <property name="height_request">72</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
+                                    <child>
+                                      <object class="GtkLabel" id="probabilidades1">
+                                        <property name="width_request">100</property>
+                                        <property name="height_request">80</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="x">31</property>
+                                        <property name="y">-21</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="probabilidades2">
+                                        <property name="width_request">100</property>
+                                        <property name="height_request">80</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="x">31</property>
+                                        <property name="y">20</property>
+                                      </packing>
+                                    </child>
                                   </object>
                                   <packing>
                                     <property name="x">283</property>
@@ -236,6 +274,7 @@
                                     <signal name="clicked" handler="on_Acept7_clicked" object="juego7" swapped="no"/>
                                     <signal name="clicked" handler="on_Acept8_clicked" object="juego8" swapped="no"/>
                                     <signal name="clicked" handler="on_Acept9_clicked" object="juego9" swapped="no"/>
+                                    <signal name="clicked" handler="on_Acept_clicked" swapped="no"/>
                                   </object>
                                   <packing>
                                     <property name="x">99</property>
@@ -644,19 +683,6 @@
                                     <property name="y">7</property>
                                   </packing>
                                 </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="respuesta_SD">
-                                <property name="width_request">470</property>
-                                <property name="height_request">40</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
