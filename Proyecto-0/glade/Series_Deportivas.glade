@@ -124,6 +124,19 @@
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <child>
+                              <object class="GtkLabel" id="respuesta_SD">
+                                <property name="width_request">470</property>
+                                <property name="height_request">40</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
                               <object class="GtkFixed" id="datos_SD">
                                 <property name="width_request">470</property>
                                 <property name="height_request">430</property>
@@ -236,6 +249,8 @@
                                     <signal name="clicked" handler="on_Acept7_clicked" object="juego7" swapped="no"/>
                                     <signal name="clicked" handler="on_Acept8_clicked" object="juego8" swapped="no"/>
                                     <signal name="clicked" handler="on_Acept9_clicked" object="juego9" swapped="no"/>
+                                    <signal name="clicked" handler="on_AceptPH_clicked" object="Ph" swapped="no"/>
+                                    <signal name="clicked" handler="on_AceptPR_clicked" object="Pr" swapped="no"/>
                                   </object>
                                   <packing>
                                     <property name="x">99</property>
@@ -644,19 +659,6 @@
                                     <property name="y">7</property>
                                   </packing>
                                 </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="respuesta_SD">
-                                <property name="width_request">470</property>
-                                <property name="height_request">40</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
