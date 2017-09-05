@@ -40,6 +40,7 @@ GtkWidget *juego11;
 
 GtkWidget *probabilidades1;
 GtkWidget *probabilidades2;
+GtkWidget *result;
 GtkWidget *entry_cargar_SD;
 GtkWidget *btn_calcular_SD;
 GtkWidget *calcProbabilidad;
@@ -50,6 +51,7 @@ GtkWidget *guardar_SD;
 GtkWidget *SalirDelPrograma;
 
 int CantidadDeJuegos = 0;
+int juegosganar = 0;
 float ph = 0;
 float pr = 0;
 float qh = 0;
@@ -65,12 +67,12 @@ int lugar_juego8=0;
 int lugar_juego9=0;
 int lugar_juego10=0;
 int lugar_juego11=0;
+int lugar_juego[11];
 
+float mat[10][10];
 
 int main(int argc, char *argv[])
 {
-    
- 
     gtk_init(&argc, &argv);
  
     builder = gtk_builder_new();
@@ -84,6 +86,7 @@ int main(int argc, char *argv[])
     g_Pr = GTK_WIDGET(gtk_builder_get_object(builder, "Pr"));
     probabilidades1 = GTK_WIDGET(gtk_builder_get_object(builder, "probabilidades1"));
     probabilidades2 = GTK_WIDGET(gtk_builder_get_object(builder, "probabilidades2"));
+    result = GTK_WIDGET(gtk_builder_get_object(builder, "result"));
     gtk_widget_show(window_SD);   
                               
     gtk_main();
@@ -103,7 +106,29 @@ void on_btn_crear_SD_clicked()
 
 void on_btn_calcular_SD_clicked()
 {   
-    
+    for (int i=0;i<=CantidadDeJuegos;i++){
+        for( int j = 0;j<CantidadDeJuegos;j++){
+            if(j==0){
+                mat[i][j]=0;
+                continue;
+            }
+            if(i==0){
+                mat[i][j]=1;
+                continue;
+            }
+
+            mat[i][j]=ph*mat[i-1][j]+qr*mat[i][j-1];
+        }
+
+    }
+    printf("%f\n",mat[CantidadDeJuegos-1][CantidadDeJuegos-1]);
+    char val[120];
+    strcpy(val,"La probabilidad de que A gane la serie es de: ");
+    char v[30];
+    sprintf(v,"%f",mat[CantidadDeJuegos-1][CantidadDeJuegos-1]);
+    strcat(val,v);
+   
+    gtk_label_set_text(GTK_LABEL(result), val);
 }
 
 void on_btn_cargar_SD_clicked(){
@@ -145,11 +170,20 @@ void on_Acept_clicked(){
     prS = gtk_entry_get_text(GTK_ENTRY(g_Pr));
     pr = stof(prS);
 
-    qh = 1 - ph;
-    qr = 1 - pr;
+    qh = 1 - pr;
+    qr = 1 - ph;
 
-    printf("ph = %4.4f\n",ph);
-    printf("pr = %4.4f\n\n",pr);
+    lugar_juego[0]=lugar_juego1;
+    lugar_juego[1]=lugar_juego2;
+    lugar_juego[2]=lugar_juego3;
+    lugar_juego[3]=lugar_juego4;
+    lugar_juego[4]=lugar_juego5;
+    lugar_juego[5]=lugar_juego6;
+    lugar_juego[6]=lugar_juego7;
+    lugar_juego[7]=lugar_juego8;
+    lugar_juego[8]=lugar_juego9;
+    lugar_juego[9]=lugar_juego10;
+    lugar_juego[10]=lugar_juego11;
    
 
 }
@@ -347,9 +381,25 @@ void on_calcProbabilidad_clicked(){
 void on_cantJuegos_changed (GtkWidget *widget)
 {
   //gtk_widget_set_sensitive (widget2, TRUE);
-    CantidadDeJuegos=0;
+    CantidadDeJuegos=3;
     GtkComboBox *combo_box = widget;
-    while(CantidadDeJuegos<=gtk_combo_box_get_active (combo_box)){
-            CantidadDeJuegos++;
+    switch (gtk_combo_box_get_active (combo_box)){
+        case 0:
+            CantidadDeJuegos=3;
+            break;
+        case 1:
+            CantidadDeJuegos=4;
+            break;
+        case 2:
+            CantidadDeJuegos=5;
+            break;
+        case 3:
+            CantidadDeJuegos=6;
+            break;
+        case 4:
+            CantidadDeJuegos=7;
+            break;
+    
     }
+    printf("%d\n",CantidadDeJuegos );
 }
