@@ -131,9 +131,10 @@ void on_btn_calcular_SD_clicked()
             }
             if(lugar_juego[CantidadDeJuegos2-1-(i+j-2)] == 1){
                 mat[i][j]=ph*mat[i-1][j]+qr*mat[i][j-1];}
-            else{
+            if(lugar_juego[CantidadDeJuegos2-1-(i+j-2)] == 2){
                 mat[i][j]=pr*mat[i-1][j]+qh*mat[i][j-1];
             }
+            
             printf("%f\n",mat[i][j]);
         }
 
