@@ -51,6 +51,7 @@ GtkWidget *guardar_SD;
 GtkWidget *SalirDelPrograma;
 
 int CantidadDeJuegos = 0;
+int CantidadDeJuegos2 = 0;
 int juegosganar = 0;
 float ph = 0;
 float pr = 0;
@@ -106,6 +107,18 @@ void on_btn_crear_SD_clicked()
 
 void on_btn_calcular_SD_clicked()
 {   
+    lugar_juego[0]=lugar_juego1;
+    lugar_juego[1]=lugar_juego2;
+    lugar_juego[2]=lugar_juego3;
+    lugar_juego[3]=lugar_juego4;
+    lugar_juego[4]=lugar_juego5;
+    lugar_juego[5]=lugar_juego6;
+    lugar_juego[6]=lugar_juego7;
+    lugar_juego[7]=lugar_juego8;
+    lugar_juego[8]=lugar_juego9;
+    lugar_juego[9]=lugar_juego10;
+    lugar_juego[10]=lugar_juego11;
+
     for (int i=0;i<=CantidadDeJuegos;i++){
         for( int j = 0;j<CantidadDeJuegos;j++){
             if(j==0){
@@ -116,12 +129,21 @@ void on_btn_calcular_SD_clicked()
                 mat[i][j]=1;
                 continue;
             }
-
-            mat[i][j]=ph*mat[i-1][j]+qr*mat[i][j-1];
+            if(lugar_juego[CantidadDeJuegos2-1-(i+j-2)] == 1){
+                mat[i][j]=ph*mat[i-1][j]+qr*mat[i][j-1];}
+            else{
+                mat[i][j]=pr*mat[i-1][j]+qh*mat[i][j-1];
+            }
+            printf("%f\n",mat[i][j]);
         }
 
     }
-    printf("%f\n",mat[CantidadDeJuegos-1][CantidadDeJuegos-1]);
+    for (int i=0;i<=CantidadDeJuegos2;i++){
+       printf("%d\n",lugar_juego[i]);
+
+    }
+    //printf("%f\n",mat[CantidadDeJuegos-1][CantidadDeJuegos-1]);
+
     char val[120];
     strcpy(val,"La probabilidad de que A gane la serie es de: ");
     char v[30];
@@ -173,17 +195,7 @@ void on_Acept_clicked(){
     qh = 1 - pr;
     qr = 1 - ph;
 
-    lugar_juego[0]=lugar_juego1;
-    lugar_juego[1]=lugar_juego2;
-    lugar_juego[2]=lugar_juego3;
-    lugar_juego[3]=lugar_juego4;
-    lugar_juego[4]=lugar_juego5;
-    lugar_juego[5]=lugar_juego6;
-    lugar_juego[6]=lugar_juego7;
-    lugar_juego[7]=lugar_juego8;
-    lugar_juego[8]=lugar_juego9;
-    lugar_juego[9]=lugar_juego10;
-    lugar_juego[10]=lugar_juego11;
+    
    
 
 }
@@ -226,7 +238,7 @@ void on_Acept11_clicked(GtkWidget *widget,GtkWidget *widget2){
 void on_juego2_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
-    if(CantidadDeJuegos >=3){
+    if(CantidadDeJuegos2 >=3){
     gtk_widget_set_sensitive (widget2, TRUE);
         }
 
@@ -239,7 +251,7 @@ void on_juego3_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos >=4){
+    if(CantidadDeJuegos2 >=4){
     gtk_widget_set_sensitive (widget2, TRUE);}
 
       if (gtk_combo_box_get_active (combo_box) == 0) {
@@ -251,7 +263,7 @@ void on_juego4_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos >=5){
+    if(CantidadDeJuegos2 >=5){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -262,7 +274,7 @@ void on_juego5_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos >=6){
+    if(CantidadDeJuegos2 >=6){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -273,7 +285,7 @@ void on_juego6_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos >=7){
+    if(CantidadDeJuegos2 >=7){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -284,7 +296,7 @@ void on_juego7_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos >=8){
+    if(CantidadDeJuegos2 >=8){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -295,7 +307,7 @@ void on_juego8_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos >=9){
+    if(CantidadDeJuegos2 >=9){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -306,7 +318,7 @@ void on_juego9_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-   if(CantidadDeJuegos >=10){
+   if(CantidadDeJuegos2 >=10){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -317,7 +329,7 @@ void on_juego10_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos >=11){
+    if(CantidadDeJuegos2 >=11){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -401,5 +413,24 @@ void on_cantJuegos_changed (GtkWidget *widget)
             break;
     
     }
+    switch (gtk_combo_box_get_active (combo_box)){
+        case 0:
+            CantidadDeJuegos2=3;
+            break;
+        case 1:
+            CantidadDeJuegos2=5;
+            break;
+        case 2:
+            CantidadDeJuegos2=7;
+            break;
+        case 3:
+            CantidadDeJuegos2=9;
+            break;
+        case 4:
+            CantidadDeJuegos2=11;
+            break;
+    
+    }
+    juegosganar = CantidadDeJuegos-1;
     printf("%d\n",CantidadDeJuegos );
 }
