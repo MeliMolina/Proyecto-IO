@@ -14,10 +14,8 @@
  ************************************************************************/
 
 #include <glib.h>
-
-
-
 #include <gtk/gtk.h>
+#include "lib/matrix.c"
  
 GtkBuilder  *builder; 
 GtkWidget  *window_SD;
@@ -50,6 +48,14 @@ GtkWidget *guardar_SD;
 
 GtkWidget *SalirDelPrograma;
 
+GtkWidget *datos_SD;
+GtkWidget *tabla_sol_SD;
+GtkWidget *tabla_nuevo_SD;
+GtkWidget *gridt;
+GtkWidget * grid;
+GtkWidget * grid2;
+GtkWidget * gridr;
+
 int CantidadDeJuegos = 0;
 int CantidadDeJuegos2 = 0;
 int juegosganar = 0;
@@ -57,6 +63,10 @@ float ph = 0;
 float pr = 0;
 float qh = 0;
 float qr = 0;
+
+float ** tabla;
+float resp;
+
 
 int lugar_juego[11];
 
@@ -78,7 +88,44 @@ int main(int argc, char *argv[])
     probabilidades1 = GTK_WIDGET(gtk_builder_get_object(builder, "probabilidades1"));
     probabilidades2 = GTK_WIDGET(gtk_builder_get_object(builder, "probabilidades2"));
     result = GTK_WIDGET(gtk_builder_get_object(builder, "result"));
-    gtk_widget_show(window_SD);   
+
+    datos_SD = GTK_WIDGET(gtk_builder_get_object(builder, "datos_SD"));
+    tabla_sol_SD = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_sol_SD"));
+
+    tabla_nuevo_SD = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_nuevo_SD"));
+
+
+    grid = gtk_grid_new ();
+    //gtk_grid_set_row_spacing (grid, 10);
+
+    grid2 = gtk_grid_new ();
+    //gtk_grid_set_row_spacing (grid2, 10);
+    //gtk_grid_set_column_spacing (grid2, 10);
+    
+    gridt = gtk_grid_new ();
+    //gtk_grid_set_column_spacing (gridt, 10);
+    
+    gridr = gtk_grid_new ();    
+    
+    //gtk_container_add (GTK_CONTAINER (tabla_nuevo_PM), gridt);
+    //gtk_widget_show (gridt);
+    
+    gtk_container_add (GTK_CONTAINER (datos_SD), grid);
+    gtk_widget_show (grid);
+
+    gtk_container_add (GTK_CONTAINER (tabla_sol_SD), grid2);
+    gtk_widget_show (grid2);
+    
+    gtk_container_add (GTK_CONTAINER (tabla_nuevo_SD), gridr);
+    gtk_widget_show (gridr);
+
+    g_object_unref(builder);
+ 
+    
+    //gtk_builder_connect_signals(builder, NULL); 
+
+   
+    gtk_widget_show(window_SD);
                               
     gtk_main();
     return 0;
@@ -95,41 +142,136 @@ void on_btn_crear_SD_clicked()
     
 }
 
+
+void drawAnswer(){
+    int i, j;
+
+   
+    
+    for (i = -1; i < (CantidadDeJuegos); i++)
+    {
+        for(j = -1; j < (CantidadDeJuegos); j++)
+        {
+            if (i==-1){
+                if(j==-1){
+                    GtkWidget *label = gtk_label_new ("");
+                    gtk_widget_set_size_request(label, 470/(CantidadDeJuegos+ 2), 470/(CantidadDeJuegos+ 2));
+
+                    GdkColor lcolor;
+                    gdk_color_parse ("white", &lcolor);
+                    gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
+
+                    gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
+                    gtk_widget_show (label);    
+                }
+                else{
+                    char val[30];
+                    sprintf(val,"%d", j);
+
+                    GtkWidget *label = gtk_label_new (val);
+                    gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
+
+                    GdkColor lcolor;
+                    gdk_color_parse ("white", &lcolor);
+                    gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
+
+                    gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
+                    gtk_widget_show (label);        
+                }
+            }
+            else{
+                if(j==-1){
+                    char val[30];
+                    sprintf(val,"%d", i);
+
+                    GtkWidget *label = gtk_label_new (val);
+                    gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
+
+                    GdkColor lcolor;
+                    gdk_color_parse ("white", &lcolor);
+                    gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
+
+                    gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
+                    gtk_widget_show (label);    
+                }
+                else{
+                    if((j==0)&&(i==0)){
+                        GtkWidget *label = gtk_label_new ("");
+                        gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
+
+                        GdkColor lcolor;
+                        gdk_color_parse ("white", &lcolor);
+                        gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
+
+                        gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
+                        gtk_widget_show (label);
+                    }
+                    else{
+                        char val[30];
+                        sprintf(val,"%.*f", 4, tabla[i][j]);
+                        //char val2[12];
+                        //sprintf(val2,"%d", sackAnswers[i][j]);
+
+                        GtkWidget *label = gtk_label_new (val);
+                        gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
+
+                        GdkColor lcolor;
+                        gdk_color_parse ("white", &lcolor);
+                        gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
+
+                        gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
+                        gtk_widget_show (label);    
+                    }
+                }
+            }
+        }
+    }
+}
+
 void on_btn_calcular_SD_clicked()
 {   
+
+	tabla = createFloatMatrix(CantidadDeJuegos, CantidadDeJuegos);
 
 
     for (int i=0;i<CantidadDeJuegos;i++){
         for( int j = 0;j<CantidadDeJuegos;j++){
             if(j==0){
-                mat[i][j]=0;
+                tabla[i][j]=0;
                 continue;
             }
             if(i==0){
-                mat[i][j]=1;
+                tabla[i][j]=1;
                 continue;
             }
             if(lugar_juego[CantidadDeJuegos2-1-(i+j-2)] == 1){
-                mat[i][j]=ph*mat[i-1][j]+qr*mat[i][j-1];}
+                tabla[i][j]=ph*tabla[i-1][j]+qr*tabla[i][j-1];}
+
             if(lugar_juego[CantidadDeJuegos2-1-(i+j-2)] == 2){
-                mat[i][j]=pr*mat[i-1][j]+qh*mat[i][j-1];
+                tabla[i][j]=pr*tabla[i-1][j]+qh*tabla[i][j-1];
             }
             
-            printf("%f\n",mat[i][j]);
+           //printf("%f\n",tabla[i][j]);
         }
 
     }
-    for (int i=0;i<=CantidadDeJuegos2;i++){
+
+    printFloatMatrix(tabla, CantidadDeJuegos, CantidadDeJuegos);
+
+    /*for (int i=0;i<=CantidadDeJuegos2;i++){
        printf("%d\n",lugar_juego[i]);
 
-    }
+    }*/
     //printf("%f\n",mat[CantidadDeJuegos-1][CantidadDeJuegos-1]);
 
     char val[120];
     strcpy(val,"La probabilidad de que A gane la serie es de: ");
     char v[30];
-    sprintf(v,"%f",mat[CantidadDeJuegos-1][CantidadDeJuegos-1]);
+    sprintf(v,"%f",tabla[CantidadDeJuegos-1][CantidadDeJuegos-1]);
     strcat(val,v);
+
+   drawAnswer();
+ 
    
     gtk_label_set_text(GTK_LABEL(result), val);
 }
@@ -165,6 +307,7 @@ float stof(const char* s){
 };
 
 void on_Acept_clicked(){
+
     const gchar *phS;
     phS = gtk_entry_get_text(GTK_ENTRY(g_Ph));
     ph = stof(phS);
@@ -180,6 +323,8 @@ void on_Acept_clicked(){
    
 
 }
+
+
 
 
 
