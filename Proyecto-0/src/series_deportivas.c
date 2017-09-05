@@ -119,7 +119,7 @@ void on_btn_calcular_SD_clicked()
     lugar_juego[9]=lugar_juego10;
     lugar_juego[10]=lugar_juego11;
 
-    for (int i=0;i<=CantidadDeJuegos;i++){
+    for (int i=0;i<CantidadDeJuegos;i++){
         for( int j = 0;j<CantidadDeJuegos;j++){
             if(j==0){
                 mat[i][j]=0;
