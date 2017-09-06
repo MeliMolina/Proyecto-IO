@@ -113,24 +113,15 @@ int main(int argc, char *argv[])
 
 
     grid = gtk_grid_new ();
-    //gtk_grid_set_row_spacing (grid, 10);
 
     grid2 = gtk_grid_new ();
-    //gtk_grid_set_row_spacing (grid2, 10);
-    //gtk_grid_set_column_spacing (grid2, 10);
     
     gridt = gtk_grid_new ();
-    //gtk_grid_set_column_spacing (gridt, 10);
-    
     gridr = gtk_grid_new ();    
     
     
     gtk_container_add (GTK_CONTAINER (datos_SD), grid);
     gtk_widget_show (grid);
-
-    //gtk_container_add (GTK_CONTAINER (tabla_sol_SD), grid2);
-    //gtk_widget_show (grid2);
-    
     gtk_container_add (GTK_CONTAINER (tabla_nuevo_SD), gridr);
     gtk_widget_show (gridr);
 
@@ -152,7 +143,7 @@ void on_SalirDelPrograma_clicked()
 }
 
 
-void drawAnswer(){
+void CrearTabla(){
     int i, j;
 
     gtk_grid_set_row_spacing (grid2, 2);
@@ -294,17 +285,10 @@ int on_btn_calcular_SD_clicked()
                 tabla[i][j]=pr*tabla[i-1][j]+qh*tabla[i][j-1];
             }
             
-           //printf("%f\n",tabla[i][j]);
+       
         }
 
     }
-
-    
-    /*for (int i=0;i<=totalJuegos;i++){
-       printf("%d\n",lugar_juego[i]);
-
-    }*/
-    //printf("%f\n",mat[mitadJuegos-1][mitadJuegos-1]);
 
     char val[120];
     strcpy(val,"La probabilidad de que A gane la serie es de: ");
@@ -312,7 +296,7 @@ int on_btn_calcular_SD_clicked()
     sprintf(v,"%f",tabla[mitadJuegos-1][mitadJuegos-1]);
     strcat(val,v);
 
-   drawAnswer();
+   CrearTabla();
  
    
     gtk_label_set_text(GTK_LABEL(result), val);
