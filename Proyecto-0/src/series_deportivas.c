@@ -409,10 +409,15 @@ void readFile(char* filename)
     gtk_combo_box_set_active(juego11,lugar_juego[10]);
 
     char array[10];
-    snprintf(array, sizeof(array), "%f", ph);
+
+    int pht = ph*10000;
+    int prt = pr*10000;
+   
+
+    snprintf(array, sizeof(array), "0.%d", pht);
     gtk_entry_set_text(GTK_ENTRY(g_Ph),array);
 
-    snprintf(array, sizeof(array), "%f", pr);
+    snprintf(array, sizeof(array), "0.%d", prt);
     gtk_entry_set_text(GTK_ENTRY(g_Pr),array);
 
     char val[40];
@@ -484,10 +489,11 @@ int on_Acept_clicked(){
         return 0;
     }
     for(int i = 0 ; i <strlen(phS);i++){
+ 
         if(phS[i]=='.'){
             continue;
         }
-        if(isdigit(phS[i])==FALSE){
+    if(isdigit(phS[i])==FALSE){
             gtk_label_set_text(GTK_LABEL(result), "ph y pr tiene que ser entre 0 y 1.");
             return 0;
         }
@@ -554,7 +560,7 @@ int on_Acept_clicked(){
 
 
 
-void on_Acept2_clicked(GtkWidget *widget,GtkWidget *widget2){
+/*void on_Acept2_clicked(GtkWidget *widget,GtkWidget *widget2){
     gtk_widget_set_sensitive (widget2, FALSE);
 }
 void on_Acept3_clicked(GtkWidget *widget,GtkWidget *widget2){
@@ -585,7 +591,7 @@ void on_Acept11_clicked(GtkWidget *widget,GtkWidget *widget2){
     gtk_widget_set_sensitive (widget2, FALSE);
 }
 
-
+*/
 
 void on_juego2_changed(GtkWidget *widget,GtkWidget *widget2){
 
@@ -594,9 +600,7 @@ void on_juego2_changed(GtkWidget *widget,GtkWidget *widget2){
     gtk_widget_set_sensitive (widget2, TRUE);
         }
 
-      if (gtk_combo_box_get_active (combo_box) == 0) {
-        gtk_widget_set_sensitive (widget2, FALSE);
-      }
+      
       lugar_juego[1] = gtk_combo_box_get_active (combo_box);
 }
 void on_juego3_changed(GtkWidget *widget,GtkWidget *widget2){
@@ -606,9 +610,7 @@ void on_juego3_changed(GtkWidget *widget,GtkWidget *widget2){
     if(totalJuegos >=4){
     gtk_widget_set_sensitive (widget2, TRUE);}
 
-      if (gtk_combo_box_get_active (combo_box) == 0) {
-        gtk_widget_set_sensitive (widget2, FALSE);
-      }
+      
       lugar_juego[2] = gtk_combo_box_get_active (combo_box);
 }
 void on_juego4_changed(GtkWidget *widget,GtkWidget *widget2){
@@ -617,9 +619,7 @@ void on_juego4_changed(GtkWidget *widget,GtkWidget *widget2){
     
     if(totalJuegos >=5){
     gtk_widget_set_sensitive (widget2, TRUE);}
-      if (gtk_combo_box_get_active (combo_box) == 0) {
-        gtk_widget_set_sensitive (widget2, FALSE);
-      }
+      
     lugar_juego[3] = gtk_combo_box_get_active (combo_box);
 }
 void on_juego5_changed(GtkWidget *widget,GtkWidget *widget2){
@@ -628,9 +628,7 @@ void on_juego5_changed(GtkWidget *widget,GtkWidget *widget2){
     
     if(totalJuegos >=6){
     gtk_widget_set_sensitive (widget2, TRUE);}
-      if (gtk_combo_box_get_active (combo_box) == 0) {
-        gtk_widget_set_sensitive (widget2, FALSE);
-      }
+     
       lugar_juego[4] = gtk_combo_box_get_active (combo_box);
 }
 void on_juego6_changed(GtkWidget *widget,GtkWidget *widget2){
@@ -639,9 +637,7 @@ void on_juego6_changed(GtkWidget *widget,GtkWidget *widget2){
     
     if(totalJuegos >=7){
     gtk_widget_set_sensitive (widget2, TRUE);}
-      if (gtk_combo_box_get_active (combo_box) == 0) {
-        gtk_widget_set_sensitive (widget2, FALSE);
-      }
+      
       lugar_juego[5] = gtk_combo_box_get_active (combo_box);
 }
 void on_juego7_changed(GtkWidget *widget,GtkWidget *widget2){
@@ -650,9 +646,7 @@ void on_juego7_changed(GtkWidget *widget,GtkWidget *widget2){
     
     if(totalJuegos >=8){
     gtk_widget_set_sensitive (widget2, TRUE);}
-      if (gtk_combo_box_get_active (combo_box) == 0) {
-        gtk_widget_set_sensitive (widget2, FALSE);
-      }
+    
       lugar_juego[6] = gtk_combo_box_get_active (combo_box);
 }
 void on_juego8_changed(GtkWidget *widget,GtkWidget *widget2){
@@ -661,9 +655,7 @@ void on_juego8_changed(GtkWidget *widget,GtkWidget *widget2){
     
     if(totalJuegos >=9){
     gtk_widget_set_sensitive (widget2, TRUE);}
-      if (gtk_combo_box_get_active (combo_box) == 0) {
-        gtk_widget_set_sensitive (widget2, FALSE);
-      }
+
       lugar_juego[7] = gtk_combo_box_get_active (combo_box);
 }
 void on_juego9_changed(GtkWidget *widget,GtkWidget *widget2){
@@ -672,9 +664,7 @@ void on_juego9_changed(GtkWidget *widget,GtkWidget *widget2){
     
    if(totalJuegos >=10){
     gtk_widget_set_sensitive (widget2, TRUE);}
-      if (gtk_combo_box_get_active (combo_box) == 0) {
-        gtk_widget_set_sensitive (widget2, FALSE);
-      }
+  
       lugar_juego[8] = gtk_combo_box_get_active (combo_box);
 }
 void on_juego10_changed(GtkWidget *widget,GtkWidget *widget2){
@@ -683,9 +673,7 @@ void on_juego10_changed(GtkWidget *widget,GtkWidget *widget2){
     
     if(totalJuegos >=11){
     gtk_widget_set_sensitive (widget2, TRUE);}
-      if (gtk_combo_box_get_active (combo_box) == 0) {
-        gtk_widget_set_sensitive (widget2, FALSE);
-      }
+ 
       lugar_juego[9] = gtk_combo_box_get_active (combo_box);
 }
 
@@ -702,9 +690,7 @@ void on_juego1_changed(GtkWidget *widget,GtkWidget *widget2){
     GtkComboBox *combo_box = widget;
     
     gtk_widget_set_sensitive (widget2, TRUE);
-      if (gtk_combo_box_get_active (combo_box) == 0) {
-        gtk_widget_set_sensitive (widget2, FALSE);
-      }
+ 
     /*gint pos = gtk_combo_box_get_active (combo_box);
     gint first = 0;
     gtk_widget_get_active(widget);*/
