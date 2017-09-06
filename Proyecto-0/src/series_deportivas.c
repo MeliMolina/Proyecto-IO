@@ -24,6 +24,7 @@ GtkWidget *cantJuegos;
 GtkWidget *g_Ph;
 GtkWidget *g_Pr;
 GtkWidget *Acept;
+GtkWidget * btn_cargar_SD;
 
 GtkWidget *juego1;
 GtkWidget *juego2;
@@ -53,10 +54,10 @@ GtkWidget *SalirDelPrograma;
 GtkWidget *datos_SD;
 GtkWidget *tabla_sol_SD;
 GtkWidget *tabla_nuevo_SD;
-GtkWidget *gridt;
-GtkWidget * grid;
 GtkWidget * grid2;
-GtkWidget * gridr;
+
+
+
 
 GtkWidget *label;
 GtkWidget *box;
@@ -92,11 +93,18 @@ int main(int argc, char *argv[])
     g_Pr = GTK_WIDGET(gtk_builder_get_object(builder, "Pr"));
     probabilidades1 = GTK_WIDGET(gtk_builder_get_object(builder, "probabilidades1"));
     probabilidades2 = GTK_WIDGET(gtk_builder_get_object(builder, "probabilidades2"));
+
     entry_cargar_SD = GTK_WIDGET(gtk_builder_get_object(builder, "entry_cargar_SD"));
     result = GTK_WIDGET(gtk_builder_get_object(builder, "result"));
     folder = GTK_WIDGET(gtk_builder_get_object(builder, "folder"));
     filenameEntry = GTK_WIDGET(gtk_builder_get_object(builder, "filename"));
     cantJuegos = GTK_WIDGET(gtk_builder_get_object(builder, "cantJuegos"));
+    Acept = GTK_WIDGET(gtk_builder_get_object(builder, "Acept"));
+    btn_calcular_SD = GTK_WIDGET(gtk_builder_get_object(builder, "btn_calcular_SD"));
+    guardar = GTK_WIDGET(gtk_builder_get_object(builder, "guardar_SD"));
+    btn_cargar_SD = GTK_WIDGET(gtk_builder_get_object(builder, "btn_cargar_SD"));
+    SalirDelPrograma = GTK_WIDGET(gtk_builder_get_object(builder, "SalirDelPrograma"));
+
 
     juego1 = GTK_WIDGET(gtk_builder_get_object(builder, "juego1"));
     juego2 = GTK_WIDGET(gtk_builder_get_object(builder, "juego2"));
@@ -109,29 +117,18 @@ int main(int argc, char *argv[])
     juego9 = GTK_WIDGET(gtk_builder_get_object(builder, "juego9"));
     juego10 = GTK_WIDGET(gtk_builder_get_object(builder, "juego10"));
     juego11 = GTK_WIDGET(gtk_builder_get_object(builder, "juego11"));
-
     datos_SD = GTK_WIDGET(gtk_builder_get_object(builder, "datos_SD"));
     tabla_sol_SD = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_sol_SD"));
 
-    tabla_nuevo_SD = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_nuevo_SD"));
 
-
-    grid = gtk_grid_new ();
-
-    //grid2 = gtk_grid_new ();
-    
-    gridt = gtk_grid_new ();
-    gridr = gtk_grid_new ();    
-    
-    
-    gtk_container_add (GTK_CONTAINER (datos_SD), grid);
-    gtk_widget_show (grid);
-
-   // gtk_container_add (GTK_CONTAINER (tabla_sol_SD), grid2);
-    //gtk_widget_show (grid2);
-
-    gtk_container_add (GTK_CONTAINER (tabla_nuevo_SD), gridr);
-    gtk_widget_show (gridr);
+    gtk_widget_set_tooltip_text(Acept, "Calcula las probabilidades");
+    gtk_widget_set_tooltip_text(entry_cargar_SD, "Seleccionar un archivo");
+    gtk_widget_set_tooltip_text(btn_calcular_SD, "Calcula la tabla con las probabilidades de A y B");
+    gtk_widget_set_tooltip_text(folder, "Seleccionar un directorio");
+    gtk_widget_set_tooltip_text(filenameEntry, "Nombre del archivo a guardar");
+    gtk_widget_set_tooltip_text(guardar, "Guarda los datos en un archivo");
+    gtk_widget_set_tooltip_text(btn_cargar_SD, "Carga el archivo seleccionado");
+    gtk_widget_set_tooltip_text(SalirDelPrograma, "Cierra el programa");
 
     g_object_unref(builder);
 
