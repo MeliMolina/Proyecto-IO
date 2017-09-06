@@ -160,8 +160,7 @@ void on_SalirDelPrograma_clicked()
 void drawAnswer(){
     int i, j;
 
-   
-    
+
     for (i = -1; i < (CantidadDeJuegos); i++)
     {
         for(j = -1; j < (CantidadDeJuegos); j++)
@@ -172,7 +171,7 @@ void drawAnswer(){
                     gtk_widget_set_size_request(label, 470/(CantidadDeJuegos+ 2), 470/(CantidadDeJuegos+ 2));
 
                     GdkColor lcolor;
-                    gdk_color_parse ("white", &lcolor);
+                    gdk_color_parse ("black", &lcolor);
                     gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
 
                     gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
@@ -186,7 +185,7 @@ void drawAnswer(){
                     gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
 
                     GdkColor lcolor;
-                    gdk_color_parse ("white", &lcolor);
+                    gdk_color_parse ("black", &lcolor);
                     gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
 
                     gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
@@ -202,7 +201,7 @@ void drawAnswer(){
                     gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
 
                     GdkColor lcolor;
-                    gdk_color_parse ("white", &lcolor);
+                    gdk_color_parse ("black", &lcolor);
                     gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
 
                     gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
@@ -214,7 +213,7 @@ void drawAnswer(){
                         gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
 
                         GdkColor lcolor;
-                        gdk_color_parse ("white", &lcolor);
+                        gdk_color_parse ("black", &lcolor);
                         gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
 
                         gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
@@ -230,7 +229,7 @@ void drawAnswer(){
                         gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
 
                         GdkColor lcolor;
-                        gdk_color_parse ("white", &lcolor);
+                        gdk_color_parse ("black", &lcolor);
                         gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
 
                         gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
