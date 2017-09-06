@@ -43,8 +43,9 @@ GtkWidget *entry_cargar_SD;
 GtkWidget *btn_calcular_SD;
 GtkWidget *calcProbabilidad;
 GtkWidget *folder;
-GtkWidget *filename;
-GtkWidget *guardar_SD;
+GtkWidget *filenameEntry;
+GtkWidget *guardar;
+
 
 GtkWidget *SalirDelPrograma;
 
@@ -87,7 +88,23 @@ int main(int argc, char *argv[])
     g_Pr = GTK_WIDGET(gtk_builder_get_object(builder, "Pr"));
     probabilidades1 = GTK_WIDGET(gtk_builder_get_object(builder, "probabilidades1"));
     probabilidades2 = GTK_WIDGET(gtk_builder_get_object(builder, "probabilidades2"));
+    entry_cargar_SD = GTK_WIDGET(gtk_builder_get_object(builder, "entry_cargar_SD"));
     result = GTK_WIDGET(gtk_builder_get_object(builder, "result"));
+    folder = GTK_WIDGET(gtk_builder_get_object(builder, "folder"));
+    filenameEntry = GTK_WIDGET(gtk_builder_get_object(builder, "filename"));
+    cantJuegos = GTK_WIDGET(gtk_builder_get_object(builder, "cantJuegos"));
+
+    juego1 = GTK_WIDGET(gtk_builder_get_object(builder, "juego1"));
+    juego2 = GTK_WIDGET(gtk_builder_get_object(builder, "juego2"));
+    juego3 = GTK_WIDGET(gtk_builder_get_object(builder, "juego3"));
+    juego4 = GTK_WIDGET(gtk_builder_get_object(builder, "juego4"));
+    juego5 = GTK_WIDGET(gtk_builder_get_object(builder, "juego5"));
+    juego6 = GTK_WIDGET(gtk_builder_get_object(builder, "juego6"));
+    juego7 = GTK_WIDGET(gtk_builder_get_object(builder, "juego7"));
+    juego8 = GTK_WIDGET(gtk_builder_get_object(builder, "juego8"));
+    juego9 = GTK_WIDGET(gtk_builder_get_object(builder, "juego9"));
+    juego10 = GTK_WIDGET(gtk_builder_get_object(builder, "juego10"));
+    juego11 = GTK_WIDGET(gtk_builder_get_object(builder, "juego11"));
 
     datos_SD = GTK_WIDGET(gtk_builder_get_object(builder, "datos_SD"));
     tabla_sol_SD = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_sol_SD"));
@@ -137,10 +154,7 @@ void on_SalirDelPrograma_clicked()
     gtk_widget_destroy(window_SD);
 }
 
-void on_btn_crear_SD_clicked()
-{
-    
-}
+
 
 
 void drawAnswer(){
@@ -276,12 +290,110 @@ void on_btn_calcular_SD_clicked()
     gtk_label_set_text(GTK_LABEL(result), val);
 }
 
-void on_btn_cargar_SD_clicked(){
- 
-}
-
 void on_guardar_SD_clicked ()
 {
+    char * filename[250];
+
+    char* name = gtk_entry_get_text (filenameEntry);
+    char* folderfile = gtk_file_chooser_get_filename(folder);
+
+    sprintf(filename,"%s/%s", folderfile, name);
+
+    writeFile(filename);
+
+    gtk_entry_set_text (filenameEntry, "");
+
+}
+void writeFile(char* filename)
+{
+
+    FILE *file;
+    file = fopen(filename, "w");
+    
+  
+
+    fprintf(file, "%i\n", CantidadDeJuegos);
+    fprintf(file, "%i\n", CantidadDeJuegos2);
+    fprintf(file, "%f\n", ph);
+    fprintf(file, "%f\n", pr);
+    fprintf(file, "%f\n", qh);
+    fprintf(file, "%f\n", qr);
+    
+    for (int i = 0 ;i < CantidadDeJuegos2;i++){
+        fprintf(file, "%i\n", lugar_juego[i]);
+    }
+
+    fclose(file);
+}
+
+void on_btn_cargar_SD_clicked(){
+    const gchar *filename;
+    filename = gtk_file_chooser_get_filename (entry_cargar_SD);
+    readFile(filename);
+}
+
+
+void readFile(char* filename)
+{    
+
+    FILE *file;
+    file = fopen(filename, "r");
+    
+    fscanf(file, "%i", &CantidadDeJuegos);
+    fscanf(file, "%i", &CantidadDeJuegos2);
+    fscanf(file, "%f", &ph);
+    fscanf(file, "%f", &pr);
+    fscanf(file, "%f", &qh);
+    fscanf(file, "%f", &qr);
+    
+    
+
+    int i = 0;
+
+    while (i < CantidadDeJuegos2)
+    {
+        fscanf(file, "%i", &lugar_juego[i]);
+        i++;
+    }
+
+    fclose(file);
+
+    
+    if(CantidadDeJuegos2==3){
+        gtk_combo_box_set_active(cantJuegos,0);
+    }
+    if(CantidadDeJuegos2==5){
+        gtk_combo_box_set_active(cantJuegos,1);
+    }
+    if(CantidadDeJuegos2==7){
+        gtk_combo_box_set_active(cantJuegos,2);
+    }
+    if(CantidadDeJuegos2==9){
+        gtk_combo_box_set_active(cantJuegos,3);
+    }
+    if(CantidadDeJuegos2==11){
+        gtk_combo_box_set_active(cantJuegos,4);
+    }
+
+    gtk_combo_box_set_active(juego1,lugar_juego[0]);
+    gtk_combo_box_set_active(juego2,lugar_juego[1]);
+    gtk_combo_box_set_active(juego3,lugar_juego[2]);
+    gtk_combo_box_set_active(juego4,lugar_juego[3]);
+    gtk_combo_box_set_active(juego5,lugar_juego[4]);
+    gtk_combo_box_set_active(juego6,lugar_juego[5]);
+    gtk_combo_box_set_active(juego7,lugar_juego[6]);
+    gtk_combo_box_set_active(juego8,lugar_juego[7]);
+    gtk_combo_box_set_active(juego9,lugar_juego[8]);
+    gtk_combo_box_set_active(juego10,lugar_juego[9]);
+    gtk_combo_box_set_active(juego11,lugar_juego[10]);
+
+    char array[10];
+    snprintf(array, sizeof(array), "%f", ph);
+    gtk_entry_set_text(GTK_ENTRY(g_Ph),array);
+
+    snprintf(array, sizeof(array), "%f", pr);
+    gtk_entry_set_text(GTK_ENTRY(g_Pr),array);
+
 
 
 }
