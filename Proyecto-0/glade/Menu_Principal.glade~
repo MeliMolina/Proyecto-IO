@@ -36,7 +36,7 @@
             </attributes>
           </object>
           <packing>
-            <property name="x">133</property>
+            <property name="x">128</property>
             <property name="y">59</property>
           </packing>
         </child>
@@ -102,8 +102,9 @@
             <property name="can_focus">False</property>
             <property name="valign">start</property>
             <property name="label" translatable="yes">Edwin Cen Xu
-
-</property>
+Willian Espinoza
+ Cristian León
+Melissa Molina Corrales</property>
             <attributes>
               <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
               <attribute name="style" value="italic"/>
@@ -111,8 +112,8 @@
             </attributes>
           </object>
           <packing>
-            <property name="x">222</property>
-            <property name="y">376</property>
+            <property name="x">192</property>
+            <property name="y">375</property>
           </packing>
         </child>
         <child>
@@ -121,7 +122,6 @@
             <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Melissa Molina Corrales</property>
             <attributes>
               <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
               <attribute name="style" value="italic"/>
@@ -168,7 +168,7 @@
             <property name="can_focus">False</property>
           </object>
           <packing>
-            <property name="x">-7</property>
+            <property name="x">-8</property>
             <property name="y">80</property>
           </packing>
         </child>
