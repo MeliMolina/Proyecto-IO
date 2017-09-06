@@ -16,6 +16,9 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 #include "lib/matrix.c"
+
+ 
+
  
 GtkBuilder  *builder; 
 GtkWidget  *window_SD;
@@ -122,13 +125,15 @@ int main(int argc, char *argv[])
     
     gtk_container_add (GTK_CONTAINER (datos_SD), grid);
     gtk_widget_show (grid);
+
+    gtk_container_add (GTK_CONTAINER (tabla_sol_SD), grid2);
+    gtk_widget_show (grid2);
+
     gtk_container_add (GTK_CONTAINER (tabla_nuevo_SD), gridr);
     gtk_widget_show (gridr);
 
     g_object_unref(builder);
- 
-    
-    gtk_builder_connect_signals(builder, NULL); 
+
    
     gtk_widget_show(window_SD);
                               
@@ -146,8 +151,8 @@ void on_SalirDelPrograma_clicked()
 void CrearTabla(){
     int i, j;
 
-    gtk_grid_set_row_spacing (grid2, 2);
-    gtk_grid_set_column_spacing (grid2, 2);
+    gtk_grid_set_row_spacing (grid2, 1);
+    gtk_grid_set_column_spacing (grid2, 1);
 
 
     for (i = -1; i < (mitadJuegos); i++)
@@ -163,8 +168,7 @@ void CrearTabla(){
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
                     const GdkRGBA *color;
                     
-                    gdk_color_parse("#789E4B", &color );
-                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    
                     gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
                     gtk_widget_show (label);
@@ -182,7 +186,7 @@ void CrearTabla(){
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
                     const GdkRGBA *color;
                     
-                    gdk_color_parse( "#789E4B", &color );
+                    gdk_color_parse( "#00BFFF", &color );
                     gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
                     gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
@@ -202,7 +206,7 @@ void CrearTabla(){
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
                     const GdkRGBA *color;
                     
-                    gdk_color_parse( "#789E4B", &color );
+                    gdk_color_parse( "#00BFFF", &color );
                     gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
                     gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
@@ -218,12 +222,32 @@ void CrearTabla(){
                         gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
                         const GdkRGBA *color;
                         
-                        gdk_color_parse( "#00F0FF", &color );
+                        gdk_color_parse( "#A9D0F5", &color );
                         gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
                         gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
                         gtk_widget_show (label);
                         gtk_widget_show (box);
+                    }
+
+                    if((i == mitadJuegos-1)&& (j == mitadJuegos-1 )){
+                         char val[30];
+                        sprintf(val,"%.*f", 4, tabla[i][j]);
+
+                        GtkWidget *label = gtk_label_new (val);
+                        gtk_widget_set_size_request(label, 470/(mitadJuegos+ 2), 470/(mitadJuegos + 2));
+
+                        GtkWidget *box = gtk_box_new(0, 0);
+                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                        const GdkRGBA *color;
+                        
+                        gdk_color_parse( "#FE2E64", &color );
+                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                        gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
+
+                        gtk_widget_show (label);
+                        gtk_widget_show (box);
+
                     }
                     else{
                         char val[30];
@@ -237,7 +261,7 @@ void CrearTabla(){
                         gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
                         const GdkRGBA *color;
                         
-                        gdk_color_parse( "#00F0FF", &color );
+                        gdk_color_parse( "#A9D0F5", &color );
                         gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
                         gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
@@ -248,8 +272,7 @@ void CrearTabla(){
             }
         }
     }
-    gtk_container_add (GTK_CONTAINER (tabla_sol_SD), grid2);
-    gtk_widget_show (grid2);
+    
     
 }
 
@@ -296,7 +319,7 @@ int on_btn_calcular_SD_clicked()
     sprintf(v,"%f",tabla[mitadJuegos-1][mitadJuegos-1]);
     strcat(val,v);
 
-   CrearTabla();
+   	CrearTabla();
  
    
     gtk_label_set_text(GTK_LABEL(result), val);

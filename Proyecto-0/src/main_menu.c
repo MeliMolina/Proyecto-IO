@@ -15,6 +15,9 @@
 
 #include <gtk/gtk.h>
 
+ 
+
+
 GtkBuilder      *builder_about; 
 GtkWidget       *about_window;
 
@@ -37,8 +40,6 @@ GtkWidget *button_3;
 GtkWidget *button_4;
 GtkWidget *button_5;
 GtkWidget *button_6;
-
-
 
 
 int main(int argc, char *argv[])
