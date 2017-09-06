@@ -124,14 +124,12 @@ int main(int argc, char *argv[])
     
     gridr = gtk_grid_new ();    
     
-    //gtk_container_add (GTK_CONTAINER (tabla_nuevo_PM), gridt);
-    //gtk_widget_show (gridt);
     
     gtk_container_add (GTK_CONTAINER (datos_SD), grid);
     gtk_widget_show (grid);
 
-    gtk_container_add (GTK_CONTAINER (tabla_sol_SD), grid2);
-    gtk_widget_show (grid2);
+    //gtk_container_add (GTK_CONTAINER (tabla_sol_SD), grid2);
+    //gtk_widget_show (grid2);
     
     gtk_container_add (GTK_CONTAINER (tabla_nuevo_SD), gridr);
     gtk_widget_show (gridr);
@@ -139,8 +137,7 @@ int main(int argc, char *argv[])
     g_object_unref(builder);
  
     
-    //gtk_builder_connect_signals(builder, NULL); 
-
+    gtk_builder_connect_signals(builder, NULL); 
    
     gtk_widget_show(window_SD);
                               
@@ -155,10 +152,11 @@ void on_SalirDelPrograma_clicked()
 }
 
 
-
-
 void drawAnswer(){
     int i, j;
+
+    gtk_grid_set_row_spacing (grid2, 2);
+    gtk_grid_set_column_spacing (grid2, 2);
 
 
     for (i = -1; i < (mitadJuegos); i++)
@@ -170,12 +168,17 @@ void drawAnswer(){
                     GtkWidget *label = gtk_label_new ("");
                     gtk_widget_set_size_request(label, 470/(mitadJuegos+ 2), 470/(mitadJuegos+ 2));
 
-                    GdkColor lcolor;
-                    gdk_color_parse ("black", &lcolor);
-                    gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
+                    GtkWidget *box = gtk_box_new(0, 0);
+                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                    const GdkRGBA *color;
+                    
+                    gdk_color_parse("#789E4B", &color );
+                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
-                    gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
-                    gtk_widget_show (label);    
+                    gtk_widget_show (label);
+                    gtk_widget_show (box);
+                       
                 }
                 else{
                     char val[30];
@@ -184,12 +187,16 @@ void drawAnswer(){
                     GtkWidget *label = gtk_label_new (val);
                     gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos + 2));
 
-                    GdkColor lcolor;
-                    gdk_color_parse ("black", &lcolor);
-                    gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
+                    GtkWidget *box = gtk_box_new(0, 0);
+                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                    const GdkRGBA *color;
+                    
+                    gdk_color_parse( "#789E4B", &color );
+                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
-                    gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
-                    gtk_widget_show (label);        
+                    gtk_widget_show (label);
+                    gtk_widget_show (box);      
                 }
             }
             else{
@@ -200,46 +207,62 @@ void drawAnswer(){
                     GtkWidget *label = gtk_label_new (val);
                     gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos + 2));
 
-                    GdkColor lcolor;
-                    gdk_color_parse ("black", &lcolor);
-                    gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
+                    GtkWidget *box = gtk_box_new(0, 0);
+                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                    const GdkRGBA *color;
+                    
+                    gdk_color_parse( "#789E4B", &color );
+                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
-                    gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
-                    gtk_widget_show (label);    
+                    gtk_widget_show (label);
+                    gtk_widget_show (box);
                 }
                 else{
                     if((j==0)&&(i==0)){
                         GtkWidget *label = gtk_label_new ("");
-                        gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos + 2));
+                        gtk_widget_set_size_request(label, 470/(mitadJuegos+ 2), 470/(mitadJuegos + 2));
 
-                        GdkColor lcolor;
-                        gdk_color_parse ("black", &lcolor);
-                        gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
+                        GtkWidget *box = gtk_box_new(0, 0);
+                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                        const GdkRGBA *color;
+                        
+                        gdk_color_parse( "#00F0FF", &color );
+                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                        gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
-                        gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
                         gtk_widget_show (label);
+                        gtk_widget_show (box);
                     }
                     else{
                         char val[30];
                         sprintf(val,"%.*f", 4, tabla[i][j]);
-                        //char val2[12];
-                        //sprintf(val2,"%d", sackAnswers[i][j]);
+                   
 
                         GtkWidget *label = gtk_label_new (val);
-                        gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos + 2));
+                        gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos+ 2));
 
-                        GdkColor lcolor;
-                        gdk_color_parse ("black", &lcolor);
-                        gtk_widget_modify_fg (label, GTK_STATE_NORMAL, &lcolor);
+                         GtkWidget *box = gtk_box_new(0, 0);
+                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                        const GdkRGBA *color;
+                        
+                        gdk_color_parse( "#00F0FF", &color );
+                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                        gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
-                        gtk_grid_attach(GTK_GRID(grid2), label, j+1, i+1, 1, 1);
-                        gtk_widget_show (label);    
+                        gtk_widget_show (label);
+                        gtk_widget_show (box);   
                     }
                 }
             }
         }
     }
+    gtk_container_add (GTK_CONTAINER (tabla_sol_SD), grid2);
+    gtk_widget_show (grid2);
+    
 }
+
+
 
 int on_btn_calcular_SD_clicked()
 {   
