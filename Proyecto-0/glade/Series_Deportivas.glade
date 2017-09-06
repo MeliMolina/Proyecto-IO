@@ -124,19 +124,6 @@
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkLabel" id="respuesta_SD">
-                                <property name="width_request">470</property>
-                                <property name="height_request">40</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkFixed" id="datos_SD">
                                 <property name="width_request">470</property>
                                 <property name="height_request">430</property>
@@ -206,24 +193,9 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkButton" id="calcProbabilidad">
-                                    <property name="label" translatable="yes">Calcular Probabilidades</property>
-                                    <property name="width_request">96</property>
-                                    <property name="height_request">20</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <signal name="clicked" handler="on_calcProbabilidad_clicked" swapped="no"/>
-                                  </object>
-                                  <packing>
-                                    <property name="x">278</property>
-                                    <property name="y">7</property>
-                                  </packing>
-                                </child>
-                                <child>
                                   <object class="GtkFixed" id="prob">
-                                    <property name="width_request">160</property>
-                                    <property name="height_request">72</property>
+                                    <property name="width_request">165</property>
+                                    <property name="height_request">130</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
@@ -235,7 +207,7 @@
                                       </object>
                                       <packing>
                                         <property name="x">31</property>
-                                        <property name="y">-21</property>
+                                        <property name="y">-25</property>
                                       </packing>
                                     </child>
                                     <child>
@@ -247,13 +219,13 @@
                                       </object>
                                       <packing>
                                         <property name="x">31</property>
-                                        <property name="y">20</property>
+                                        <property name="y">24</property>
                                       </packing>
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="x">283</property>
-                                    <property name="y">47</property>
+                                    <property name="x">287</property>
+                                    <property name="y">12</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -690,6 +662,19 @@
                                     <property name="y">377</property>
                                   </packing>
                                 </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="respuesta_SD">
+                                <property name="width_request">470</property>
+                                <property name="height_request">40</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>

@@ -41,7 +41,7 @@ GtkWidget *probabilidades2;
 GtkWidget *result;
 GtkWidget *entry_cargar_SD;
 GtkWidget *btn_calcular_SD;
-GtkWidget *calcProbabilidad;
+
 GtkWidget *folder;
 GtkWidget *filenameEntry;
 GtkWidget *guardar;
@@ -57,8 +57,8 @@ GtkWidget * grid;
 GtkWidget * grid2;
 GtkWidget * gridr;
 
-int CantidadDeJuegos = 0;
-int CantidadDeJuegos2 = 0;
+int mitadJuegos = 0;
+int totalJuegos = 0;
 int juegosganar = 0;
 float ph = 0;
 float pr = 0;
@@ -161,14 +161,14 @@ void drawAnswer(){
     int i, j;
 
 
-    for (i = -1; i < (CantidadDeJuegos); i++)
+    for (i = -1; i < (mitadJuegos); i++)
     {
-        for(j = -1; j < (CantidadDeJuegos); j++)
+        for(j = -1; j < (mitadJuegos); j++)
         {
             if (i==-1){
                 if(j==-1){
                     GtkWidget *label = gtk_label_new ("");
-                    gtk_widget_set_size_request(label, 470/(CantidadDeJuegos+ 2), 470/(CantidadDeJuegos+ 2));
+                    gtk_widget_set_size_request(label, 470/(mitadJuegos+ 2), 470/(mitadJuegos+ 2));
 
                     GdkColor lcolor;
                     gdk_color_parse ("black", &lcolor);
@@ -182,7 +182,7 @@ void drawAnswer(){
                     sprintf(val,"%d", j);
 
                     GtkWidget *label = gtk_label_new (val);
-                    gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
+                    gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos + 2));
 
                     GdkColor lcolor;
                     gdk_color_parse ("black", &lcolor);
@@ -198,7 +198,7 @@ void drawAnswer(){
                     sprintf(val,"%d", i);
 
                     GtkWidget *label = gtk_label_new (val);
-                    gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
+                    gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos + 2));
 
                     GdkColor lcolor;
                     gdk_color_parse ("black", &lcolor);
@@ -210,7 +210,7 @@ void drawAnswer(){
                 else{
                     if((j==0)&&(i==0)){
                         GtkWidget *label = gtk_label_new ("");
-                        gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
+                        gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos + 2));
 
                         GdkColor lcolor;
                         gdk_color_parse ("black", &lcolor);
@@ -226,7 +226,7 @@ void drawAnswer(){
                         //sprintf(val2,"%d", sackAnswers[i][j]);
 
                         GtkWidget *label = gtk_label_new (val);
-                        gtk_widget_set_size_request(label, 470/(CantidadDeJuegos + 2), 470/(CantidadDeJuegos + 2));
+                        gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos + 2));
 
                         GdkColor lcolor;
                         gdk_color_parse ("black", &lcolor);
@@ -241,14 +241,21 @@ void drawAnswer(){
     }
 }
 
-void on_btn_calcular_SD_clicked()
+int on_btn_calcular_SD_clicked()
 {   
+    for(int i = 0; i < totalJuegos;i++){
+        if(lugar_juego[i]==0){
+            gtk_label_set_text(GTK_LABEL(result), "Falta un formato de la serie.");
+            return 0;
+        }
+    }
+   
 
-	tabla = createFloatMatrix(CantidadDeJuegos, CantidadDeJuegos);
+	tabla = createFloatMatrix(mitadJuegos, mitadJuegos);
 
 
-    for (int i=0;i<CantidadDeJuegos;i++){
-        for( int j = 0;j<CantidadDeJuegos;j++){
+    for (int i=0;i<mitadJuegos;i++){
+        for( int j = 0;j<mitadJuegos;j++){
             if(j==0){
                 tabla[i][j]=0;
                 continue;
@@ -257,10 +264,10 @@ void on_btn_calcular_SD_clicked()
                 tabla[i][j]=1;
                 continue;
             }
-            if(lugar_juego[CantidadDeJuegos2-1-(i+j-2)] == 1){
+            if(lugar_juego[totalJuegos-1-(i+j-2)] == 1){
                 tabla[i][j]=ph*tabla[i-1][j]+qr*tabla[i][j-1];}
 
-            if(lugar_juego[CantidadDeJuegos2-1-(i+j-2)] == 2){
+            if(lugar_juego[totalJuegos-1-(i+j-2)] == 2){
                 tabla[i][j]=pr*tabla[i-1][j]+qh*tabla[i][j-1];
             }
             
@@ -269,18 +276,17 @@ void on_btn_calcular_SD_clicked()
 
     }
 
-    printFloatMatrix(tabla, CantidadDeJuegos, CantidadDeJuegos);
-
-    /*for (int i=0;i<=CantidadDeJuegos2;i++){
+    
+    /*for (int i=0;i<=totalJuegos;i++){
        printf("%d\n",lugar_juego[i]);
 
     }*/
-    //printf("%f\n",mat[CantidadDeJuegos-1][CantidadDeJuegos-1]);
+    //printf("%f\n",mat[mitadJuegos-1][mitadJuegos-1]);
 
     char val[120];
     strcpy(val,"La probabilidad de que A gane la serie es de: ");
     char v[30];
-    sprintf(v,"%f",tabla[CantidadDeJuegos-1][CantidadDeJuegos-1]);
+    sprintf(v,"%f",tabla[mitadJuegos-1][mitadJuegos-1]);
     strcat(val,v);
 
    drawAnswer();
@@ -289,18 +295,29 @@ void on_btn_calcular_SD_clicked()
     gtk_label_set_text(GTK_LABEL(result), val);
 }
 
-void on_guardar_SD_clicked ()
+int on_guardar_SD_clicked ()
 {
     char * filename[250];
 
     char* name = gtk_entry_get_text (filenameEntry);
+
+    if(strlen(name)==0){
+        gtk_label_set_text(GTK_LABEL(result), "Escriba el nombre del archivo.");
+        return 0;
+    }
+
     char* folderfile = gtk_file_chooser_get_filename(folder);
+    if(folderfile==NULL){
+        gtk_label_set_text(GTK_LABEL(result), "Selecione un folder.");
+        return 0;
+    }
 
     sprintf(filename,"%s/%s", folderfile, name);
 
     writeFile(filename);
 
     gtk_entry_set_text (filenameEntry, "");
+    gtk_label_set_text(GTK_LABEL(result), "Se guardó exitosamente.");
 
 }
 void writeFile(char* filename)
@@ -311,35 +328,40 @@ void writeFile(char* filename)
     
   
 
-    fprintf(file, "%i\n", CantidadDeJuegos);
-    fprintf(file, "%i\n", CantidadDeJuegos2);
+    fprintf(file, "%i\n", mitadJuegos);
+    fprintf(file, "%i\n", totalJuegos);
     fprintf(file, "%f\n", ph);
     fprintf(file, "%f\n", pr);
     fprintf(file, "%f\n", qh);
     fprintf(file, "%f\n", qr);
     
-    for (int i = 0 ;i < CantidadDeJuegos2;i++){
+    for (int i = 0 ;i < totalJuegos;i++){
         fprintf(file, "%i\n", lugar_juego[i]);
     }
 
     fclose(file);
 }
 
-void on_btn_cargar_SD_clicked(){
+int on_btn_cargar_SD_clicked(){
     const gchar *filename;
     filename = gtk_file_chooser_get_filename (entry_cargar_SD);
+    if(filename==NULL){
+        gtk_label_set_text(GTK_LABEL(result), "Selecione un archivo.");
+        return 0;
+    }
     readFile(filename);
 }
 
 
 void readFile(char* filename)
 {    
+ 
 
     FILE *file;
     file = fopen(filename, "r");
     
-    fscanf(file, "%i", &CantidadDeJuegos);
-    fscanf(file, "%i", &CantidadDeJuegos2);
+    fscanf(file, "%i", &mitadJuegos);
+    fscanf(file, "%i", &totalJuegos);
     fscanf(file, "%f", &ph);
     fscanf(file, "%f", &pr);
     fscanf(file, "%f", &qh);
@@ -349,7 +371,7 @@ void readFile(char* filename)
 
     int i = 0;
 
-    while (i < CantidadDeJuegos2)
+    while (i < totalJuegos)
     {
         fscanf(file, "%i", &lugar_juego[i]);
         i++;
@@ -358,19 +380,19 @@ void readFile(char* filename)
     fclose(file);
 
     
-    if(CantidadDeJuegos2==3){
+    if(totalJuegos==3){
         gtk_combo_box_set_active(cantJuegos,0);
     }
-    if(CantidadDeJuegos2==5){
+    if(totalJuegos==5){
         gtk_combo_box_set_active(cantJuegos,1);
     }
-    if(CantidadDeJuegos2==7){
+    if(totalJuegos==7){
         gtk_combo_box_set_active(cantJuegos,2);
     }
-    if(CantidadDeJuegos2==9){
+    if(totalJuegos==9){
         gtk_combo_box_set_active(cantJuegos,3);
     }
-    if(CantidadDeJuegos2==11){
+    if(totalJuegos==11){
         gtk_combo_box_set_active(cantJuegos,4);
     }
 
@@ -393,6 +415,35 @@ void readFile(char* filename)
     snprintf(array, sizeof(array), "%f", pr);
     gtk_entry_set_text(GTK_ENTRY(g_Pr),array);
 
+    char val[40];
+    strcpy(val,"Ph = ");
+    char v[12];
+    sprintf(v,"%f",ph);
+    strcat(val,v);
+
+    strcat(val,"\n");
+
+    strcat(val,"Pr = ");
+    char v1[12];
+    sprintf(v1,"%f",pr);
+
+    strcat(val,v1);
+
+    gtk_label_set_text(GTK_LABEL(probabilidades1), val);
+
+    strcpy(val,"Qh = ");
+    char v2[12];
+    sprintf(v2,"%f",qh);
+    strcat(val,v2); 
+
+    strcat(val,"\n");
+
+    strcat(val,"Qr = ");
+    char v3[8];
+    sprintf(v3,"%f",qr);
+    strcat(val,v3);    
+
+    gtk_label_set_text(GTK_LABEL(probabilidades2), val);
 
 
 }
@@ -417,18 +468,82 @@ float stof(const char* s){
   return rez * fact;
 };
 
-void on_Acept_clicked(){
+
+
+int on_Acept_clicked(){
 
     const gchar *phS;
     phS = gtk_entry_get_text(GTK_ENTRY(g_Ph));
     ph = stof(phS);
-    
     const gchar *prS;
     prS = gtk_entry_get_text(GTK_ENTRY(g_Pr));
     pr = stof(prS);
+    
+    if(strlen(phS)==0 || strlen(prS)==0){
+        gtk_label_set_text(GTK_LABEL(result), "Los campos no pueden estar vacíos.");
+        return 0;
+    }
+    for(int i = 0 ; i <strlen(phS);i++){
+        if(phS[i]=='.'){
+            continue;
+        }
+        if(isdigit(phS[i])==FALSE){
+            gtk_label_set_text(GTK_LABEL(result), "ph y pr tiene que ser entre 0 y 1.");
+            return 0;
+        }
+    }
+    for(int i = 0 ; i <strlen(prS);i++){
+        if(prS[i]=='.'){
+            continue;
+        }
+        if(isdigit(prS[i])==FALSE){
+            gtk_label_set_text(GTK_LABEL(result), "ph y pr tiene que ser entre 0 y 1.");
+            return 0;
+        }
+    }
 
-    qh = 1 - pr;
-    qr = 1 - ph;
+    if((ph >= 0 && ph <=1)&&(pr >= 0 && pr <=1)){
+        qr = 1 - ph;
+        qh = 1 - pr;
+        gtk_label_set_text(GTK_LABEL(result), "");
+    }else{
+ 
+        gtk_label_set_text(GTK_LABEL(result), "ph y pr tiene que ser entre 0 y 1.");
+        return 0;
+    }
+
+
+ 
+
+    char val[40];
+    strcpy(val,"Ph = ");
+    char v[12];
+    sprintf(v,"%f",ph);
+    strcat(val,v);
+
+    strcat(val,"\n");
+
+    strcat(val,"Pr = ");
+    char v1[12];
+    sprintf(v1,"%f",pr);
+
+    strcat(val,v1);
+
+    gtk_label_set_text(GTK_LABEL(probabilidades1), val);
+
+    strcpy(val,"Qh = ");
+    char v2[12];
+    sprintf(v2,"%f",qh);
+    strcat(val,v2); 
+
+    strcat(val,"\n");
+
+    strcat(val,"Qr = ");
+    char v3[8];
+    sprintf(v3,"%f",qr);
+    strcat(val,v3);    
+
+    gtk_label_set_text(GTK_LABEL(probabilidades2), val);
 
     
    
@@ -475,7 +590,7 @@ void on_Acept11_clicked(GtkWidget *widget,GtkWidget *widget2){
 void on_juego2_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
-    if(CantidadDeJuegos2 >=3){
+    if(totalJuegos >=3){
     gtk_widget_set_sensitive (widget2, TRUE);
         }
 
@@ -488,7 +603,7 @@ void on_juego3_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos2 >=4){
+    if(totalJuegos >=4){
     gtk_widget_set_sensitive (widget2, TRUE);}
 
       if (gtk_combo_box_get_active (combo_box) == 0) {
@@ -500,7 +615,7 @@ void on_juego4_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos2 >=5){
+    if(totalJuegos >=5){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -511,7 +626,7 @@ void on_juego5_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos2 >=6){
+    if(totalJuegos >=6){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -522,7 +637,7 @@ void on_juego6_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos2 >=7){
+    if(totalJuegos >=7){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -533,7 +648,7 @@ void on_juego7_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos2 >=8){
+    if(totalJuegos >=8){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -544,7 +659,7 @@ void on_juego8_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos2 >=9){
+    if(totalJuegos >=9){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -555,7 +670,7 @@ void on_juego9_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-   if(CantidadDeJuegos2 >=10){
+   if(totalJuegos >=10){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -566,7 +681,7 @@ void on_juego10_changed(GtkWidget *widget,GtkWidget *widget2){
 
     GtkComboBox *combo_box = widget;
     
-    if(CantidadDeJuegos2 >=11){
+    if(totalJuegos >=11){
     gtk_widget_set_sensitive (widget2, TRUE);}
       if (gtk_combo_box_get_active (combo_box) == 0) {
         gtk_widget_set_sensitive (widget2, FALSE);
@@ -601,81 +716,49 @@ void on_juego1_changed(GtkWidget *widget,GtkWidget *widget2){
 
 }
 
-void on_calcProbabilidad_clicked(){
-    char val[40];
-    strcpy(val,"Ph = ");
-    char v[12];
-    sprintf(v,"%f",ph);
-    strcat(val,v);
 
-    strcat(val,"\n");
-
-    strcat(val,"Pr = ");
-    char v1[12];
-    sprintf(v1,"%f",pr);
-
-    strcat(val,v1);
-
-    gtk_label_set_text(GTK_LABEL(probabilidades1), val);
-
-    strcpy(val,"Qh = ");
-    char v2[12];
-    sprintf(v2,"%f",qh);
-    strcat(val,v2); 
-
-    strcat(val,"\n");
-
-    strcat(val,"Qr = ");
-    char v3[8];
-    sprintf(v3,"%f",qr);
-    strcat(val,v3);    
-
-    gtk_label_set_text(GTK_LABEL(probabilidades2), val);
-
-
-}
 
 void on_cantJuegos_changed (GtkWidget *widget)
 {
   //gtk_widget_set_sensitive (widget2, TRUE);
-    CantidadDeJuegos=3;
+    mitadJuegos=3;
     GtkComboBox *combo_box = widget;
     switch (gtk_combo_box_get_active (combo_box)){
         case 0:
-            CantidadDeJuegos=3;
+            mitadJuegos=3;
             break;
         case 1:
-            CantidadDeJuegos=4;
+            mitadJuegos=4;
             break;
         case 2:
-            CantidadDeJuegos=5;
+            mitadJuegos=5;
             break;
         case 3:
-            CantidadDeJuegos=6;
+            mitadJuegos=6;
             break;
         case 4:
-            CantidadDeJuegos=7;
+            mitadJuegos=7;
             break;
     
     }
     switch (gtk_combo_box_get_active (combo_box)){
         case 0:
-            CantidadDeJuegos2=3;
+            totalJuegos=3;
             break;
         case 1:
-            CantidadDeJuegos2=5;
+            totalJuegos=5;
             break;
         case 2:
-            CantidadDeJuegos2=7;
+            totalJuegos=7;
             break;
         case 3:
-            CantidadDeJuegos2=9;
+            totalJuegos=9;
             break;
         case 4:
-            CantidadDeJuegos2=11;
+            totalJuegos=11;
             break;
     
     }
-    juegosganar = CantidadDeJuegos-1;
-    printf("%d\n",CantidadDeJuegos );
+    juegosganar = mitadJuegos-1;
+   
 }
