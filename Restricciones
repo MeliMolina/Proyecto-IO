@@ -1,0 +1,2 @@
+Validar que ph, y pr sean mayores a 1, que sean positivos y float
+Que ph y pr no sean strings
