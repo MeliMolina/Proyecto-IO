@@ -10,6 +10,8 @@
 
  Melissa Molina Corrales
  Edwin Cen Xu
+ Willian Espinoza
+ Cristian León
 
  ************************************************************************/
 
@@ -62,8 +64,8 @@ GtkWidget * grid2;
 GtkWidget *label;
 GtkWidget *box;
 
-int mitadJuegos = 0;
-int totalJuegos = 0;
+int mitadJuegos = 3;
+int totalJuegos = 3;
 float ph = 0;
 float pr = 0;
 float qh = 0;
@@ -290,6 +292,10 @@ void CrearTabla(){
 
 int on_btn_calcular_SD_clicked()
 {   
+    if(ph==0 && pr==0){
+        gtk_label_set_text(GTK_LABEL(result), "Los campos no pueden estar vacíos.");
+        return 0;
+    }
     for(int i = 0; i < totalJuegos;i++){
         if(lugar_juego[i]==0){
             gtk_label_set_text(GTK_LABEL(result), "Falta un formato de la serie.");
