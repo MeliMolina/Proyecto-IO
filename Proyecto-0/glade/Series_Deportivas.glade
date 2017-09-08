@@ -106,7 +106,7 @@
                         <property name="pixbuf">fondo4.jpg</property>
                       </object>
                       <packing>
-                        <property name="x">-44</property>
+                        <property name="x">-26</property>
                         <property name="y">-17</property>
                       </packing>
                     </child>

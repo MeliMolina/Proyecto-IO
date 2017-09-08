@@ -101,10 +101,14 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="valign">start</property>
-            <property name="label" translatable="yes">Edwin Cen Xu
-Willian Espinoza
- Cristian León
-Melissa Molina Corrales</property>
+            <property name="label" translatable="yes">      Edwin Cen Xu
+
+Melissa Molina Corrales
+
+     Willian Espinoza
+
+      Cristian León
+</property>
             <attributes>
               <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
               <attribute name="style" value="italic"/>

@@ -159,8 +159,8 @@ void CrearTabla(){
 
                        
     grid2 = gtk_grid_new ();
-    gtk_grid_set_row_spacing (grid2, 1);
-    gtk_grid_set_column_spacing (grid2, 1);
+    gtk_grid_set_row_spacing (grid2, 2);
+    gtk_grid_set_column_spacing (grid2, 2);
 
                      
 
