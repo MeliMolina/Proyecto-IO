@@ -163,6 +163,16 @@ void on_btn_calcular_clicked(){
 		}else{
 		strs[i-1] = cant_nodos;}
 	}
+	for(int i=1;i<=nnodos;i++){	
+		const gchar *cant_nodos;
+		cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,i,0));
+		if(strlen(cant_nodos)==0){
+			strs[i-1] = strsAux[i-1];
+		}else{
+		strs[i-1] = cant_nodos;}
+		printf("%s\n",strs[i-1] );
+	}
+
 		
 	
 	CrearTabla();
@@ -442,8 +452,10 @@ float stof(const char* s){
 
 
 int on_Nodos_changed(GtkWidget *widget){
+    for(int i=1;i<=nnodos;i++){	
+		strs[i-1]=strsAux[i-1];
+	}
     deleteTablesGrid();
-    
     /*const gchar *cant_nodos;
     cant_nodos = gtk_entry_get_text(GTK_ENTRY(cant_nodos_RMC));*/
     GtkComboBox *combo_box = widget;
