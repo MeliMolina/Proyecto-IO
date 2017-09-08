@@ -26,6 +26,7 @@ all: $(OBJS)
 	$(LD) -o $(TARGET) $(OBJS) $(LDFLAGS)
 	$(CC) -o Pending src/pending.c $(LDFLAGS)
 	$(CC) -o Series_Deportivas src/series_deportivas.c $(LDFLAGS)
+	$(CC) -o Rutas_Optimas src/rutas_optimas.c $(LDFLAGS)
 	./main_menu
     
 

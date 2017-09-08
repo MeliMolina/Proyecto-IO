@@ -134,7 +134,7 @@ void on_Button_Programa1_clicked(){
 }
 
 void on_Button_Programa2_clicked(){
-    system("./Pending &");
+    system("./Rutas_Optimas &");
 	
 
 }
