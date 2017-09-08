@@ -106,7 +106,7 @@
                         <property name="pixbuf">blue.jpg</property>
                       </object>
                       <packing>
-                        <property name="x">-824</property>
+                        <property name="x">-859</property>
                         <property name="y">-254</property>
                       </packing>
                     </child>
