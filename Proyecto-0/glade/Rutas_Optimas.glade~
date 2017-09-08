@@ -4,7 +4,7 @@
   <requires lib="gtk+" version="3.12"/>
   <object class="GtkWindow" id="window_SD">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Series Deportivas</property>
+    <property name="title" translatable="yes">Algoritmo de Floyd</property>
     <property name="window_position">center</property>
     <child>
       <object class="GtkFixed" id="cont_fijo_SD">
@@ -52,7 +52,7 @@
                   <object class="GtkLabel" id="label_titulo_SD">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Algoritmo Series Deportivas</property>
+                    <property name="label" translatable="yes">Algoritmo de Floyd</property>
                     <property name="justify">center</property>
                     <attributes>
                       <attribute name="font-desc" value="DejaVu Serif Bold Italic 11"/>
@@ -103,11 +103,11 @@
                         <property name="height_request">253</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">fondo4.jpg</property>
+                        <property name="pixbuf">blue.jpg</property>
                       </object>
                       <packing>
-                        <property name="x">-44</property>
-                        <property name="y">-17</property>
+                        <property name="x">-830</property>
+                        <property name="y">-277</property>
                       </packing>
                     </child>
                     <child>
@@ -179,6 +179,19 @@
                                     <property name="y">84</property>
                                   </packing>
                                 </child>
+                                <child>
+                                  <object class="GtkLabel" id="label2">
+                                    <property name="width_request">100</property>
+                                    <property name="height_request">80</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes">D(0)</property>
+                                  </object>
+                                  <packing>
+                                    <property name="x">334</property>
+                                    <property name="y">1</property>
+                                  </packing>
+                                </child>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -227,20 +240,6 @@
                         <property name="height_request">412</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkButton" id="next">
-                            <property name="label" translatable="yes">siguiente</property>
-                            <property name="width_request">100</property>
-                            <property name="height_request">14</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                          </object>
-                          <packing>
-                            <property name="x">139</property>
-                            <property name="y">410</property>
-                          </packing>
-                        </child>
                       </object>
                       <packing>
                         <property name="x">171</property>
@@ -262,8 +261,22 @@
                     <property name="lines">1</property>
                   </object>
                   <packing>
-                    <property name="x">664</property>
-                    <property name="y">468</property>
+                    <property name="x">845</property>
+                    <property name="y">9</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="next">
+                    <property name="label" translatable="yes">siguiente</property>
+                    <property name="width_request">100</property>
+                    <property name="height_request">-1</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                  </object>
+                  <packing>
+                    <property name="x">779</property>
+                    <property name="y">509</property>
                   </packing>
                 </child>
               </object>

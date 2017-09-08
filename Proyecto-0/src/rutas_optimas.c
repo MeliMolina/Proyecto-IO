@@ -44,15 +44,16 @@ GtkWidget *gridt;
 GtkWidget *Nodos;
 
 
-GtkWidget *tabla_label1;
-GtkWidget *tabla_label2;
+GtkWidget *tabla_label;
+
 
 GtkWidget *label;
 GtkWidget *box;
-char *strs[50]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
-float ** tabla;
+char *strs[2000]= {"A","B","C","D","E","F","G","H","I","J"};
+char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J"};
+int ** tabla;
 float resp;
-
+int contador = 0;
 int nnodos;
 
 
@@ -83,7 +84,7 @@ int main(int argc, char *argv[])
     tabla_sol1 = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_sol1"));
     tabla_input = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_input"));
     tabla_sol2 = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_sol2"));
-
+	tabla_label = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_label"));
 
     
     gtk_widget_set_tooltip_text(entry_cargar_SD, "Seleccionar un archivo");
@@ -126,17 +127,44 @@ void deleteTablesGrid()
 
 void on_btn_calcular_clicked(){
 
-	tabla = createFloatMatrix(nnodos, nnodos);
+	GList *children, *iter;
+
+    children = gtk_container_get_children(GTK_CONTAINER(tabla_sol1));
+    for(iter = children; iter != NULL; iter = g_list_next(iter))
+        gtk_widget_destroy(GTK_WIDGET(iter->data));
+    g_list_free(children);
+
+	char val[40];
+    strcpy(val,"D(");
+    char v[12];
+    sprintf(v,"%d",contador);
+    strcat(val,v);
+
+    strcat(val,")");
+
+    gtk_label_set_text(GTK_LABEL(tabla_label), val);
+
+	tabla = createFloatMatrix(nnodos+1, nnodos+1);
 
 	for(int i=1;i<=nnodos;i++){	
 		for(int j=1;j<=nnodos;j++){
+			if(i==j){
+				tabla[i][j] = 0;
+			}else{
 			const gchar *cant_nodos;
 			cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
 			int valor = atoi(cant_nodos);
-			
-			tabla[i][j]=valor;
+			tabla[i][j] = valor;}
 		}
+		const gchar *cant_nodos;
+		cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,i,0));
+		if(strlen(cant_nodos)==0){
+			strs[i-1] = strsAux[i-1];
+		}else{
+		strs[i-1] = cant_nodos;}
 	}
+		
+	
 	CrearTabla();
 }
 
@@ -153,29 +181,15 @@ void CrearTabla(){
     gtk_grid_set_row_spacing (grid2, 1);
     gtk_grid_set_column_spacing (grid2, 1);
 
-    for (i = -1; i < (nnodos); i++)
+    for (i = 0; i <=(nnodos); i++)
     {
-        for(j = -1; j < (nnodos); j++)
+        for(j = 0; j <=(nnodos); j++)
         {
-            if (i==-1){
-                if(j==-1){
-                    label = gtk_label_new ("");
-                    gtk_widget_set_size_request(label, 470/(nnodos+ 2), 470/(nnodos+ 2));
+        	if(i==0&&j==0){continue;}
+            if (i==0){
 
-                    box = gtk_box_new(0, 0);
-                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
-                    const GdkRGBA *color;
-                    
-                    
-                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
-
-                    gtk_widget_show (label);
-                    gtk_widget_show (box);
-                       
-                }
-                else{
                     char val[30];
-                    sprintf(val,"%d", j);
+                    sprintf(val,"%s", strs[j-1]);
 
                     label = gtk_label_new (val);
                     gtk_widget_set_size_request(label, 470/(nnodos + 2), 470/(nnodos + 2));
@@ -190,12 +204,12 @@ void CrearTabla(){
 
                     gtk_widget_show (label);
                     gtk_widget_show (box);      
-                }
+                
             }
             else{
-                if(j==-1){
+                if(j==0){
                     char val[30];
-                    sprintf(val,"%d", i);
+                    sprintf(val,"%s", strs[i-1]);
 
                     label = gtk_label_new (val);
                     gtk_widget_set_size_request(label, 470/(nnodos + 2), 470/(nnodos + 2));
@@ -212,44 +226,11 @@ void CrearTabla(){
                     gtk_widget_show (box);
                 }
                 else{
-                    if((j==0)&&(i==0)){
-                        label = gtk_label_new ("");
-                        gtk_widget_set_size_request(label, 470/(nnodos+ 2), 470/(nnodos + 2));
-
-                        box = gtk_box_new(0, 0);
-                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
-                        const GdkRGBA *color;
-                        
-                        gdk_color_parse( "#A9D0F5", &color );
-                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
-                        gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
-
-                        gtk_widget_show (label);
-                        gtk_widget_show (box);
-                    }
-
-                    if((i == nnodos-1)&& (j == nnodos-1 )){
-                         char val[30];
-                        sprintf(val,"%.*f", 4, tabla[i][j]);
-
-                        label = gtk_label_new (val);
-                        gtk_widget_set_size_request(label, 470/(nnodos+ 2), 470/(nnodos + 2));
-
-                        box = gtk_box_new(0, 0);
-                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
-                        const GdkRGBA *color;
-                        
-                        gdk_color_parse( "#FE2E64", &color );
-                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
-                        gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
-
-                        gtk_widget_show (label);
-                        gtk_widget_show (box);
-
-                    }
-                    else{
+                    
+                    
+                    
                         char val[30];
-                        sprintf(val,"%.*f", 4, tabla[i][j]);
+                        sprintf(val,"%d", tabla[i][j]);
                    
 
                         label = gtk_label_new (val);
@@ -265,7 +246,7 @@ void CrearTabla(){
 
                         gtk_widget_show (label);
                         gtk_widget_show (box);   
-                    }
+                    
                 }
             }
         }
@@ -462,7 +443,7 @@ float stof(const char* s){
 
 int on_Nodos_changed(GtkWidget *widget){
     deleteTablesGrid();
-
+    
     /*const gchar *cant_nodos;
     cant_nodos = gtk_entry_get_text(GTK_ENTRY(cant_nodos_RMC));*/
     GtkComboBox *combo_box = widget;
@@ -479,29 +460,62 @@ int on_Nodos_changed(GtkWidget *widget){
     int i, j;
     for (i = 1; i < val+1; i++)
     {
-        GtkWidget *label = gtk_label_new (strs[i-1]);
+        //GtkWidget *label = gtk_label_new (strs[i-1]);
 
-        gtk_grid_attach(GTK_GRID(gridt), label, 0, i, 1, 1);
-        gtk_widget_show (label);
-        
-        GtkWidget *labelf = gtk_label_new (strs[i-1]);
+        /*gtk_grid_attach(GTK_GRID(gridt), label, 0, i, 1, 1);
+        gtk_widget_show (label);*/
+
+           
+        /*GtkWidget *labelf = gtk_label_new (strs[i-1]);
         
         gtk_grid_attach(GTK_GRID(gridt), labelf, i, 0, 1, 1);
-        gtk_widget_show (labelf);
+        gtk_widget_show (labelf);*/
         
         for(j = 1; j < val+1; j++)
-        {                       
+        {               
+        	if(i==1){ 
+        		GtkWidget *entry = gtk_entry_new();
+		        gtk_entry_set_width_chars(entry,3);
+		        gtk_grid_attach(GTK_GRID(gridt), entry, j, 0, 1, 1);
+		        gtk_entry_set_text(entry,strs[j-1]);
+		        gtk_widget_show (entry);}     
+        	if(j==1){
+		        /*GtkWidget *entry = gtk_entry_new();
+		        gtk_entry_set_width_chars(entry,3);
+		        gtk_grid_attach(GTK_GRID(gridt), entry, 0, i, 1, 1);
+		        gtk_entry_set_text(entry,strs[i-1]);
+		        gtk_widget_show (entry);*/
+		        GtkWidget *labelf = gtk_label_new (strs[i-1]);
+        
+		        gtk_grid_attach(GTK_GRID(gridt), labelf, 0, i, 1, 1);
+		        gtk_widget_show (labelf);
+
+		        }
+        	if(i==j){
+        		GtkWidget *labelf = gtk_label_new ("0");
+        		gtk_grid_attach(GTK_GRID(gridt), labelf, i, j, 1, 1);
+        		gtk_widget_show (labelf);
+
+        	}else{
             GtkWidget *entry = gtk_entry_new();
             gtk_entry_set_width_chars(entry,3);
             //gtk_container_add (GTK_CONTAINER (table), label);
             gtk_grid_attach(GTK_GRID(gridt), entry, j, i, 1, 1);
-            gtk_widget_show (entry);
+            gtk_widget_show (entry);}
         }
     }
     gtk_container_add (GTK_CONTAINER (tabla_input), gridt);
     gtk_widget_show (gridt);
 
-    
+    /*for(int i=0;i<=nnodos;i++){	
+		for(int j=0;j<=nnodos;j++){
+			if(i==j){	
+				
+    			gtk_entry_set_text(gtk_grid_get_child_at (gridt,j,i),"0");
+				tabla[i][j] = 0;
+			}
+		}
+	}*/
     
 /*
     const gchar *phS;
