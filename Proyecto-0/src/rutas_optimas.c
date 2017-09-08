@@ -39,6 +39,7 @@ GtkWidget *SalirDelPrograma;
 GtkWidget *tabla_sol1;
 GtkWidget *tabla_sol2;
 GtkWidget *grid1;
+GtkWidget *grid2;
 GtkWidget *gridt;
 GtkWidget *Nodos;
 
@@ -123,6 +124,22 @@ void deleteTablesGrid()
 
 }
 
+void on_btn_calcular_clicked(){
+
+	tabla = createFloatMatrix(nnodos, nnodos);
+
+	for(int i=1;i<=nnodos;i++){	
+		for(int j=1;j<=nnodos;j++){
+			const gchar *cant_nodos;
+			cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
+			int valor = atoi(cant_nodos);
+			
+			tabla[i][j]=valor;
+		}
+	}
+	CrearTabla();
+}
+
 void on_SalirDelPrograma_clicked()
 {
     gtk_widget_destroy(window_SD);
@@ -130,39 +147,20 @@ void on_SalirDelPrograma_clicked()
 
 
 void CrearTabla(){
-
-
-
-    
-
-
-
-/*
     int i, j;
-
-    GList *children, *iter;
-
-    children = gtk_container_get_children(GTK_CONTAINER(tabla_sol_SD));
-    for(iter = children; iter != NULL; iter = g_list_next(iter))
-      gtk_widget_destroy(GTK_WIDGET(iter->data));
-    g_list_free(children);
-
-                       
+                    
     grid2 = gtk_grid_new ();
     gtk_grid_set_row_spacing (grid2, 1);
     gtk_grid_set_column_spacing (grid2, 1);
 
-                     
-
-
-    for (i = -1; i < (mitadJuegos); i++)
+    for (i = -1; i < (nnodos); i++)
     {
-        for(j = -1; j < (mitadJuegos); j++)
+        for(j = -1; j < (nnodos); j++)
         {
             if (i==-1){
                 if(j==-1){
                     label = gtk_label_new ("");
-                    gtk_widget_set_size_request(label, 470/(mitadJuegos+ 2), 470/(mitadJuegos+ 2));
+                    gtk_widget_set_size_request(label, 470/(nnodos+ 2), 470/(nnodos+ 2));
 
                     box = gtk_box_new(0, 0);
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
@@ -180,7 +178,7 @@ void CrearTabla(){
                     sprintf(val,"%d", j);
 
                     label = gtk_label_new (val);
-                    gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos + 2));
+                    gtk_widget_set_size_request(label, 470/(nnodos + 2), 470/(nnodos + 2));
 
                     box = gtk_box_new(0, 0);
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
@@ -200,7 +198,7 @@ void CrearTabla(){
                     sprintf(val,"%d", i);
 
                     label = gtk_label_new (val);
-                    gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos + 2));
+                    gtk_widget_set_size_request(label, 470/(nnodos + 2), 470/(nnodos + 2));
 
                     box = gtk_box_new(0, 0);
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
@@ -216,7 +214,7 @@ void CrearTabla(){
                 else{
                     if((j==0)&&(i==0)){
                         label = gtk_label_new ("");
-                        gtk_widget_set_size_request(label, 470/(mitadJuegos+ 2), 470/(mitadJuegos + 2));
+                        gtk_widget_set_size_request(label, 470/(nnodos+ 2), 470/(nnodos + 2));
 
                         box = gtk_box_new(0, 0);
                         gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
@@ -230,12 +228,12 @@ void CrearTabla(){
                         gtk_widget_show (box);
                     }
 
-                    if((i == mitadJuegos-1)&& (j == mitadJuegos-1 )){
+                    if((i == nnodos-1)&& (j == nnodos-1 )){
                          char val[30];
                         sprintf(val,"%.*f", 4, tabla[i][j]);
 
                         label = gtk_label_new (val);
-                        gtk_widget_set_size_request(label, 470/(mitadJuegos+ 2), 470/(mitadJuegos + 2));
+                        gtk_widget_set_size_request(label, 470/(nnodos+ 2), 470/(nnodos + 2));
 
                         box = gtk_box_new(0, 0);
                         gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
@@ -255,7 +253,7 @@ void CrearTabla(){
                    
 
                         label = gtk_label_new (val);
-                        gtk_widget_set_size_request(label, 470/(mitadJuegos + 2), 470/(mitadJuegos+ 2));
+                        gtk_widget_set_size_request(label, 470/(nnodos + 2), 470/(nnodos+ 2));
 
                          box = gtk_box_new(0, 0);
                         gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
@@ -275,7 +273,7 @@ void CrearTabla(){
 
     gtk_container_add (GTK_CONTAINER (tabla_sol1), grid2);
     gtk_widget_show (grid2);   
-    */
+    
 }
 
 
@@ -315,7 +313,7 @@ void writeFile(char* filename)
     
   
 
-    fprintf(file, "%i\n", mitadJuegos);
+    fprintf(file, "%i\n", nnodos);
     fprintf(file, "%i\n", totalJuegos);
     fprintf(file, "%f\n", ph);
     fprintf(file, "%f\n", pr);
@@ -347,7 +345,7 @@ void readFile(char* filename)
     /*FILE *file;
     file = fopen(filename, "r");
     
-    fscanf(file, "%i", &mitadJuegos);
+    fscanf(file, "%i", &nnodos);
     fscanf(file, "%i", &totalJuegos);
     fscanf(file, "%f", &ph);
     fscanf(file, "%f", &pr);
@@ -494,7 +492,7 @@ int on_Nodos_changed(GtkWidget *widget){
         for(j = 1; j < val+1; j++)
         {                       
             GtkWidget *entry = gtk_entry_new();
-            gtk_entry_set_width_chars(entry,5);
+            gtk_entry_set_width_chars(entry,3);
             //gtk_container_add (GTK_CONTAINER (table), label);
             gtk_grid_attach(GTK_GRID(gridt), entry, j, i, 1, 1);
             gtk_widget_show (entry);
@@ -502,6 +500,8 @@ int on_Nodos_changed(GtkWidget *widget){
     }
     gtk_container_add (GTK_CONTAINER (tabla_input), gridt);
     gtk_widget_show (gridt);
+
+    
     
 /*
     const gchar *phS;

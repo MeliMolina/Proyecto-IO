@@ -103,11 +103,11 @@
                         <property name="height_request">253</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">blue.jpg</property>
+                        <property name="pixbuf">fondo4.jpg</property>
                       </object>
                       <packing>
-                        <property name="x">-859</property>
-                        <property name="y">-254</property>
+                        <property name="x">-44</property>
+                        <property name="y">-17</property>
                       </packing>
                     </child>
                     <child>
@@ -223,10 +223,24 @@
                     </child>
                     <child>
                       <object class="GtkFixed" id="tabla_sol1">
-                        <property name="width_request">509</property>
-                        <property name="height_request">472</property>
+                        <property name="width_request">519</property>
+                        <property name="height_request">412</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkButton" id="next">
+                            <property name="label" translatable="yes">siguiente</property>
+                            <property name="width_request">100</property>
+                            <property name="height_request">14</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                          </object>
+                          <packing>
+                            <property name="x">139</property>
+                            <property name="y">410</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="x">171</property>
@@ -240,7 +254,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="tabla_label1">
+                  <object class="GtkLabel" id="tabla_label">
                     <property name="width_request">100</property>
                     <property name="height_request">29</property>
                     <property name="visible">True</property>
@@ -248,20 +262,8 @@
                     <property name="lines">1</property>
                   </object>
                   <packing>
-                    <property name="x">648</property>
-                    <property name="y">509</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="tabla_label2">
-                    <property name="width_request">100</property>
-                    <property name="height_request">31</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                  </object>
-                  <packing>
-                    <property name="x">1110</property>
-                    <property name="y">505</property>
+                    <property name="x">664</property>
+                    <property name="y">468</property>
                   </packing>
                 </child>
               </object>
@@ -321,13 +323,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btn_calcular_SD">
+                  <object class="GtkButton" id="btn_calcular">
                     <property name="label" translatable="yes">Calcular</property>
                     <property name="width_request">80</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <signal name="clicked" handler="on_btn_calcular_SD_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_btn_calcular_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
