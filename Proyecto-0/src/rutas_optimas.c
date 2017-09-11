@@ -52,6 +52,7 @@ GtkWidget *box;
 char *strs[2000]= {"A","B","C","D","E","F","G","H","I","J"};
 char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J"};
 int ** tabla;
+int ** tabla2;
 float resp;
 int contador = 0;
 int nnodos;
@@ -111,6 +112,17 @@ int main(int argc, char *argv[])
     return 0;
 } 
  
+
+
+void floyd(){
+	for(int i = 0; i < nnodos; i++){
+		tabla2[contador][i]=tabla[contador][i];
+		tabla2[i][contador]=tabla[i][contador];
+	}
+
+
+
+}
 void deleteTablesGrid()
 {
     /*grid1 = gtk_grid_new ();
@@ -145,16 +157,23 @@ void on_btn_calcular_clicked(){
     gtk_label_set_text(GTK_LABEL(tabla_label), val);
 
 	tabla = createFloatMatrix(nnodos+1, nnodos+1);
+	tabla2 = createFloatMatrix(nnodos+1, nnodos+1);
 
 	for(int i=1;i<=nnodos;i++){	
 		for(int j=1;j<=nnodos;j++){
 			if(i==j){
 				tabla[i][j] = 0;
 			}else{
-			const gchar *cant_nodos;
-			cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
-			int valor = atoi(cant_nodos);
-			tabla[i][j] = valor;}
+				const gchar *cant_nodos;
+				cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
+				int valor = atoi(cant_nodos);
+				if(cant_nodos[0] == '-'){
+					tabla[i][j] = -1;
+				}
+				else{
+					tabla[i][j] = valor;
+				}
+			}
 		}
 		const gchar *cant_nodos;
 		cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,i,0));
@@ -170,7 +189,6 @@ void on_btn_calcular_clicked(){
 			strs[i-1] = strsAux[i-1];
 		}else{
 		strs[i-1] = cant_nodos;}
-		printf("%s\n",strs[i-1] );
 	}
 
 		
@@ -240,7 +258,12 @@ void CrearTabla(){
                     
                     
                         char val[30];
-                        sprintf(val,"%d", tabla[i][j]);
+                        if(tabla[i][j]==-1){
+                        	sprintf(val,"%s", "-");
+                        }
+                        else{
+                        	sprintf(val,"%d", tabla[i][j]);
+                    	}
                    
 
                         label = gtk_label_new (val);
