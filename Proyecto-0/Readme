@@ -23,3 +23,11 @@ Instrucciones para correr el programa
 Al ejecutar el makefile se mostrará la interfaz del proyecto con una ventana principal con el menú
 de programas de programación dinámica.
 
+En la opción Rutas optimas se encontrará el Algoritmo de Floyd.
+-El manejo del valor infinito en la tabla es con el símbolo: "-"
+-Se llena la tabla con los valores de D(0) y luego se da click en el botón "Calcular" para visualizar la tabla D(1)
+-Las diferentes tablas con sus cambios se pueden visualizar dando click en el botón "Siguiente"
+-La tabla P con las rutas se puede visualizar en el botón "Tabla de Cambios".
+-Las rutas óptimas se pueden visualizar en el botón "Rutas óptimas" y se mostrará una ventana para ingresar el nodo 1 y el nodo 2 y mostrar la ruta óptima.
+
+
