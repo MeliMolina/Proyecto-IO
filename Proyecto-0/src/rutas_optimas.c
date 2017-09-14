@@ -51,6 +51,7 @@ GtkWidget *resultRuta;
 
 GtkWidget *result;
 GtkWidget *tabla_label;
+GtkWidget *ruta_optima;
 
 
 GtkWidget *label;
@@ -675,6 +676,9 @@ int on_rutas_optimas_clicked(){
         gtk_label_set_text(GTK_LABEL(result), "Tiene que llegar a la última tabla primero.");
         return 0;
     }
+    /*builder = gtk_builder_new();
+    gtk_builder_add_from_file (builder, "glade/Rutas_Optimas.glade", NULL);
+    window_RO = GTK_WIDGET(gtk_builder_get_object(builder, "window_RO"));*/
     gtk_widget_show(window_RO);
 }
 
