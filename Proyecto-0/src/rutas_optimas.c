@@ -114,6 +114,7 @@ int main(int argc, char *argv[])
     gtk_widget_set_tooltip_text(btn_cargar_SD, "Carga el archivo seleccionado");
     gtk_widget_set_tooltip_text(SalirDelPrograma, "Cierra el programa");
 
+    gtk_label_set_text(GTK_LABEL(result), "Utilice \"-\" para infinito.");
     grid1 = gtk_grid_new ();
     gtk_grid_set_row_spacing (grid1, 10);
     gtk_grid_set_column_spacing (grid1, 10);
