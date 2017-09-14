@@ -588,7 +588,7 @@ void getOptimalPath(int begin,int end){
     }
     else{
         strcat(val,arrow);
-        printf("Tome %d y pase por %d \n",begin,medium);
+        //printf("Tome %d y pase por %d \n",begin,medium);
         getOptimalPath(medium,end);
     }
     
