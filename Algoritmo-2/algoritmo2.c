@@ -112,6 +112,18 @@ int **matIni(){
 
 }
 
+void rutaOptima(int **matP,int **matO, int x, int y){
+    if(matP != MAX_INT){
+        if(matP == 0){
+            printf("%d-%d\n",x,y);
+        }else{
+            printf("%d-%d-%d\n",x,matP[x-1][y-1],y);
+        }
+    }else{
+        printf("No existe una ruta desde %d hasta %d\n",x,y);
+    }
+}
+
 int main(){
 
     /*
@@ -126,6 +138,7 @@ int main(){
     int ***registro = crearCubVacio(size);
     int **matP = crearMatVacia(size);
     int **mat = matIni();
+    llenarCeros(matP,size);
     algoritmo2(matP,registro,mat,size);
 
     //imprime las matrices anteriores
@@ -137,5 +150,6 @@ int main(){
     //imprime la matriz P
     printf("P=\n");
     imprimirMat(matP,size);
+    rutaOptima(matP,mat,1,2);
     return 0;
 }
