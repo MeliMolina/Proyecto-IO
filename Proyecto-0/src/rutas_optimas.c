@@ -128,6 +128,8 @@ int main(int argc, char *argv[])
 
    
     gtk_widget_show(window_SD);
+    
+                              
                               
     gtk_main();
     return 0;
