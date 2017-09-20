@@ -263,20 +263,8 @@
                                       <item id="8" translatable="yes">8</item>
                                       <item id="9" translatable="yes">9</item>
                                       <item id="10" translatable="yes">10</item>
-                                      <item translatable="yes">11</item>
-                                      <item translatable="yes">12</item>
-                                      <item translatable="yes">12</item>
-                                      <item translatable="yes">1</item>
-                                      <item translatable="yes">1</item>
-                                      <item translatable="yes">1</item>
-                                      <item translatable="yes">1</item>
-                                      <item translatable="yes">1</item>
-                                      <item translatable="yes">1</item>
-                                      <item translatable="yes">1</item>
-                                      <item translatable="yes">1</item>
-                                      <item translatable="yes">1</item>
                                     </items>
-                                    <signal name="changed" handler="on_Nodos_changed" swapped="no"/>
+                                    <signal name="changed" handler="on_vidaUtil_changed" swapped="no"/>
                                   </object>
                                   <packing>
                                     <property name="x">97</property>
