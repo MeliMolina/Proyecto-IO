@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
+<interface>
+  <requires lib="gtk+" version="3.12"/>
+  <object class="GtkWindow" id="window_RO">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Algoritmo de Floyd</property>
+    <property name="window_position">center</property>
+    <signal name="destroy" handler="on_window_RO_destroy" swapped="no"/>
+    <child>
+      <object class="GtkFixed" id="fixed1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkEntry" id="ciudad1">
+            <property name="width_request">28</property>
+            <property name="height_request">79</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="x">20</property>
+            <property name="y">46</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="ciudad2">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="x">242</property>
+            <property name="y">46</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="resultRuta">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="x">25</property>
+            <property name="y">132</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label3">
+            <property name="width_request">100</property>
+            <property name="height_request">22</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Nodo 1</property>
+          </object>
+          <packing>
+            <property name="x">22</property>
+            <property name="y">41</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label4">
+            <property name="width_request">100</property>
+            <property name="height_request">24</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Nodo 2</property>
+          </object>
+          <packing>
+            <property name="x">246</property>
+            <property name="y">40</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="mostrarRuta">
+            <property name="label" translatable="yes">Mostrar Ruta</property>
+            <property name="width_request">100</property>
+            <property name="height_request">29</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="on_mostrarRuta_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">201</property>
+            <property name="y">210</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="salirRO">
+            <property name="label" translatable="yes">Salir</property>
+            <property name="width_request">100</property>
+            <property name="height_request">-1</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="on_salirRO_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">330</property>
+            <property name="y">210</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkWindow" id="window_SD">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Algoritmo de Floyd</property>
+    <property name="window_position">center</property>
+    <child>
+      <object class="GtkFixed" id="cont_fijo_SD">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkImage" id="fondo_SD">
+            <property name="width_request">100</property>
+            <property name="height_request">94</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="x">-296</property>
+            <property name="y">-131</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="cont_caja_principal_SD">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="margin_top">5</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkBox" id="cont_caja_titulo_SD">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkSeparator" id="separador_izq_titulo_SD">
+                    <property name="width_request">435</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_titulo_SD">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Algoritmo de Floyd</property>
+                    <property name="justify">center</property>
+                    <attributes>
+                      <attribute name="font-desc" value="DejaVu Serif Bold Italic 11"/>
+                      <attribute name="weight" value="bold"/>
+                      <attribute name="foreground" value="#000000000000"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">5</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSeparator" id="separador_der_titulo_SD">
+                    <property name="width_request">435</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFixed" id="cont_fijo_tabla_SD">
+                <property name="height_request">32</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkFixed" id="tabla_SD">
+                    <property name="width_request">32</property>
+                    <property name="height_request">32</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImage" id="img_tabla_SD">
+                        <property name="width_request">480</property>
+                        <property name="height_request">253</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="pixbuf">blue.jpg</property>
+                      </object>
+                      <packing>
+                        <property name="x">-830</property>
+                        <property name="y">-277</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkFixed" id="cont_datos_SD">
+                        <property name="width_request">470</property>
+                        <property name="height_request">470</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkBox" id="box1">
+                            <property name="width_request">100</property>
+                            <property name="height_request">80</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkFixed" id="datos_SD">
+                                <property name="width_request">628</property>
+                                <property name="height_request">447</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkLabel" id="label1">
+                                    <property name="width_request">100</property>
+                                    <property name="height_request">80</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes">Vida Útil</property>
+                                  </object>
+                                  <packing>
+                                    <property name="x">6</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkComboBoxText" id="vidaUtil">
+                                    <property name="width_request">100</property>
+                                    <property name="height_request">30</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="active">0</property>
+                                    <items>
+                                      <item id="1" translatable="yes">1</item>
+                                      <item id="2" translatable="yes">2</item>
+                                      <item id="3" translatable="yes">3</item>
+                                      <item id="4" translatable="yes">4</item>
+                                      <item id="5" translatable="yes">5</item>
+                                      <item id="6" translatable="yes">6</item>
+                                      <item id="7" translatable="yes">7</item>
+                                      <item id="8" translatable="yes">8</item>
+                                      <item id="9" translatable="yes">9</item>
+                                      <item translatable="yes">10</item>
+                                    </items>
+                                    <signal name="changed" handler="on_Nodos_changed" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="x">97</property>
+                                    <property name="y">22</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkFixed" id="tabla_input">
+                                    <property name="width_request">528</property>
+                                    <property name="height_request">346</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                  </object>
+                                  <packing>
+                                    <property name="x">13</property>
+                                    <property name="y">84</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="result">
+                                    <property name="width_request">100</property>
+                                    <property name="height_request">1</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                  </object>
+                                  <packing>
+                                    <property name="x">44</property>
+                                    <property name="y">465</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label2">
+                                    <property name="width_request">100</property>
+                                    <property name="height_request">80</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes">Plan</property>
+                                  </object>
+                                  <packing>
+                                    <property name="x">228</property>
+                                    <property name="y">-1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSpinButton" id="plan">
+                                    <property name="width_request">100</property>
+                                    <property name="height_request">80</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="value">30</property>
+                                  </object>
+                                  <packing>
+                                    <property name="x">304</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="aceptPlan">
+                                    <property name="label" translatable="yes">Aceptar</property>
+                                    <property name="width_request">87</property>
+                                    <property name="height_request">23</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <signal name="clicked" handler="on_aceptPlan_clicked" swapped="no"/>
+                                  </object>
+                                  <packing>
+                                    <property name="x">17</property>
+                                    <property name="y">68</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="x">-2</property>
+                        <property name="y">5</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">53</property>
+                    <property name="y">20</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkFixed" id="tabla_SD1">
+                    <property name="width_request">0</property>
+                    <property name="height_request">32</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImage" id="img_tabla_SD1">
+                        <property name="width_request">100</property>
+                        <property name="height_request">80</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="x">90</property>
+                        <property name="y">-17</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkFixed" id="tabla_sol1">
+                        <property name="width_request">519</property>
+                        <property name="height_request">412</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="x">171</property>
+                        <property name="y">33</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">510</property>
+                    <property name="y">20</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="tabla_label">
+                    <property name="width_request">100</property>
+                    <property name="height_request">29</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="lines">1</property>
+                  </object>
+                  <packing>
+                    <property name="x">845</property>
+                    <property name="y">9</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="next">
+                    <property name="label" translatable="yes">Siguiente</property>
+                    <property name="width_request">100</property>
+                    <property name="height_request">-1</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_next_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="x">671</property>
+                    <property name="y">509</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="tablaCambios">
+                    <property name="label" translatable="yes">Tabla de Cambios</property>
+                    <property name="width_request">100</property>
+                    <property name="height_request">6</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_tablaCambios_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="x">777</property>
+                    <property name="y">509</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="tablaActual">
+                    <property name="label" translatable="yes">Tabla Actual</property>
+                    <property name="width_request">100</property>
+                    <property name="height_request">-1</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_tablaActual_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="x">916</property>
+                    <property name="y">509</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="rutas_optimas">
+                    <property name="label" translatable="yes">Rutas Óptimas</property>
+                    <property name="width_request">100</property>
+                    <property name="height_request">10</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_rutas_optimas_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="x">1026</property>
+                    <property name="y">509</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="cont_caja_calc_SD">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">30</property>
+                <property name="spacing">5</property>
+                <property name="baseline_position">top</property>
+                <child>
+                  <object class="GtkFileChooserButton" id="entry_cargar_SD">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="btn_cargar_SD">
+                    <property name="label" translatable="yes">Cargar</property>
+                    <property name="width_request">80</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_btn_cargar_SD_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <object class="GtkSeparator" id="separador_calcular_SD">
+                    <property name="width_request">210</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">center</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="btn_calcular">
+                    <property name="label" translatable="yes">Calcular</property>
+                    <property name="width_request">80</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_btn_calcular_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkFileChooserButton" id="folder">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="action">select-folder</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">5</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="filename">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">6</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="guardar_SD">
+                    <property name="label" translatable="yes">Guardar</property>
+                    <property name="width_request">80</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_guardar_SD_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">7</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="cont_caja_footer_SD">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">10</property>
+                <child>
+                  <object class="GtkSeparator" id="separador_footer_SD">
+                    <property name="width_request">902</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">center</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="padding">6</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="SalirDelPrograma">
+                    <property name="label" translatable="yes">Salir</property>
+                    <property name="width_request">83</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">end</property>
+                    <property name="valign">end</property>
+                    <property name="margin_bottom">5</property>
+                    <property name="xalign">0.51999998092651367</property>
+                    <signal name="clicked" handler="on_SalirDelPrograma_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="pack_type">end</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="x">-2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

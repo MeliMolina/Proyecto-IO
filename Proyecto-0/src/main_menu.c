@@ -140,8 +140,7 @@ void on_Button_Programa2_clicked(){
 }
 
 void on_Button_Programa3_clicked(){
-
-	system("./Pending &");
+    system("./Reemplazo_Equipos &");
 
 }
 
