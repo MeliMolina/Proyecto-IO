@@ -52,11 +52,12 @@ GtkWidget *resultRuta;
 GtkWidget *result;
 GtkWidget *tabla_label;
 GtkWidget *ruta_optima;
+GtkWidget *plan;
 
 
 GtkWidget *label;
 GtkWidget *box;
-char *strs[2000]= {"A","B","C","D","E","F","G","H","I","J"};
+char *strs[2000]= {"Años","Mantenimiento","Reventa","D","E","F","G","H","I","J"};
 char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J"};
 int ** tabla;
 int ** tabla2;
@@ -92,7 +93,7 @@ int main(int argc, char *argv[])
     filenameEntry = GTK_WIDGET(gtk_builder_get_object(builder, "filename"));
 
 
-
+    plan = GTK_WIDGET(gtk_builder_get_object(builder, "plan"));
     guardar = GTK_WIDGET(gtk_builder_get_object(builder, "guardar_SD"));
     btn_cargar_SD = GTK_WIDGET(gtk_builder_get_object(builder, "btn_cargar_SD"));
     SalirDelPrograma = GTK_WIDGET(gtk_builder_get_object(builder, "SalirDelPrograma"));
@@ -1050,49 +1051,56 @@ float stof(char* s){
 
 
 
-int on_Nodos_changed(GtkWidget *widget){
-    for(int i=1;i<=nnodos;i++){	
-		strs[i-1]=strsAux[i-1];
-	}
+int on_aceptPlan_clicked(){
+    
     deleteTablesGrid();
     
-    GtkComboBox *combo_box = widget;
-    int val = gtk_combo_box_get_active (combo_box)+1;//atoi(cant_nodos);
+    /*GtkComboBox *combo_box = widget;
+    int val = gtk_combo_box_get_active (combo_box)+1;//atoi(cant_nodos);*/
 
-    
-    nnodos = val;
-    
-    
+    gtk_label_set_text(GTK_LABEL(result), "");
+
+    const gchar *pln;
+    pln = gtk_entry_get_text(plan);
+    int t = atoi(pln);
     gridt = gtk_grid_new ();
     gtk_grid_set_row_spacing (gridt, 5);
     gtk_grid_set_column_spacing (gridt, 5);
-    
+    char v[12];
+    printf("%d\n",t );
+    if(t<=0||t>30){
+        gtk_label_set_text(GTK_LABEL(result), "El plan tiene que ser entre 1 y 30 años");
+        return 0;
+    }
+
     int i, j;
-    for (i = 1; i < val+1; i++)
+    for (i = 1; i < t+1; i++)
     {
         
-        for(j = 1; j < val+1; j++)
+        for(j = 1; j < 4; j++)
         {               
         	if(i==1){ 
-        		GtkWidget *entry = gtk_entry_new();
-		        gtk_entry_set_width_chars(entry,3);
-		        gtk_grid_attach(GTK_GRID(gridt), entry, j, 0, 1, 1);
-		        gtk_entry_set_text(entry,strs[j-1]);
-		        gtk_widget_show (entry);}     
-        	if(j==1){
-		       
-		        GtkWidget *labelf = gtk_label_new (strs[i-1]);
+        		GtkWidget *labelf = gtk_label_new (strs[j-1]);
+		
+		        gtk_grid_attach(GTK_GRID(gridt), labelf, j, 0, 1, 1);
+            
+                
+		        
+
+		        gtk_widget_show (labelf);
+              
+      
+            }     
+        	if(j==2){
+                
+		        sprintf(v,"%d",i);
+		        GtkWidget *labelf = gtk_label_new (v);
         
-		        gtk_grid_attach(GTK_GRID(gridt), labelf, 0, i, 1, 1);
+		        gtk_grid_attach(GTK_GRID(gridt), labelf, 1, i, 1, 1);
 		        gtk_widget_show (labelf);
 
 		        }
-        	if(i==j){
-        		GtkWidget *labelf = gtk_label_new ("0");
-        		gtk_grid_attach(GTK_GRID(gridt), labelf, i, j, 1, 1);
-        		gtk_widget_show (labelf);
-
-        	}else{
+            if(j!=1){
             GtkWidget *entry = gtk_entry_new();
             gtk_entry_set_width_chars(entry,3);
             gtk_grid_attach(GTK_GRID(gridt), entry, j, i, 1, 1);
