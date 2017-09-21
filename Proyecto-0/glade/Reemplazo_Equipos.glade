@@ -412,7 +412,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
-                                  <object class="GtkLabel" id="label7">
+                                  <object class="GtkLabel" id="calculos">
                                     <property name="width_request">117</property>
                                     <property name="height_request">50</property>
                                     <property name="visible">True</property>
@@ -521,6 +521,19 @@ labellabellabellabellabellabellabel
                   <packing>
                     <property name="x">815</property>
                     <property name="y">33</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label5">
+                    <property name="width_request">100</property>
+                    <property name="height_request">80</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Costo </property>
+                  </object>
+                  <packing>
+                    <property name="x">236</property>
+                    <property name="y">65</property>
                   </packing>
                 </child>
               </object>
@@ -691,6 +704,18 @@ labellabellabellabellabellabellabel
           </object>
           <packing>
             <property name="x">-2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="costo">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+          </object>
+          <packing>
+            <property name="x">306</property>
+            <property name="y">87</property>
           </packing>
         </child>
       </object>
