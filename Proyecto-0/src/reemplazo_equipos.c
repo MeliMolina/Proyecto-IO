@@ -115,10 +115,29 @@ int on_btn_calcular_clicked(){
 	deleteTablesGrid(tabla_planAux);
 	gtk_label_set_text(GTK_LABEL(calculos), "");
 
-	/*tabla = createFloatMatrix(nnodos+1, nnodos+1);
-	tabla2 = createFloatMatrix(nnodos+1, nnodos+1);
-	
-
+	tabla = createFloatMatrix(tiempototal, 2);
+	//tabla2 = createFloatMatrix(tiempototal, 2);
+    for(int i=1;i<=tiempototal;i++){ 
+        for(int j=2;j<4;j++){
+            
+                const gchar *cant_nodos;
+                cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
+                int valor = atoi(cant_nodos);
+                if(isdigit(cant_nodos[0])==FALSE){
+                    gtk_label_set_text(GTK_LABEL(result), "Los valores de la tabla no pueden tener letras.");
+                    return 0;
+                }
+                else if(valor < 0){
+                    gtk_label_set_text(GTK_LABEL(result), "Los valores de la tabla tienen que ser mayor o igual que 0");
+                    return 0;
+                }
+                else{
+                    tabla[i-1][j-2] = valor;
+                }
+            
+        }
+    }
+/*
 	contador = 0;
 
 	for(int i=1;i<=nnodos;i++){	
@@ -184,15 +203,14 @@ void on_SalirDelPrograma_clicked()
 }
 
 void CrearTabla(){
-    int i, j;
                    
     grid2 = gtk_grid_new ();
     gtk_grid_set_row_spacing (grid2, 1);
     gtk_grid_set_column_spacing (grid2, 1);
 
-    for (i = 0; i <=(nnodos); i++)
+    for (int i = 0; i < tiempototal; i++)
     {
-        for(j = 0; j <=(nnodos); j++)
+        for(int j = 0; j < 2; j++)
         {
             if(i==0&&j==0){continue;}
             if (i==0){
@@ -437,7 +455,7 @@ int on_aceptPlan_clicked(){
         gtk_label_set_text(GTK_LABEL(result), "El costo tiene que ser mayor que 0.");
         return 0;
     }
-    if(t<=0||t>30){
+    if(t<=0){
         gtk_label_set_text(GTK_LABEL(result), "El plan tiene que ser entre 1 y 30 años.");
         return 0;
     }
@@ -449,21 +467,21 @@ int on_aceptPlan_clicked(){
     gtk_grid_set_column_spacing (gridt, 5);
     char v[5];
 
-    for (int i = 1; i < t+1; i++)
+    for (int i = 0; i < t+1; i++)
     {
         
-        for(int j = 1; j < 4; j++)
+        for(int j = 0; j < 4; j++)
         {               
-            if(i==1){ 
+            if(i==0){ 
                 GtkWidget *labelf = gtk_label_new (strs[j-1]);  
                 gtk_grid_attach(GTK_GRID(gridt), labelf, j, 0, 1, 1);
                 gtk_widget_show (labelf);}     
-            if(j==2){              
+            if(j==1&&i!=0){              
                 sprintf(v,"%d",i);
                 GtkWidget *labelf = gtk_label_new (v);     
                 gtk_grid_attach(GTK_GRID(gridt), labelf, 1, i, 1, 1);
                 gtk_widget_show (labelf);}
-            if(j!=1){
+            if(j>1&&i!=0){
             GtkWidget *entry = gtk_entry_new();
             gtk_entry_set_width_chars(entry,3);
             gtk_grid_attach(GTK_GRID(gridt), entry, j, i, 1, 1);

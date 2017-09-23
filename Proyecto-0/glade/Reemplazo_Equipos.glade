@@ -417,55 +417,6 @@
                                     <property name="height_request">50</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">labellabellabellabellabellabellabellabel
-labellabellabellabellabel
-labellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabellabel
-labellabellabellabellabel
-labellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabellabel
-labellabellabellabellabel
-labellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabellabel
-labellabellabellabellabel
-labellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabellabel
-labellabellabellabellabel
-labellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabellabel
-labellabellabellabellabel
-labellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-labellabellabellabellabellabellabel
-</property>
                                   </object>
                                 </child>
                               </object>
@@ -490,13 +441,13 @@ labellabellabellabellabellabellabel
                 <child>
                   <object class="GtkFixed" id="tabla_plan">
                     <property name="width_request">320</property>
-                    <property name="height_request">440</property>
+                    <property name="height_request">282</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkScrolledWindow" id="scrolledwindow2">
                         <property name="width_request">300</property>
-                        <property name="height_request">421</property>
+                        <property name="height_request">242</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="shadow_type">in</property>
@@ -534,6 +485,43 @@ labellabellabellabellabellabellabel
                   <packing>
                     <property name="x">236</property>
                     <property name="y">65</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScrolledWindow" id="scrolledwindow4">
+                    <property name="width_request">300</property>
+                    <property name="height_request">165</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkViewport" id="viewport4">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkFixed" id="tabla_ResultOpt">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkLabel" id="resultplanes">
+                                <property name="width_request">295</property>
+                                <property name="height_request">149</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="x">1</property>
+                                <property name="y">6</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="x">819</property>
+                    <property name="y">288</property>
                   </packing>
                 </child>
               </object>
