@@ -55,6 +55,7 @@ int ** tablaC;
 int ** tablaG;
 int ** tablaReventa;
 int ** tablaPlan;
+int ** tablaPlanAux;
 
 int contador = 0;
 int nnodos;
@@ -151,6 +152,7 @@ void calcularC(){
 void calcularG(){
     char v[12];
     int reg = 0;
+    
     for(int i = 0;i <= tiempototal;i++){
         strcat(val,"\nG(");
         sprintf(v,"%d",tiempototal-i);
@@ -163,29 +165,49 @@ void calcularG(){
         }
         
         int tempmenor = -1;
+  
+        tablaPlanAux = createFloatMatrix(tiempototal+1, 1);
+
         for(int j = 1;j <= tiempototal;j++){
             int temp = tablaC[j-1][0] + tablaG[i-j][0];
-            strcat(val,"\n=");
+            strcat(val,"\n");
+            sprintf(v,"%d",temp);
+            strcat(val,v);
+            tablaPlanAux[j-1][0] = temp;
+
             if(tempmenor==-1){
                 tempmenor = temp;
             }
 
             if(tempmenor>temp){
-                tempmenor = temp;
+                tempmenor = temp;   
             }
-            sprintf(v,"%d",temp);
-            strcat(val,v);
+            
             if(i==j){
                 break;
             }
         }
+        
+        revisarMenor(tempmenor, i);
+
         tablaG[i][0] = tempmenor;
-        printf("%d:%d\n",i, tempmenor );
         strcat(val,"\n");
         reg++;
     }
     gtk_label_set_text(GTK_LABEL(calculos), val);
 }
+
+void revisarMenor(int tempmenor, int i){
+    for(int j = 1; j <= tiempototal;j++){
+        if(tablaPlanAux[j-1][0]==tempmenor){
+            tablaPlan[tiempototal-i][tiempototal-i+j]=tiempototal-i+j;
+        }
+    }
+
+
+
+}
+
 
 int on_btn_calcular_clicked(){
 
@@ -196,6 +218,12 @@ int on_btn_calcular_clicked(){
 	tablaC = createFloatMatrix(tiempototal, 1);
     tablaG = createFloatMatrix(tiempototal+1, 1);
     tablaPlan = createFloatMatrix(tiempototal+1, tiempototal+1);
+
+    /*for(int i = 0;i < tiempototal+1;i++){
+        for(int j = 0; j < tiempototal+1;j++){
+            tablaPlan[i][j] = -1;
+        }
+    }*/
 
     for(int i=1;i<=tiempototal;i++){ 
         for(int j=2;j<4;j++){
@@ -219,6 +247,7 @@ int on_btn_calcular_clicked(){
     }
     calcularC();
     calcularG();
+    CrearTabla();
 /*
 	contador = 0;
 
@@ -290,12 +319,12 @@ void CrearTabla(){
     gtk_grid_set_row_spacing (grid2, 1);
     gtk_grid_set_column_spacing (grid2, 1);
 
-    for (int i = 0; i < tiempototal; i++)
+    for (int i = 0; i < tiempototal+1; i++)
     {
-        for(int j = 0; j < 2; j++)
+        for(int j = 0; j < tiempototal+1; j++)
         {   
             char val[30];
-            sprintf(val,"%d", tabla[i][j]);
+            sprintf(val,"%d", tablaPlan[i][j]);
             label = gtk_label_new (val);
             gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal+ 2));
             box = gtk_box_new(0, 0);
