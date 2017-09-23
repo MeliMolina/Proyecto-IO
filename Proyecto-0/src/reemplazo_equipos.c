@@ -54,6 +54,7 @@ int ** tabla;
 int ** tablaC;
 int ** tablaG;
 int ** tablaReventa;
+int ** tablaPlan;
 
 int contador = 0;
 int nnodos;
@@ -149,9 +150,9 @@ void calcularC(){
 
 void calcularG(){
     char v[12];
-
-    for(int i = 0;i < tiempototal;i++){
-        strcat(val,"G(");
+    int reg = 0;
+    for(int i = 0;i <= tiempototal;i++){
+        strcat(val,"\nG(");
         sprintf(v,"%d",tiempototal-i);
         strcat(val,v);
         strcat(val,") = ");
@@ -162,8 +163,8 @@ void calcularG(){
         }
         
         int tempmenor = -1;
-        for(int j = 0;j < tiempototal-1;j++){
-            int temp = tablaC[j][0] + tablaG[i-j][0];
+        for(int j = 1;j <= tiempototal;j++){
+            int temp = tablaC[j-1][0] + tablaG[i-j][0];
             strcat(val,"\n=");
             if(tempmenor==-1){
                 tempmenor = temp;
@@ -179,7 +180,9 @@ void calcularG(){
             }
         }
         tablaG[i][0] = tempmenor;
+        printf("%d:%d\n",i, tempmenor );
         strcat(val,"\n");
+        reg++;
     }
     gtk_label_set_text(GTK_LABEL(calculos), val);
 }
@@ -191,7 +194,8 @@ int on_btn_calcular_clicked(){
 
 	tabla = createFloatMatrix(tiempototal, 2);
 	tablaC = createFloatMatrix(tiempototal, 1);
-    tablaG = createFloatMatrix(tiempototal, 1);
+    tablaG = createFloatMatrix(tiempototal+1, 1);
+    tablaPlan = createFloatMatrix(tiempototal+1, tiempototal+1);
 
     for(int i=1;i<=tiempototal;i++){ 
         for(int j=2;j<4;j++){
