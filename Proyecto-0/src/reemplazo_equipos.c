@@ -51,7 +51,9 @@ GtkWidget *box;
 char *strs[100]= {"Años","Mantenimiento","Reventa"};
 
 int ** tabla;
-int ** tabla2;
+int ** tablaC;
+int ** tablaG;
+int ** tablaReventa;
 
 int contador = 0;
 int nnodos;
@@ -59,7 +61,7 @@ int nnodos;
 int costoini = 0;
 int tiempototal = 0;
 int vidaUtil = 1;
-
+char val[3000];
 
 int main(int argc, char *argv[])
 {
@@ -109,6 +111,78 @@ void deleteTablesGrid(GtkWidget *widget)
 
 }
 
+void calcularC(){
+    char v[12];
+    int limitador = 0;
+    int reg = 0;
+    strcpy(val,"");
+    for(int i = 0;i <= tiempototal;i++){
+        limitador++;
+        for(int j = 0;j < tiempototal;j++){
+            if(vidaUtil<limitador){
+                continue;
+            }
+            if(j+limitador+i-reg>tiempototal){
+                continue;
+            }
+            strcat(val,"C");
+            sprintf(v,"%d%d",j+i-reg, j+limitador+i-reg);
+            strcat(val,v);
+            strcat(val," = ");
+            if(j+limitador+i-reg>tiempototal-1){
+                int tempo = costoini;
+                for(int r = 0; r < limitador;r++){
+                    tempo+=tabla[r][0];
+                }
+                tempo-=tabla[i][1];
+                tablaC[i][0]=tempo;
+                sprintf(v,"%d",tempo);
+                strcat(val,v);   
+            }
+        }
+        reg++;
+        strcat(val,"\n");
+    }
+    strcat(val,"\n");
+    
+}
+
+void calcularG(){
+    char v[12];
+
+    for(int i = 0;i < tiempototal;i++){
+        strcat(val,"G(");
+        sprintf(v,"%d",tiempototal-i);
+        strcat(val,v);
+        strcat(val,") = ");
+        if(i==0){
+            strcat(val,"0\n");
+            tablaG[i][0]=0;
+            continue;
+        }
+        
+        int tempmenor = -1;
+        for(int j = 0;j < tiempototal-1;j++){
+            int temp = tablaC[j][0] + tablaG[i-j][0];
+            strcat(val,"\n=");
+            if(tempmenor==-1){
+                tempmenor = temp;
+            }
+
+            if(tempmenor>temp){
+                tempmenor = temp;
+            }
+            sprintf(v,"%d",temp);
+            strcat(val,v);
+            if(i==j){
+                break;
+            }
+        }
+        tablaG[i][0] = tempmenor;
+        strcat(val,"\n");
+    }
+    gtk_label_set_text(GTK_LABEL(calculos), val);
+}
 
 int on_btn_calcular_clicked(){
 
@@ -116,7 +190,9 @@ int on_btn_calcular_clicked(){
 	gtk_label_set_text(GTK_LABEL(calculos), "");
 
 	tabla = createFloatMatrix(tiempototal, 2);
-	//tabla2 = createFloatMatrix(tiempototal, 2);
+	tablaC = createFloatMatrix(tiempototal, 1);
+    tablaG = createFloatMatrix(tiempototal, 1);
+
     for(int i=1;i<=tiempototal;i++){ 
         for(int j=2;j<4;j++){
             
@@ -137,6 +213,8 @@ int on_btn_calcular_clicked(){
             
         }
     }
+    calcularC();
+    calcularG();
 /*
 	contador = 0;
 
@@ -144,7 +222,7 @@ int on_btn_calcular_clicked(){
 		for(int j=2;j<=nnodos;j++){
 			if(i==j){
 				tabla[i][j] = 0;
-				tabla2[i][j] = 0;
+				tablaC[i][j] = 0;
 			}else{
 				const gchar *cant_nodos;
 				cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
@@ -192,7 +270,7 @@ int on_btn_calcular_clicked(){
 
 	for(int i = 1; i <= nnodos; i++){
 		for(int j = 1; j <= nnodos; j++){
-			tabla[i][j] = tabla2[i][j];
+			tabla[i][j] = tablaC[i][j];
 		}
 	}*/
 }
@@ -211,15 +289,29 @@ void CrearTabla(){
     for (int i = 0; i < tiempototal; i++)
     {
         for(int j = 0; j < 2; j++)
-        {
-            if(i==0&&j==0){continue;}
+        {   
+            char val[30];
+            sprintf(val,"%d", tabla[i][j]);
+            label = gtk_label_new (val);
+            gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal+ 2));
+            box = gtk_box_new(0, 0);
+             gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                                  const GdkRGBA *color;
+                                        
+                                  gdk_color_parse( "#AFC6EE", &color );
+                                  gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                                  gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
+
+                                  gtk_widget_show (label);
+                                  gtk_widget_show (box);  
+            /*if(i==0&&j==0){continue;}
             if (i==0){
 
                     char val[30];
                     sprintf(val,"%s", strs[j-1]);
 
                     label = gtk_label_new (val);
-                    gtk_widget_set_size_request(label, 470/(nnodos + 2), 470/(nnodos + 2));
+                    gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal + 2));
 
                     box = gtk_box_new(0, 0);
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
@@ -239,7 +331,7 @@ void CrearTabla(){
                     sprintf(val,"%s", strs[i-1]);
 
                     label = gtk_label_new (val);
-                    gtk_widget_set_size_request(label, 470/(nnodos + 2), 470/(nnodos + 2));
+                    gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal + 2));
 
                     box = gtk_box_new(0, 0);
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
@@ -255,11 +347,11 @@ void CrearTabla(){
                 else{    
                         char val[30];
                     
-                        if(tabla2[i][j]==-1){
+                        if(tablaC[i][j]==-1){
                             sprintf(val,"%s", "-");
 
                             label = gtk_label_new (val);
-                            gtk_widget_set_size_request(label, 470/(nnodos + 2), 470/(nnodos+ 2));
+                            gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal+ 2));
 
                             box = gtk_box_new(0, 0);
                             gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
@@ -274,12 +366,12 @@ void CrearTabla(){
                         }
                         else{
 
-                            sprintf(val,"%d", tabla2[i][j]);
+                            sprintf(val,"%d", tablaC[i][j]);
 
-                            if(tabla2[i][j] != tabla[i][j]){
+                            if(tablaC[i][j] != tabla[i][j]){
 
                                 label = gtk_label_new (val);
-                                gtk_widget_set_size_request(label, 470/(nnodos + 2), 470/(nnodos+ 2));
+                                gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal+ 2));
 
                                  box = gtk_box_new(0, 0);
                                 gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
@@ -295,7 +387,7 @@ void CrearTabla(){
                             }
                             else{
                                  label = gtk_label_new (val);
-                                 gtk_widget_set_size_request(label, 470/(nnodos + 2), 470/(nnodos+ 2));
+                                 gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal+ 2));
 
                                   box = gtk_box_new(0, 0);
                                   gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
@@ -311,7 +403,7 @@ void CrearTabla(){
 
                         }
                 }
-            }
+            }*/
         }
     }
 
@@ -357,7 +449,7 @@ void writeFile(char* filename)
     FILE *file;
     file = fopen(filename, "w");
 
-    fprintf(file, "%i\n", nnodos);
+    fprintf(file, "%i\n", tiempototal);
 	const gchar *cant_nodos;
     for (int i = 1 ;i <= nnodos;i++){
     	for(int j = 1; j <= nnodos; j++){
@@ -404,7 +496,7 @@ void readFile(char* filename)
     nnodos = atoi(array);
     
     tabla = createFloatMatrix(nnodos+1, nnodos+1);
-    tabla2 = createFloatMatrix(nnodos+1, nnodos+1);
+    tablaC = createFloatMatrix(nnodos+1, nnodos+1);
     
 
     for (int i = 1 ;i <= nnodos;i++){
