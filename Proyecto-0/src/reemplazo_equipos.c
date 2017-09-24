@@ -130,7 +130,7 @@ void calcularC(){
                 continue;
             }
             strcat(val,"C");
-            sprintf(v,"%d%d",j+i-reg, j+limitador+i-reg);
+            sprintf(v,"%d|%d",j+i-reg, j+limitador+i-reg);
             strcat(val,v);
             strcat(val," = ");
             if(j+limitador+i-reg>tiempototal-1){
@@ -172,7 +172,19 @@ void calcularG(){
 
         for(int j = 1;j <= tiempototal;j++){
             int temp = tablaC[j-1][0] + tablaG[i-j][0];
-            strcat(val,"\n");
+            strcat(val,"\nC");
+            sprintf(v,"%d|",tiempototal-i);
+            strcat(val,v);
+            sprintf(v,"%d",tiempototal-(i-j));
+            strcat(val,v);
+            strcat(val," + G(");
+            sprintf(v,"%d) = ",tiempototal-(i-j));
+            strcat(val,v);
+            sprintf(v,"%d + ",tablaC[j-1][0]);
+            strcat(val,v);
+            sprintf(v,"%d = ",tablaG[i-j][0]);
+            strcat(val,v);
+
             sprintf(v,"%d",temp);
             strcat(val,v);
             tablaPlanAux[j-1][0] = temp;
@@ -362,6 +374,7 @@ void CrearTabla(){
                     sprintf(val,"%s", "");
                     char v[100];
                     for(int r = 0; r <= tiempototal;r++){
+
                         if(tablaPlan[i][r]!=0){
                             sprintf(v,"%d", tablaPlan[i][r]);
                             if(r+1!=tiempototal){
