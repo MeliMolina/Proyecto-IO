@@ -48,7 +48,9 @@ GtkWidget *label;
 GtkWidget *box;
 
 
-char *strs[100]= {"Años","Mantenimiento","Reventa"};
+char *strs[50]= {"Años","Mantenimiento","Reventa"};
+char *strs2[50]= {"t","G(t)","Proximo"};
+
 
 int ** tabla;
 int ** tablaC;
@@ -203,9 +205,6 @@ void revisarMenor(int tempmenor, int i){
             tablaPlan[tiempototal-i][tiempototal-i+j]=tiempototal-i+j;
         }
     }
-
-
-
 }
 
 
@@ -319,49 +318,31 @@ void CrearTabla(){
     gtk_grid_set_row_spacing (grid2, 1);
     gtk_grid_set_column_spacing (grid2, 1);
 
-    for (int i = 0; i < tiempototal+1; i++)
+    for (int i = -1; i < tiempototal+1; i++)
     {
-        for(int j = 0; j < tiempototal+1; j++)
+        for(int j = 0; j < 3; j++)
         {   
-            char val[30];
-            sprintf(val,"%d", tablaPlan[i][j]);
-            label = gtk_label_new (val);
-            gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal+ 2));
-            box = gtk_box_new(0, 0);
-             gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
-                                  const GdkRGBA *color;
-                                        
-                                  gdk_color_parse( "#AFC6EE", &color );
-                                  gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
-                                  gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
-                                  gtk_widget_show (label);
-                                  gtk_widget_show (box);  
-            /*if(i==0&&j==0){continue;}
-            if (i==0){
-
-                    char val[30];
-                    sprintf(val,"%s", strs[j-1]);
-
-                    label = gtk_label_new (val);
-                    gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal + 2));
-
-                    box = gtk_box_new(0, 0);
-                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
-                    const GdkRGBA *color;
+            if(i==-1){
+                char val[30];
+                sprintf(val,"%s", strs2[j]);
+                label = gtk_label_new (val);
+                gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal + 2));
+                box = gtk_box_new(0, 0);
+                gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                const GdkRGBA *color;
                     
-                    gdk_color_parse( "#467DD9", &color );
-                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
-                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
+                gdk_color_parse( "#467DD9", &color );
+                gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
-                    gtk_widget_show (label);
-                    gtk_widget_show (box);      
-                
+                gtk_widget_show (label);
+                gtk_widget_show (box);  
             }
             else{
                 if(j==0){
                     char val[30];
-                    sprintf(val,"%s", strs[i-1]);
+                    sprintf(val,"%d", i);
 
                     label = gtk_label_new (val);
                     gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal + 2));
@@ -370,73 +351,58 @@ void CrearTabla(){
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
                     const GdkRGBA *color;
                     
-                    gdk_color_parse( "#467DD9", &color );
+                    gdk_color_parse( "#AFC6EE", &color );
                     gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
                     gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
                     gtk_widget_show (label);
                     gtk_widget_show (box);
                 }
-                else{    
-                        char val[30];
-                    
-                        if(tablaC[i][j]==-1){
-                            sprintf(val,"%s", "-");
-
-                            label = gtk_label_new (val);
-                            gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal+ 2));
-
-                            box = gtk_box_new(0, 0);
-                            gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
-                            const GdkRGBA *color;
-                                
-                            gdk_color_parse( "#AFC6EE", &color );
-                            gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
-                            gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
-
-                            gtk_widget_show (label);
-                            gtk_widget_show (box);  
-                        }
-                        else{
-
-                            sprintf(val,"%d", tablaC[i][j]);
-
-                            if(tablaC[i][j] != tabla[i][j]){
-
-                                label = gtk_label_new (val);
-                                gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal+ 2));
-
-                                 box = gtk_box_new(0, 0);
-                                gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
-                                const GdkRGBA *color;
-                                    
-                                gdk_color_parse( "#EDE040", &color );
-                                gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
-                                gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
-
-                                gtk_widget_show (label);
-                                gtk_widget_show (box);
-
+                else if(j==2){
+                    sprintf(val,"%s", "");
+                    char v[100];
+                    for(int r = 0; r <= tiempototal;r++){
+                        if(tablaPlan[i][r]!=0){
+                            sprintf(v,"%d", tablaPlan[i][r]);
+                            if(r+1!=tiempototal){
+                                strcat(v,", ");
                             }
-                            else{
-                                 label = gtk_label_new (val);
-                                 gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal+ 2));
+                            strcat(val,v);
+                        }
+                    }
+                    label = gtk_label_new (val);
+                    gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal+ 2));
 
-                                  box = gtk_box_new(0, 0);
-                                  gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
-                                  const GdkRGBA *color;
+                    box = gtk_box_new(0, 0);
+                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                    const GdkRGBA *color;
                                         
-                                  gdk_color_parse( "#AFC6EE", &color );
-                                  gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
-                                  gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
+                    gdk_color_parse( "#AFC6EE", &color );
+                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
 
-                                  gtk_widget_show (label);
-                                  gtk_widget_show (box);  
-                            }
-
-                        }
+                    gtk_widget_show (label);
+                    gtk_widget_show (box);  
                 }
-            }*/
+                else{    
+                    char val[30];
+                    sprintf(val,"%d", tablaG[tiempototal-i][0]);
+
+                    label = gtk_label_new (val);
+                    gtk_widget_set_size_request(label, 470/(tiempototal + 2), 470/(tiempototal+ 2));
+
+                    box = gtk_box_new(0, 0);
+                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                    const GdkRGBA *color;
+                                        
+                    gdk_color_parse( "#AFC6EE", &color );
+                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
+
+                    gtk_widget_show (label);
+                    gtk_widget_show (box);   
+                }
+            }
         }
     }
 
