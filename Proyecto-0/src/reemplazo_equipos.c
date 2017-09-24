@@ -44,13 +44,14 @@ GtkWidget *resultplanes;
 
 GtkWidget *plan;
 GtkWidget *costo;
+GtkWidget *vidaU;
 
 GtkWidget *label;
 GtkWidget *box;
 
 
 char *strs[50]= {"Años","Mantenimiento","Reventa"};
-char *strs2[50]= {"t","G(t)","Proximo"};
+char *strs2[50]= {"t","G(t)","Próximo"};
 
 
 int ** tabla;
@@ -61,10 +62,10 @@ int ** tablaPlan;
 int ** tablaPlanAux;
 
 int contador = 0;
-int nnodos;
+
 
 int costoini = 0;
-int tiempototal = 0;
+int tiempototal = -1;
 int vidaUtil = 1;
 char val[3000];
 
@@ -86,6 +87,7 @@ int main(int argc, char *argv[])
     SalirDelPrograma = GTK_WIDGET(gtk_builder_get_object(builder, "SalirDelPrograma"));
 
     plan = GTK_WIDGET(gtk_builder_get_object(builder, "plan"));
+    vidaU = GTK_WIDGET(gtk_builder_get_object(builder, "vidaU"));
     costo = GTK_WIDGET(gtk_builder_get_object(builder, "costo"));
     result = GTK_WIDGET(gtk_builder_get_object(builder, "result"));
     resultplanes = GTK_WIDGET(gtk_builder_get_object(builder, "resultplanes"));
@@ -395,8 +397,8 @@ void CrearTabla(){
 
 int on_guardar_SD_clicked ()
 {
-    if(contador==0){
-    	gtk_label_set_text(GTK_LABEL(result), "Hay que crear una tabla primero.");
+    if(tiempototal==-1){
+    	gtk_label_set_text(GTK_LABEL(result), "Tiene que poner la información primero");
         return 0;
     }
 
@@ -431,22 +433,16 @@ void writeFile(char* filename)
     file = fopen(filename, "w");
 
     fprintf(file, "%i\n", tiempototal);
+    fprintf(file, "%i\n", costoini);
+    fprintf(file, "%i\n", vidaUtil);
 	const gchar *cant_nodos;
-    for (int i = 1 ;i <= nnodos;i++){
-    	for(int j = 1; j <= nnodos; j++){
-            if(i==j){
-                continue;
-            }
+    for(int i=1;i<=tiempototal;i++){ 
+        for(int j=2;j<4;j++){
             const gchar *cant_nodos;
             cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
             int valor = atoi(cant_nodos);
     		fprintf(file, "%i\n", valor);
     	}
-    }
-    for (int i = 1 ;i <= nnodos;i++){
-        const gchar *cant_nodos;
-        cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,i,0));
-        fprintf(file, "%s\n", cant_nodos);
     }
 
     fclose(file);
@@ -473,38 +469,45 @@ void readFile(char* filename)
     char array[10];
     fgets(array, sizeof(array), file);
     strip(array);
-    //fscanf(file, "%i", &nnodos);
-    nnodos = atoi(array);
-    
-    tabla = createFloatMatrix(nnodos+1, nnodos+1);
-    tablaC = createFloatMatrix(nnodos+1, nnodos+1);
+    //fscanf(file, "%i", &tiempototal);
+    tiempototal = atoi(array);
+    gtk_entry_set_text(plan,array);
+
+    fgets(array, sizeof(array), file);
+    strip(array);
+
+    costoini = atoi(array);
+    gtk_entry_set_text(costo,array);
     
 
-    for (int i = 1 ;i <= nnodos;i++){
-        for(int j = 1; j <= nnodos; j++){
-            if(i==j){
-                continue;
-            }
+    fgets(array, sizeof(array), file);
+    strip(array);
+    
+    vidaUtil = atoi(array);
+
+    gtk_combo_box_set_active(vidaU,vidaUtil-1);
+    on_aceptPlan_clicked();
+
+
+    for(int i=1;i<=tiempototal;i++){ 
+        for(int j=2;j<4;j++){         
 
             fgets(array, sizeof(array), file);
             strip(array); //Quita espacios null
-            if(atoi(array) == 0){
-                gtk_entry_set_text(gtk_grid_get_child_at(gridt,j,i),"-");
-            }else{
-              gtk_entry_set_text(gtk_grid_get_child_at(gridt,j,i),array);
-            }
+            gtk_entry_set_text(gtk_grid_get_child_at(gridt,j,i),array);
         }
     }
-    for(int i = 1; i <= nnodos; i++){
-        char array[20];
-        fgets(array, sizeof(array), file);
-        strip(array);
-        gtk_entry_set_text(gtk_grid_get_child_at(gridt,i,0),array);
-    }
+
+
     fclose(file);
     
+
+   
+
+
  
 }
+
 
 
 void on_vidaUtil_changed(GtkWidget *widget){
