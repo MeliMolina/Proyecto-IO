@@ -40,6 +40,7 @@ GtkWidget *grid2;
 GtkWidget *gridt;
 
 GtkWidget *result;
+GtkWidget *resultplanes;
 
 GtkWidget *plan;
 GtkWidget *costo;
@@ -87,6 +88,7 @@ int main(int argc, char *argv[])
     plan = GTK_WIDGET(gtk_builder_get_object(builder, "plan"));
     costo = GTK_WIDGET(gtk_builder_get_object(builder, "costo"));
     result = GTK_WIDGET(gtk_builder_get_object(builder, "result"));
+    resultplanes = GTK_WIDGET(gtk_builder_get_object(builder, "resultplanes"));
     tabla_planAux = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_planAux"));
     tabla_input = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_input"));
     calculos = GTK_WIDGET(gtk_builder_get_object(builder, "calculos"));
@@ -230,11 +232,6 @@ int on_btn_calcular_clicked(){
     tablaG = createFloatMatrix(tiempototal+1, 1);
     tablaPlan = createFloatMatrix(tiempototal+1, tiempototal+1);
 
-    /*for(int i = 0;i < tiempototal+1;i++){
-        for(int j = 0; j < tiempototal+1;j++){
-            tablaPlan[i][j] = -1;
-        }
-    }*/
 
     for(int i=1;i<=tiempototal;i++){ 
         for(int j=2;j<4;j++){
@@ -259,64 +256,36 @@ int on_btn_calcular_clicked(){
     calcularC();
     calcularG();
     CrearTabla();
-/*
-	contador = 0;
+    sprintf(val,"%s","");
+    for(int t = 0;t < tiempototal;t++){
+        char v[10];
+        strcat(val,"Planes desde año ");
+        sprintf(v,"%d",t);
+        strcat(val,v);
+        strcat(val,": \n");
+        mostrarPlanes(t);
+    }
+    gtk_label_set_text(GTK_LABEL(resultplanes), val);
+}
 
-	for(int i=1;i<=nnodos;i++){	
-		for(int j=2;j<=nnodos;j++){
-			if(i==j){
-				tabla[i][j] = 0;
-				tablaC[i][j] = 0;
-			}else{
-				const gchar *cant_nodos;
-				cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
-				int valor = atoi(cant_nodos);
-				if(cant_nodos[0] == '-'){
-					tabla[i][j] = -1;
-				}
-				else if(isdigit(cant_nodos[0])==FALSE){
-		            gtk_label_set_text(GTK_LABEL(result), "Los valores de la tabla no pueden tener letras.");
-		            return 0;
-		        }
-		        else if(valor < 1){
-		            gtk_label_set_text(GTK_LABEL(result), "Los valores de la tabla tienen que ser mayor o igual que 1");
-		            return 0;
-		        }
-				else{
-					tabla[i][j] = valor;
-				}
-			}
-		}
-		const gchar *cant_nodos;
-		cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,i,0));
-		
-		strs[i-1] = cant_nodos;
-	}
-	for(int i=1;i<=nnodos;i++){	
-		const gchar *cant_nodos;
-		cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,i,0));
-		
-		strs[i-1] = cant_nodos;
-	}
+int mostrarPlanes(int ind){
+    char v[30];
+    if(ind == tiempototal){
+        strcat(val,"\n");
+        return 0;
+    }
 
-	char val[40];
-    strcpy(val,"D(");
-    char v[12];
-    sprintf(v,"%d",contador+1);
-    strcat(val,v);
-
-    strcat(val,")");
-
-    //gtk_label_set_text(GTK_LABEL(tabla_label), val);
-		
-	
-	CrearTabla();
-
-	for(int i = 1; i <= nnodos; i++){
-		for(int j = 1; j <= nnodos; j++){
-			tabla[i][j] = tablaC[i][j];
-		}
-	}*/
+    //for(int i = ind;i <= tiempototal; i++){
+        for(int j = 0; j<=tiempototal; j++){
+            if(tablaPlan[ind][j]!=0){
+                sprintf(v,"%d - ",ind);
+                strcat(val,v);
+                sprintf(v,"%d\n",tablaPlan[ind][j]);
+                strcat(val,v);
+                mostrarPlanes(tablaPlan[ind][j]);
+            }
+        }
+    //}
 }
 
 void on_SalirDelPrograma_clicked()
