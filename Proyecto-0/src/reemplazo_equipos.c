@@ -280,7 +280,7 @@ int mostrarPlanes(int ind){
     //for(int i = ind;i <= tiempototal; i++){
         for(int j = 0; j<=tiempototal; j++){
             if(tablaPlan[ind][j]!=0){
-                sprintf(v,"%d - ",ind);
+                sprintf(v,"%d -> ",ind);
                 strcat(val,v);
                 sprintf(v,"%d\n",tablaPlan[ind][j]);
                 strcat(val,v);
