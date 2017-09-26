@@ -53,12 +53,15 @@ GtkWidget *box;
 char *strs[50]= {"Objeto ","Valor","Peso","Cantidad"};
 char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N"};
 char *strs2[50]= {"t","G(t)","Próximo"};
-int ** tabla2;
 
+int ** tablaColumnaAnterior;
 int ** tablaColores;
+int ** tablaResultado;
 int ** tabla;
 int capacidadMochila = 1;
 int cantidadObjetos = 1;
+int mayor;
+int ** cantidadCombinaciones;
 
 char val[300];
 
@@ -127,6 +130,10 @@ int on_btn_calcular_clicked(){
 	
     tabla = createFloatMatrix(cantidadObjetos, 3);
     tablaColores = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
+    tablaResultado = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
+    tablaColumnaAnterior = createFloatMatrix(capacidadMochila+1, 1);
+    cantidadCombinaciones = createFloatMatrix(cantidadObjetos, 1);
+
     for(int i=1;i<=cantidadObjetos;i++){ 
         for(int j=2;j<5;j++){
             
@@ -171,6 +178,7 @@ void CrearTabla(){
         {   
 
             if(i==0){
+                if(j!=cantidadObjetos){
                 char val[30];
                 sprintf(val,"%s", strsAux[j]);
                 label = gtk_label_new (val);
@@ -184,7 +192,7 @@ void CrearTabla(){
                 gtk_grid_attach(GTK_GRID(grid2), box, j+1, i, 1, 1);
 
                 gtk_widget_show (label);
-                gtk_widget_show (box);  
+                gtk_widget_show (box); } 
             }
             else{
                 if(j==0){
@@ -205,53 +213,31 @@ void CrearTabla(){
                     gtk_widget_show (label);
                     gtk_widget_show (box);
                 }
-                }/*
-                else if(j==2){
-                    sprintf(val,"%s", "");
+            
+                else {
                     char v[100];
-                    for(int r = 0; r <= cantidadObjetos;r++){
-
-                        if(tabla[i][r]!=0){
-                            sprintf(v,"%d", tabla[i][r]);
-                            if(r+1!=cantidadObjetos){
-                                strcat(v,", ");
-                            }
-                            strcat(val,v);
-                        }
-                    }
+                    sprintf(v,"%d", tablaResultado[i-1][j-1]);
+                 
                     label = gtk_label_new (val);
                     gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
 
                     box = gtk_box_new(0, 0);
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
                     const GdkRGBA *color;
-                                        
-                    gdk_color_parse( "#AFC6EE", &color );
+                    
+                    if(tablaResultado[i-1][j-1]==0){ 
+                    gdk_color_parse( "#40AD3B", &color );}
+                    else{
+                        gdk_color_parse( "#AFC6EE", &color );
+                    }
                     gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
-                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j, i, 1, 1);
 
                     gtk_widget_show (label);
                     gtk_widget_show (box);  
                 }
-                else{    
-                    char val[30];
-                    sprintf(val,"%d", tabla[cantidadObjetos-i][0]);
-
-                    label = gtk_label_new (val);
-                    gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
-
-                    box = gtk_box_new(0, 0);
-                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
-                    const GdkRGBA *color;
-                                        
-                    gdk_color_parse( "#AFC6EE", &color );
-                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
-                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
-
-                    gtk_widget_show (label);
-                    gtk_widget_show (box);   
-                }
-            }*/
+      
+            }
         }
     }
 
