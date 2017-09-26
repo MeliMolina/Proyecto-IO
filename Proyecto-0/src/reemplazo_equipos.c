@@ -124,7 +124,7 @@ void calcularC(){
     int limitador = 0;
     int reg = 0;
     strcpy(val,"");
-    for(int i = 0;i <= tiempototal;i++){
+    for(int i = 0;i <= vidaUtil;i++){
         limitador++;
         for(int j = 0;j < tiempototal;j++){
             if(vidaUtil<limitador){
@@ -174,7 +174,7 @@ void calcularG(){
   
         tablaPlanAux = createFloatMatrix(tiempototal+1, 1);
 
-        for(int j = 1;j <= tiempototal;j++){
+        for(int j = 1;j <= vidaUtil;j++){
             int temp = tablaC[j-1][0] + tablaG[i-j][0];
             strcat(val,"\nC");
             sprintf(v,"%d|",tiempototal-i);
@@ -436,7 +436,7 @@ void writeFile(char* filename)
     fprintf(file, "%i\n", costoini);
     fprintf(file, "%i\n", vidaUtil);
 	const gchar *cant_nodos;
-    for(int i=1;i<=tiempototal;i++){ 
+    for(int i=1;i<=vidaUtil;i++){ 
         for(int j=2;j<4;j++){
             const gchar *cant_nodos;
             cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
@@ -489,7 +489,7 @@ void readFile(char* filename)
     on_aceptPlan_clicked();
 
 
-    for(int i=1;i<=tiempototal;i++){ 
+    for(int i=1;i<=vidaUtil;i++){ 
         for(int j=2;j<4;j++){         
 
             fgets(array, sizeof(array), file);

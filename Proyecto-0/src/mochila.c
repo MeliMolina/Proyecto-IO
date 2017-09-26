@@ -170,7 +170,9 @@ void knapsack(){
     int valor = 0;
     for(int i = 0; i < cantidadObjetos; i++){
         for(int j = 0; j <= capacidadMochila;j++){
-            if(i <= tabla[i][1]){
+            if(i >= tabla[i][1]){
+                printf("i: %d\n", i);
+                printf("tabla: %d\n\n", tabla[i][1]);
                 for(int r = 0; r < tabla[i][2];r++){
                     valor += tabla[i][0];
                 }
