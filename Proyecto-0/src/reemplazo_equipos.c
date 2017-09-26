@@ -235,7 +235,7 @@ int on_btn_calcular_clicked(){
     tablaPlan = createFloatMatrix(tiempototal+1, tiempototal+1);
 
 
-    for(int i=1;i<=tiempototal;i++){ 
+    for(int i=1;i<=vidaUtil;i++){ 
         for(int j=2;j<4;j++){
             
                 const gchar *cant_nodos;
@@ -543,7 +543,7 @@ int on_aceptPlan_clicked(){
     gtk_grid_set_column_spacing (gridt, 5);
     char v[5];
 
-    for (int i = 0; i < t+1; i++)
+    for (int i = 0; i <= vidaUtil; i++)
     {
         
         for(int j = 0; j < 4; j++)

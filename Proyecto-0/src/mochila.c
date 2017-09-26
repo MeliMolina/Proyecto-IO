@@ -157,7 +157,7 @@ int on_btn_calcular_clicked(){
             
         }
     }
-
+    knapsack();
     CrearTabla();
 }
 
@@ -166,6 +166,20 @@ void on_SalirDelPrograma_clicked()
     gtk_widget_destroy(window_SD);
 }
 
+void knapsack(){
+    int valor = 0;
+    for(int i = 0; i < cantidadObjetos; i++){
+        for(int j = 0; j <= capacidadMochila;j++){
+            if(i <= tabla[i][1]){
+                for(int r = 0; r < tabla[i][2];r++){
+                    valor += tabla[i][0];
+                }
+                tablaResultado[i][j]= valor;
+            }
+        }
+    }
+
+}
 
 void CrearTabla(){
     grid2 = gtk_grid_new ();
@@ -218,7 +232,7 @@ void CrearTabla(){
                     char v[100];
                     sprintf(v,"%d", tablaResultado[i-1][j-1]);
                  
-                    label = gtk_label_new (val);
+                    label = gtk_label_new (v);
                     gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
 
                     box = gtk_box_new(0, 0);
