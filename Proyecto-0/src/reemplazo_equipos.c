@@ -532,7 +532,7 @@ int on_aceptPlan_clicked(){
         return 0;
     }
     if(t<=0){
-        gtk_label_set_text(GTK_LABEL(result), "El plan tiene que ser entre 1 y 30 años.");
+        gtk_label_set_text(GTK_LABEL(result), "El plan tiene que ser mayor que 0");
         return 0;
     }
     costoini = c;

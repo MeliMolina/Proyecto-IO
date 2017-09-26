@@ -145,7 +145,7 @@ void on_Button_Programa3_clicked(){
 }
 
 void on_Button_Programa4_clicked(){
-    system("./Pending &");
+    system("./Mochila &");
 	
 
 }
