@@ -123,6 +123,7 @@ void deleteTablesGrid(GtkWidget *widget)
 int on_btn_calcular_clicked(){
     deleteTablesGrid(tabla_solucion);
     gtk_label_set_text(GTK_LABEL(resultadoFinal), "");
+    gtk_label_set_text(GTK_LABEL(result), "");
 	
     tabla = createFloatMatrix(cantidadObjetos, 3);
     tablaColores = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
@@ -132,18 +133,20 @@ int on_btn_calcular_clicked(){
                 const gchar *cant_nodos;
                 cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
                 int valor = atoi(cant_nodos);
-                if(isdigit(cant_nodos[0])==FALSE){
-                    gtk_label_set_text(GTK_LABEL(result), "Los valores de la tabla no pueden tener letras.");
+                if(cant_nodos[0]== '-'){
+                    tabla[i-1][j-2] = -1;
+                }
+                else if(valor==0){
+                    gtk_label_set_text(GTK_LABEL(result), "Los valores de la tabla no pueden tener letras y tienen que ser mayor que 0.");
                     return 0;
                 }
                 else if(valor < 0){
-                    gtk_label_set_text(GTK_LABEL(result), "Los valores de la tabla tienen que ser mayor o igual que 0");
-                    return 0;
-                }
+                        gtk_label_set_text(GTK_LABEL(result), "Los valores de la tabla tienen que ser mayor o igual que 0");
+                        return 0;
+                    }
                 else{
-                    tabla[i-1][j-2] = valor;
-
-                }
+                        tabla[i-1][j-2] = valor;
+                     }
             
         }
     }
