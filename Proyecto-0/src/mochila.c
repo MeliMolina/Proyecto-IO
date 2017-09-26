@@ -50,22 +50,17 @@ GtkWidget *resultadoFinal;
 
 GtkWidget *label;
 GtkWidget *box;
-char *strs[50]= {" ","Valor","Peso"};
+char *strs[50]= {"Objeto ","Valor","Peso","Cantidad"};
 char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N"};
-int ** tabla;
+char *strs2[50]= {"t","G(t)","Próximo"};
 int ** tabla2;
-int ** tablaCambios;
 
-
-
+int ** tablaColores;
+int ** tabla;
 int capacidadMochila = 1;
 int cantidadObjetos = 1;
 
-
-
 char val[300];
-
-
 
 int main(int argc, char *argv[])
 {
@@ -75,8 +70,6 @@ int main(int argc, char *argv[])
     gtk_builder_add_from_file (builder, "glade/Mochila.glade", NULL);
  
     window_SD = GTK_WIDGET(gtk_builder_get_object(builder, "window_SD"));
-    
-    
 
     gtk_builder_connect_signals(builder, NULL);   
     entry_cargar_SD = GTK_WIDGET(gtk_builder_get_object(builder, "entry_cargar_SD"));
@@ -96,8 +89,6 @@ int main(int argc, char *argv[])
    
     capacidad = GTK_WIDGET(gtk_builder_get_object(builder, "capacidad"));
    
-
-    
     gtk_widget_set_tooltip_text(entry_cargar_SD, "Seleccionar un archivo");
     gtk_widget_set_tooltip_text(btn_calcular_SD, "Calcula la tabla con las probabilidades de A y B");
     gtk_widget_set_tooltip_text(folder, "Seleccionar un directorio");
@@ -106,19 +97,10 @@ int main(int argc, char *argv[])
     gtk_widget_set_tooltip_text(btn_cargar_SD, "Carga el archivo seleccionado");
     gtk_widget_set_tooltip_text(SalirDelPrograma, "Cierra el programa");
 
-    
-    
 
-
-
-
-
+    gtk_label_set_text(GTK_LABEL(result), "Utilice \"-\" para indicar cantidad infinito.");
     g_object_unref(builder);
-
-   
-    gtk_widget_show(window_SD);
-    
-                              
+    gtk_widget_show(window_SD);                         
                               
     gtk_main();
     return 0;
@@ -138,12 +120,35 @@ void deleteTablesGrid(GtkWidget *widget)
 
 }
 
-
-
-
 int on_btn_calcular_clicked(){
-
+    deleteTablesGrid(tabla_solucion);
+    gtk_label_set_text(GTK_LABEL(resultadoFinal), "");
 	
+    tabla = createFloatMatrix(cantidadObjetos, 3);
+    tablaColores = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
+    for(int i=1;i<=cantidadObjetos;i++){ 
+        for(int j=2;j<5;j++){
+            
+                const gchar *cant_nodos;
+                cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
+                int valor = atoi(cant_nodos);
+                if(isdigit(cant_nodos[0])==FALSE){
+                    gtk_label_set_text(GTK_LABEL(result), "Los valores de la tabla no pueden tener letras.");
+                    return 0;
+                }
+                else if(valor < 0){
+                    gtk_label_set_text(GTK_LABEL(result), "Los valores de la tabla tienen que ser mayor o igual que 0");
+                    return 0;
+                }
+                else{
+                    tabla[i-1][j-2] = valor;
+
+                }
+            
+        }
+    }
+
+    CrearTabla();
 }
 
 void on_SalirDelPrograma_clicked()
@@ -153,20 +158,108 @@ void on_SalirDelPrograma_clicked()
 
 
 void CrearTabla(){
-    
+    grid2 = gtk_grid_new ();
+    gtk_grid_set_row_spacing (grid2, 1);
+    gtk_grid_set_column_spacing (grid2, 1);
+
+    for (int i = 0; i <= capacidadMochila+1; i++)
+    {
+        for(int j = 0; j <= cantidadObjetos; j++)
+        {   
+
+            if(i==0){
+                char val[30];
+                sprintf(val,"%s", strsAux[j]);
+                label = gtk_label_new (val);
+                gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos + 2));
+                box = gtk_box_new(0, 0);
+                gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                const GdkRGBA *color;
+                    
+                gdk_color_parse( "#467DD9", &color );
+                gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                gtk_grid_attach(GTK_GRID(grid2), box, j+1, i, 1, 1);
+
+                gtk_widget_show (label);
+                gtk_widget_show (box);  
+            }
+            else{
+                if(j==0){
+                    char val[30];
+                    sprintf(val,"%d", i-1);
+
+                    label = gtk_label_new (val);
+                    gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos + 2));
+
+                    box = gtk_box_new(0, 0);
+                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                    const GdkRGBA *color;
+                    
+                    gdk_color_parse( "#AFC6EE", &color );
+                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j, i, 1, 1);
+
+                    gtk_widget_show (label);
+                    gtk_widget_show (box);
+                }
+                }/*
+                else if(j==2){
+                    sprintf(val,"%s", "");
+                    char v[100];
+                    for(int r = 0; r <= cantidadObjetos;r++){
+
+                        if(tabla[i][r]!=0){
+                            sprintf(v,"%d", tabla[i][r]);
+                            if(r+1!=cantidadObjetos){
+                                strcat(v,", ");
+                            }
+                            strcat(val,v);
+                        }
+                    }
+                    label = gtk_label_new (val);
+                    gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
+
+                    box = gtk_box_new(0, 0);
+                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                    const GdkRGBA *color;
+                                        
+                    gdk_color_parse( "#AFC6EE", &color );
+                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
+
+                    gtk_widget_show (label);
+                    gtk_widget_show (box);  
+                }
+                else{    
+                    char val[30];
+                    sprintf(val,"%d", tabla[cantidadObjetos-i][0]);
+
+                    label = gtk_label_new (val);
+                    gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
+
+                    box = gtk_box_new(0, 0);
+                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                    const GdkRGBA *color;
+                                        
+                    gdk_color_parse( "#AFC6EE", &color );
+                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
+
+                    gtk_widget_show (label);
+                    gtk_widget_show (box);   
+                }
+            }*/
+        }
+    }
+
+    gtk_container_add (GTK_CONTAINER (tabla_solucion), grid2);
+    gtk_widget_show (grid2); 
 }
-
-
-
-
 
 
 int on_guardar_SD_clicked ()
 {
-
-
     char * filename[250];
-
     char* name = gtk_entry_get_text (filenameEntry);
 
     if(strlen(name)==0){
@@ -181,9 +274,7 @@ int on_guardar_SD_clicked ()
     }
 
     sprintf(filename,"%s/%s", folderfile, name);
-
     writeFile(filename);
-
     gtk_entry_set_text (filenameEntry, "");
     gtk_label_set_text(GTK_LABEL(result), "Se guardó exitosamente.");
 
@@ -206,7 +297,6 @@ int on_btn_cargar_SD_clicked(){
     const gchar *filename;
     filename = gtk_file_chooser_get_filename (entry_cargar_SD);
     if(filename==NULL){
-
         gtk_label_set_text(GTK_LABEL(result), "Selecione un archivo.");
         return 0;
     }
@@ -280,7 +370,6 @@ int on_acept_clicked(){
         gtk_label_set_text(GTK_LABEL(result), "La capacidad tiene que ser mayor que 0.");
         return 0;
     }
-    
 
     gridt = gtk_grid_new ();
     gtk_grid_set_row_spacing (gridt, 5);
@@ -290,7 +379,7 @@ int on_acept_clicked(){
     for (int i = 0; i < cantidadObjetos+1; i++)
     {
         
-        for(int j = 0; j < 4; j++)
+        for(int j = 0; j < 5; j++)
         {               
             if(i==0){ 
                 GtkWidget *labelf = gtk_label_new (strs[j-1]);  
