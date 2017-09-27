@@ -183,65 +183,30 @@ void on_SalirDelPrograma_clicked()
 
 int knapsack(){
 
-
-    int i, j, q, value;                                         // i -> sack capacity, j -> object, q -> number of copies of an object, value -> value of bringing q copies + value of last column
+    int q;
+    int valor;
     
-    for (j = 0; j < cantidadObjetos; j++)                       // each object column 
-    {
-        for(i = 0; i <= capacidadMochila; i++)                       // each sack capacity
-        {
+    for (int j = 0; j < cantidadObjetos; j++){
+        for(int i = 0; i <= capacidadMochila; i++){
             q = 0;
-            while (q * tabla[j][1] <= i)                      // each number of copies that can be 
-            {
+            while (q * tabla[j][1] <= i){
                 
-                value = q * tabla[j][0];
-                if (j > 0)                                      // not the first column
-                {
-                    value += tablaResultado[i - q * tabla[j][1]][j - 1];// adds value of last column in the index [i - q * tabla[j][1]][j - 1]
+                valor = q * tabla[j][0];
+                if (j > 0){
+                    valor += tablaResultado[i - q * tabla[j][1]][j - 1];
                 }
-                if (value > tablaResultado[i][j])                         // if value is greater than before
-                {
-                    tablaResultadoAux[i][j] = q;                      // number of copies brought
-                    tablaResultado[i][j] = value;                         // greater value saved in matrix
-                    printf("tablaResultado: %d\n", tablaResultado[i][j]);
+                if (valor > tablaResultado[i][j]){
+                    tablaResultadoAux[i][j] = q;                     
+                    tablaResultado[i][j] = valor;                    
+                    
                 }
                 q++;
-                if (q > tabla[j][2] && tabla[j][2] != -1)   // if q is greater than object quantity and quantity isn´t infinity
-                {
-                    break;                                      // break cicle of object
+                if (q > tabla[j][2] && tabla[j][2] != -1){
+                    break;
                 }
             }
         }
     }
-    /*
-    int valor = 0;
-    for(int i = 0; i < cantidadObjetos; i++){
-        for(int j = 0; j <= capacidadMochila;j++){
-
-
-
-                for(int r = 0; r < j/tabla[i][1];r++){
-                    valor += tabla[i][0];
-                }
-                if(i==0&&j>=tabla[i][1]){
-                    tablaColores[j][i]=1;
-                }
-               
-                    tablaColores[j][i]=1;
-                }
-                else {
-                    tablaResultado[j][i]= valor;
-                    tablaColores[j][i]=0;
-                }
-            
-                else if(tablaResultado[j][i-1] < valor && i!=0){
-                    tablaResultado[j][i]= valor;
-                valor =0;
-
-        }
-                    tablaResultado[j][i] = tablaResultado[j][i-1];
-        
-    }*/
 
 }
 
@@ -303,10 +268,10 @@ void CrearTabla(){
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
                     const GdkRGBA *color;
                     
-                    if(tablaColores[i-1][j-1]==1){ 
-                    gdk_color_parse( "#40AD3B", &color );}
+                    if(tablaResultadoAux[i-1][j-1]==1){ 
+                    gdk_color_parse( "#00FF00", &color );}
                     else{
-                        gdk_color_parse( "#AFC6EE", &color );
+                        gdk_color_parse( "#FF0000", &color );
                     }
                     gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
                     gtk_grid_attach(GTK_GRID(grid2), box, j, i, 1, 1);
