@@ -54,15 +54,24 @@ char *strs[50]= {"Objeto ","Valor","Peso","Cantidad"};
 char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N"};
 char *strs2[50]= {"t","G(t)","Próximo"};
 
-int ** tablaColumnaAnterior;
-int ** tablaCantidades;
+
 int ** tablaColores;
-int ** tablaResultado;
-int ** tabla;
-int capacidadMochila = 1;
-int cantidadObjetos = 1;
 int mayor;
 int ** cantidadCombinaciones;
+
+
+int ** tabla;
+int ** tablaResultado;
+int ** tablaResultadoAux;
+int capacidadMochila;
+int cantidadObjetos;
+int array[2];
+
+int ** objects;
+int ** sack;
+int ** sackAnswers;
+int sackCapacity;
+int numberOfObjects;
 
 char val[300];
 
@@ -128,13 +137,17 @@ int on_btn_calcular_clicked(){
     deleteTablesGrid(tabla_solucion);
     gtk_label_set_text(GTK_LABEL(resultadoFinal), "");
     gtk_label_set_text(GTK_LABEL(result), "");
-	
+	/*
     tabla = createFloatMatrix(cantidadObjetos, 3);
-    tablaColores = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
-    tablaResultado = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
     tablaCantidades = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
     tablaColumnaAnterior = createFloatMatrix(capacidadMochila+1, 1);
     cantidadCombinaciones = createFloatMatrix(cantidadObjetos, 1);
+    tablaResultado = createFloatMatrix(capacidadMochila+1, cantidadObjetos);*/
+
+    tablaColores = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
+    tabla = createMatrix(cantidadObjetos, 3);
+    tablaResultado = createMatrix(capacidadMochila+1, cantidadObjetos);
+    tablaResultadoAux = createMatrix(capacidadMochila+1, cantidadObjetos);
 
     for(int i=1;i<=cantidadObjetos;i++){ 
         for(int j=2;j<5;j++){
@@ -169,33 +182,66 @@ void on_SalirDelPrograma_clicked()
 }
 
 int knapsack(){
+
+
+    int i, j, q, value;                                         // i -> sack capacity, j -> object, q -> number of copies of an object, value -> value of bringing q copies + value of last column
+    
+    for (j = 0; j < cantidadObjetos; j++)                       // each object column 
+    {
+        for(i = 0; i <= capacidadMochila; i++)                       // each sack capacity
+        {
+            q = 0;
+            while (q * tabla[j][1] <= i)                      // each number of copies that can be 
+            {
+                
+                value = q * tabla[j][0];
+                if (j > 0)                                      // not the first column
+                {
+                    value += tablaResultado[i - q * tabla[j][1]][j - 1];// adds value of last column in the index [i - q * tabla[j][1]][j - 1]
+                }
+                if (value > tablaResultado[i][j])                         // if value is greater than before
+                {
+                    tablaResultadoAux[i][j] = q;                      // number of copies brought
+                    tablaResultado[i][j] = value;                         // greater value saved in matrix
+                    printf("tablaResultado: %d\n", tablaResultado[i][j]);
+                }
+                q++;
+                if (q > tabla[j][2] && tabla[j][2] != -1)   // if q is greater than object quantity and quantity isn´t infinity
+                {
+                    break;                                      // break cicle of object
+                }
+            }
+        }
+    }
+    /*
     int valor = 0;
     for(int i = 0; i < cantidadObjetos; i++){
         for(int j = 0; j <= capacidadMochila;j++){
 
-            if(j/tabla[i][1] <= tabla[i][2] ){
+
+
                 for(int r = 0; r < j/tabla[i][1];r++){
                     valor += tabla[i][0];
                 }
+                if(i==0&&j>=tabla[i][1]){
+                    tablaColores[j][i]=1;
+                }
                
-                if(tablaResultado[j][i-1] >= valor && i!=0){
-                    printf("%d\n", tablaResultado[j][i-1]);
-                    tablaResultado[j][i] = tablaResultado[j][i-1];
-                    tablaColores[j][i]=0;
+                    tablaColores[j][i]=1;
                 }
                 else {
-                    if(j >= tabla[i][1] && i==0){
-                        tablaResultado[j][i]= valor;
-                    }else{
                     tablaResultado[j][i]= valor;
-                    tablaColores[j][i]=1;}
+                    tablaColores[j][i]=0;
                 }
-            }
-            valor = 0;
+            
+                else if(tablaResultado[j][i-1] < valor && i!=0){
+                    tablaResultado[j][i]= valor;
+                valor =0;
 
         }
+                    tablaResultado[j][i] = tablaResultado[j][i-1];
         
-    }
+    }*/
 
 }
 
@@ -248,8 +294,8 @@ void CrearTabla(){
             
                 else {
                     char v[100];
-                    sprintf(v,"%d", tablaResultado[i-1][j-1]);
                  
+                    sprintf(v,"%d", tablaResultado[i-1][j-1]);
                     label = gtk_label_new (v);
                     gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
 

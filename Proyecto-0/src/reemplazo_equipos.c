@@ -536,6 +536,10 @@ int on_aceptPlan_clicked(){
         return 0;
     }
     costoini = c;
+
+    if(vidaUtil > tiempototal){
+        vidaUtil = tiempototal;
+    }
     tiempototal = t;
 
     gridt = gtk_grid_new ();
