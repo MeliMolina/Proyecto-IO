@@ -51,7 +51,7 @@ GtkWidget *resultadoFinal;
 GtkWidget *label;
 GtkWidget *box;
 char *strs[50]= {"Objeto ","Valor","Costo","Cantidad"};
-char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N"};
+char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"};
 
 
 
@@ -59,8 +59,8 @@ char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N"};
 int ** tabla;
 int ** tablaResultado;
 int ** tablaResultadoAux;
-int capacidadMochila;
-int cantidadObjetos;
+int capacidadMochila=-1;
+int cantidadObjetos = 0;
 int array[2];
 
 
@@ -136,7 +136,15 @@ int on_btn_calcular_clicked(){
     cantidadCombinaciones = createFloatMatrix(cantidadObjetos, 1);
     tablaResultado = createFloatMatrix(capacidadMochila+1, cantidadObjetos);*/
 
-    
+    if(cantidadObjetos==0){
+        gtk_label_set_text(GTK_LABEL(result), "Debe de llenar la información primero.");
+        return 0;
+    }
+
+    if(capacidadMochila==-1){
+        gtk_label_set_text(GTK_LABEL(result), "Tiene que poner una capacidad primero.");
+        return 0;
+    }
     tabla = createMatrix(cantidadObjetos, 3);
     tablaResultado = createMatrix(capacidadMochila+1, cantidadObjetos);
     tablaResultadoAux = createMatrix(capacidadMochila+1, cantidadObjetos);
@@ -400,12 +408,12 @@ void obtenerResultado ()
         sprintf(v,"Objeto %s llevar: %i copias\n", strsAux[j], numberOfCopies);
         strcat(val,v);
         if(numberOfCopies > 0){
-            if(j-1!=0){
-                sprintf(vAux,"%d*%s, ",numberOfCopies,strsAux[j]);
+            if(j-1<0){
+                sprintf(vAux,"%d*%s",numberOfCopies,strsAux[j]);
                 strcat(vAux2,vAux);
             }
             else{
-                sprintf(vAux,"%d*%s",numberOfCopies,strsAux[j]);
+                sprintf(vAux,"%d*%s, ",numberOfCopies,strsAux[j]);
                 strcat(vAux2,vAux);
             }
         }
@@ -429,7 +437,7 @@ void readFile(char* filename)
     strip(array);
     //fscanf(file, "%i", &nnodos);
     cantidadObjetos = atoi(array);
-    gtk_combo_box_set_active(cantObj,cantidadObjetos-1);
+    gtk_entry_set_text(cantObj,array);
 
     fgets(array, sizeof(array), file);
     strip(array);
@@ -472,23 +480,38 @@ float stof(char* s){
   return rez * fact;
 };
 
-void on_cantObj_changed(GtkWidget *widget){
-    GtkComboBox *combo_box = widget;
-    cantidadObjetos = gtk_combo_box_get_active (combo_box)+1;
-}
+
 
 int on_acept_clicked(){
     
     deleteTablesGrid(tabla_input);    
-    gtk_label_set_text(GTK_LABEL(result), "");
-
+    gtk_label_set_text(GTK_LABEL(result), "Utilice \"-\" para indicar cantidad infinito.");
     const gchar *pln;
     
     pln = gtk_entry_get_text(capacidad);
     capacidadMochila = atoi(pln);
 
-    if(capacidadMochila<0){
+    if(strlen(pln)==0){
+        gtk_label_set_text(GTK_LABEL(result), "Debe de especificar una capacidad.");
+        return 0;
+    }
+
+
+    pln = gtk_entry_get_text(cantObj);
+    cantidadObjetos = atoi(pln);
+
+    if(strlen(pln)==0){
+        gtk_label_set_text(GTK_LABEL(result), "Debe de especificar una cantidad de objetos.");
+        return 0;
+    }
+
+    if(capacidadMochila  < 0){
         gtk_label_set_text(GTK_LABEL(result), "La capacidad tiene que ser mayor o igual que 0.");
+        return 0;
+    }
+
+    if(cantidadObjetos <= 0||cantidadObjetos > 20){
+        gtk_label_set_text(GTK_LABEL(result), "La capacidad tiene que ser mayor que 0 y menor que 20");
         return 0;
     }
 
