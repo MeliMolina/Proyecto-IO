@@ -52,12 +52,8 @@ GtkWidget *label;
 GtkWidget *box;
 char *strs[50]= {"Objeto ","Valor","Peso","Cantidad"};
 char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N"};
-char *strs2[50]= {"t","G(t)","Próximo"};
 
 
-int ** tablaColores;
-int mayor;
-int ** cantidadCombinaciones;
 
 
 int ** tabla;
@@ -67,13 +63,9 @@ int capacidadMochila;
 int cantidadObjetos;
 int array[2];
 
-int ** objects;
-int ** sack;
-int ** sackAnswers;
-int sackCapacity;
-int numberOfObjects;
 
-char val[300];
+
+char val[300000];
 
 int main(int argc, char *argv[])
 {
@@ -144,7 +136,7 @@ int on_btn_calcular_clicked(){
     cantidadCombinaciones = createFloatMatrix(cantidadObjetos, 1);
     tablaResultado = createFloatMatrix(capacidadMochila+1, cantidadObjetos);*/
 
-    tablaColores = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
+    
     tabla = createMatrix(cantidadObjetos, 3);
     tablaResultado = createMatrix(capacidadMochila+1, cantidadObjetos);
     tablaResultadoAux = createMatrix(capacidadMochila+1, cantidadObjetos);
@@ -174,6 +166,7 @@ int on_btn_calcular_clicked(){
     }
     knapsack();
     CrearTabla();
+    obtenerResultado();
 }
 
 void on_SalirDelPrograma_clicked()
@@ -318,7 +311,21 @@ void writeFile(char* filename)
     FILE *file;
     file = fopen(filename, "w");
     
-  
+    fprintf(file, "%i\n", cantidadObjetos);
+    fprintf(file, "%i\n", capacidadMochila);
+    const gchar *cant_nodos;
+    for(int i=1;i<=cantidadObjetos;i++){ 
+        for(int j=2;j<5;j++){
+            const gchar *cant_nodos;
+            cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
+            if(cant_nodos[0]=='-'){
+                fprintf(file, "%s\n", cant_nodos);
+            }else{
+                int valor = atoi(cant_nodos);
+                fprintf(file, "%i\n", valor);
+            }
+        }
+    }
 
     
 
@@ -347,6 +354,27 @@ void strip(char *s) {
     *p2 = '\0';
 }
 
+void obtenerResultado ()
+{
+    int j = cantidadObjetos-1;
+    int i = capacidadMochila;
+    strcpy(val,"");
+    int numberOfCopies;
+    char v[300000];
+    while (j >= 0)
+    {
+        
+ 
+        numberOfCopies = tablaResultadoAux[i][j];
+        sprintf(v,"Objeto %s llevar: %i copias\n", strsAux[j], numberOfCopies);
+        strcat(val,v);
+        i = i - numberOfCopies * tabla[j][1];
+        j--;
+    
+    }
+    gtk_label_set_text(GTK_LABEL(resultadoFinal), val);
+
+}
 
 void readFile(char* filename)
 {    
@@ -357,7 +385,25 @@ void readFile(char* filename)
     fgets(array, sizeof(array), file);
     strip(array);
     //fscanf(file, "%i", &nnodos);
-    
+    cantidadObjetos = atoi(array);
+    gtk_combo_box_set_active(cantObj,cantidadObjetos-1);
+
+    fgets(array, sizeof(array), file);
+    strip(array);
+    //fscanf(file, "%i", &nnodos);
+    capacidadMochila = atoi(array);
+    gtk_entry_set_text(capacidad,array);
+    on_acept_clicked();
+
+    for(int i=1;i<=cantidadObjetos;i++){ 
+        for(int j=2;j<5;j++){        
+
+            fgets(array, sizeof(array), file);
+            strip(array); //Quita espacios null
+            gtk_entry_set_text(gtk_grid_get_child_at(gridt,j,i),array);
+        }
+    }
+
     fclose(file);
     
  
@@ -418,7 +464,7 @@ int on_acept_clicked(){
                 gtk_grid_attach(GTK_GRID(gridt), labelf, j, 0, 1, 1);
                 gtk_widget_show (labelf);}     
             if(j==1&&i!=0){              
-                sprintf(v,"%d",i);
+                sprintf(v,"%s",strsAux[i-1]);
                 GtkWidget *labelf = gtk_label_new (v);     
                 gtk_grid_attach(GTK_GRID(gridt), labelf, 1, i, 1, 1);
                 gtk_widget_show (labelf);}
