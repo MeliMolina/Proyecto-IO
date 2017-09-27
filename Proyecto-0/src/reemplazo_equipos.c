@@ -228,6 +228,7 @@ int on_btn_calcular_clicked(){
 
 	deleteTablesGrid(tabla_planAux);
 	gtk_label_set_text(GTK_LABEL(calculos), "");
+    gtk_label_set_text(GTK_LABEL(resultplanes), "");
 
 	tabla = createFloatMatrix(tiempototal, 2);
 	tablaC = createFloatMatrix(tiempototal, 1);
@@ -536,11 +537,12 @@ int on_aceptPlan_clicked(){
         return 0;
     }
     costoini = c;
-
-    if(vidaUtil > tiempototal){
-        vidaUtil = tiempototal;
-    }
     tiempototal = t;
+
+    if(vidaUtil >= tiempototal){
+        vidaUtil = tiempototal;
+        gtk_combo_box_set_active(vidaU,tiempototal-1);
+    }
 
     gridt = gtk_grid_new ();
     gtk_grid_set_row_spacing (gridt, 5);
