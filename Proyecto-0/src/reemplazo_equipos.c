@@ -67,7 +67,7 @@ int contador = 0;
 int costoini = 0;
 int tiempototal = -1;
 int vidaUtil = 1;
-char val[3000];
+char val[3000000];
 
 int main(int argc, char *argv[])
 {
@@ -532,8 +532,8 @@ int on_aceptPlan_clicked(){
         gtk_label_set_text(GTK_LABEL(result), "El costo tiene que ser mayor que 0.");
         return 0;
     }
-    if(t<=0){
-        gtk_label_set_text(GTK_LABEL(result), "El plan tiene que ser mayor que 0");
+    if(t<=0||t > 50){
+        gtk_label_set_text(GTK_LABEL(result), "El plan tiene que ser mayor que 0 y menor que 50");
         return 0;
     }
     costoini = c;
