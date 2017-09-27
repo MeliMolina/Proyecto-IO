@@ -50,7 +50,7 @@ GtkWidget *resultadoFinal;
 
 GtkWidget *label;
 GtkWidget *box;
-char *strs[50]= {"Objeto ","Valor","Peso","Cantidad"};
+char *strs[50]= {"Objeto ","Valor","Costo","Cantidad"};
 char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N"};
 
 
@@ -140,7 +140,8 @@ int on_btn_calcular_clicked(){
     tabla = createMatrix(cantidadObjetos, 3);
     tablaResultado = createMatrix(capacidadMochila+1, cantidadObjetos);
     tablaResultadoAux = createMatrix(capacidadMochila+1, cantidadObjetos);
-
+    strcpy(val,"Maximizar\n\nZ = ");
+    char v[300000];
     for(int i=1;i<=cantidadObjetos;i++){ 
         for(int j=2;j<5;j++){
             
@@ -164,6 +165,32 @@ int on_btn_calcular_clicked(){
             
         }
     }
+    for(int j = 0; j < 2; j++){
+        for(int i = 0; i < cantidadObjetos;i++){
+            if(j == 0){
+                if(i+1 != cantidadObjetos){
+                    sprintf(v,"%d*x%d + ", tabla[i][j], i+1);
+                    strcat(val,v);
+                }else{
+                    sprintf(v,"%d*x%d\n\nSujeto a:\n\n", tabla[i][j], i+1);
+                    strcat(val,v);
+                }
+            }
+            else if(j == 1){
+                if(i+1 != cantidadObjetos){
+                    sprintf(v,"%d*x%d + ", tabla[i][j], i+1);
+                    strcat(val,v);
+                }else{
+                    sprintf(v,"%d*x%d <=", tabla[i][j], i+1);
+                    strcat(val,v);
+                }
+            }
+        }
+    }
+    sprintf(v,"%d", capacidadMochila);
+    strcat(val,v);
+    gtk_label_set_text(GTK_LABEL(result), val);
+
     knapsack();
     CrearTabla();
     obtenerResultado();
@@ -444,8 +471,8 @@ int on_acept_clicked(){
     pln = gtk_entry_get_text(capacidad);
     capacidadMochila = atoi(pln);
 
-    if(capacidadMochila<=0){
-        gtk_label_set_text(GTK_LABEL(result), "La capacidad tiene que ser mayor que 0.");
+    if(capacidadMochila<0){
+        gtk_label_set_text(GTK_LABEL(result), "La capacidad tiene que ser mayor o igual que 0.");
         return 0;
     }
 
