@@ -388,6 +388,10 @@ void obtenerResultado ()
     strcpy(val,"");
     int numberOfCopies;
     char v[300000];
+    char vAux[3000];
+    char vAux2[3000];
+    strcpy(vAux,"");
+    strcpy(vAux2,"Resultado: ");
     while (j >= 0)
     {
         
@@ -395,10 +399,22 @@ void obtenerResultado ()
         numberOfCopies = tablaResultadoAux[i][j];
         sprintf(v,"Objeto %s llevar: %i copias\n", strsAux[j], numberOfCopies);
         strcat(val,v);
+        if(numberOfCopies > 0){
+            if(j-1!=0){
+                sprintf(vAux,"%d*%s, ",numberOfCopies,strsAux[j]);
+                strcat(vAux2,vAux);
+            }
+            else{
+                sprintf(vAux,"%d*%s",numberOfCopies,strsAux[j]);
+                strcat(vAux2,vAux);
+            }
+        }
         i = i - numberOfCopies * tabla[j][1];
         j--;
     
     }
+    strcat(val,"\n");
+    strcat(val,vAux2);
     gtk_label_set_text(GTK_LABEL(resultadoFinal), val);
 
 }
