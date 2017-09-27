@@ -55,6 +55,7 @@ char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N"};
 char *strs2[50]= {"t","G(t)","Próximo"};
 
 int ** tablaColumnaAnterior;
+int ** tablaCantidades;
 int ** tablaColores;
 int ** tablaResultado;
 int ** tabla;
@@ -131,6 +132,7 @@ int on_btn_calcular_clicked(){
     tabla = createFloatMatrix(cantidadObjetos, 3);
     tablaColores = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
     tablaResultado = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
+    tablaCantidades = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
     tablaColumnaAnterior = createFloatMatrix(capacidadMochila+1, 1);
     cantidadCombinaciones = createFloatMatrix(cantidadObjetos, 1);
 
@@ -166,19 +168,33 @@ void on_SalirDelPrograma_clicked()
     gtk_widget_destroy(window_SD);
 }
 
-void knapsack(){
+int knapsack(){
     int valor = 0;
     for(int i = 0; i < cantidadObjetos; i++){
         for(int j = 0; j <= capacidadMochila;j++){
-            if(i >= tabla[i][1]){
-                printf("i: %d\n", i);
-                printf("tabla: %d\n\n", tabla[i][1]);
-                for(int r = 0; r < tabla[i][2];r++){
+
+            if(j/tabla[i][1] <= tabla[i][2] ){
+                for(int r = 0; r < j/tabla[i][1];r++){
                     valor += tabla[i][0];
                 }
-                tablaResultado[i][j]= valor;
+               
+                if(tablaResultado[j][i-1] >= valor && i!=0){
+                    printf("%d\n", tablaResultado[j][i-1]);
+                    tablaResultado[j][i] = tablaResultado[j][i-1];
+                    tablaColores[j][i]=0;
+                }
+                else {
+                    if(j >= tabla[i][1] && i==0){
+                        tablaResultado[j][i]= valor;
+                    }else{
+                    tablaResultado[j][i]= valor;
+                    tablaColores[j][i]=1;}
+                }
             }
+            valor = 0;
+
         }
+        
     }
 
 }
@@ -241,7 +257,7 @@ void CrearTabla(){
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
                     const GdkRGBA *color;
                     
-                    if(tablaResultado[i-1][j-1]==0){ 
+                    if(tablaColores[i-1][j-1]==1){ 
                     gdk_color_parse( "#40AD3B", &color );}
                     else{
                         gdk_color_parse( "#AFC6EE", &color );
