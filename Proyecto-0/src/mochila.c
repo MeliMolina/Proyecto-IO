@@ -505,8 +505,8 @@ int on_acept_clicked(){
         return 0;
     }
 
-    if(capacidadMochila  < 0){
-        gtk_label_set_text(GTK_LABEL(result), "La capacidad tiene que ser mayor o igual que 0.");
+    if(capacidadMochila  < 0||capacidadMochila  > 100){
+        gtk_label_set_text(GTK_LABEL(result), "La capacidad tiene que ser mayor o igual que 0 y menor que 100.");
         return 0;
     }
 
