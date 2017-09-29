@@ -4,7 +4,7 @@
   <requires lib="gtk+" version="3.12"/>
   <object class="GtkWindow" id="window_SD">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Algoritmo de Floyd</property>
+    <property name="title" translatable="yes">Problema de la Mochila</property>
     <property name="window_position">center</property>
     <child>
       <object class="GtkFixed" id="cont_fijo_SD">
@@ -52,7 +52,7 @@
                   <object class="GtkLabel" id="label_titulo_SD">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Algoritmo de Floyd</property>
+                    <property name="label" translatable="yes">Problema de la Mochila</property>
                     <property name="justify">center</property>
                     <attributes>
                       <attribute name="font-desc" value="DejaVu Serif Bold Italic 11"/>
@@ -63,7 +63,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="padding">5</property>
+                    <property name="padding">7</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -106,8 +106,8 @@
                         <property name="pixbuf">blue.jpg</property>
                       </object>
                       <packing>
-                        <property name="x">-830</property>
-                        <property name="y">-277</property>
+                        <property name="x">-866</property>
+                        <property name="y">-285</property>
                       </packing>
                     </child>
                     <child>
