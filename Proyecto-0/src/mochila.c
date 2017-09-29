@@ -296,7 +296,7 @@ void CrearTabla(){
                     gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
                     const GdkRGBA *color;
                     
-                    if(tablaResultadoAux[i-1][j-1]==1){ 
+                    if(tablaResultadoAux[i-1][j-1]>=1){ 
                     gdk_color_parse( "#00FF00", &color );}
                     else{
                         gdk_color_parse( "#FF0000", &color );

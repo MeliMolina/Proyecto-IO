@@ -103,12 +103,8 @@
                         <property name="height_request">253</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">blue.jpg</property>
+                        <property name="pixbuf">fondo4.jpg</property>
                       </object>
-                      <packing>
-                        <property name="x">-866</property>
-                        <property name="y">-285</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkFixed" id="cont_datos_SD">
@@ -136,9 +132,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Cantidad de Objetos</property>
+                                    <attributes>
+                                      <attribute name="font-desc" value="DejaVu Serif Bold Italic 9"/>
+                                    </attributes>
                                   </object>
                                   <packing>
-                                    <property name="x">6</property>
+                                    <property name="x">46</property>
                                     <property name="y">-33</property>
                                   </packing>
                                 </child>
@@ -149,9 +148,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Capacidad</property>
+                                    <attributes>
+                                      <attribute name="font-desc" value="DejaVu Serif Bold Italic 9"/>
+                                    </attributes>
                                   </object>
                                   <packing>
-                                    <property name="x">216</property>
+                                    <property name="x">304</property>
                                     <property name="y">-33</property>
                                   </packing>
                                 </child>
@@ -188,7 +190,8 @@
                                     <property name="can_focus">True</property>
                                   </object>
                                   <packing>
-                                    <property name="x">226</property>
+                                    <property name="x">280</property>
+                                    <property name="y">6</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -203,7 +206,7 @@
                                   </object>
                                   <packing>
                                     <property name="x">33</property>
-                                    <property name="y">60</property>
+                                    <property name="y">66</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -213,9 +216,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">Problema inicial:</property>
+                                    <attributes>
+                                      <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
+                                    </attributes>
                                   </object>
                                   <packing>
-                                    <property name="x">6</property>
+                                    <property name="x">23</property>
                                     <property name="y">307</property>
                                   </packing>
                                 </child>
@@ -253,7 +259,8 @@
                                     <property name="can_focus">True</property>
                                   </object>
                                   <packing>
-                                    <property name="x">2</property>
+                                    <property name="x">30</property>
+                                    <property name="y">7</property>
                                   </packing>
                                 </child>
                               </object>
@@ -324,6 +331,9 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Resultado Final: </property>
+                    <attributes>
+                      <attribute name="font-desc" value="DejaVu Serif Bold Italic 10"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="x">629</property>
