@@ -153,7 +153,7 @@ void on_Button_Programa4_clicked(){
 
 void on_Button_Programa5_clicked(){
 
-	system("./Pending &");
+	system("./Arbol &");
 
 }
 

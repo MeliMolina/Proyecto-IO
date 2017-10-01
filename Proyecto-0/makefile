@@ -29,6 +29,7 @@ all: $(OBJS)
 	$(CC) -o Rutas_Optimas src/rutas_optimas.c $(LDFLAGS)
 	$(CC) -o Reemplazo_Equipos src/reemplazo_equipos.c $(LDFLAGS)
 	$(CC) -o Mochila src/mochila.c $(LDFLAGS)
+	$(CC) -o Arbol src/arboles.c $(LDFLAGS)
 	./main_menu
     
 
