@@ -51,7 +51,7 @@ GtkWidget *resultadoFinal;
 GtkWidget *label;
 GtkWidget *box;
 char *strs[50]= {"Llave","Peso"};
-char *strsAux[20]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"};
+char *strsAux[2000]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"};
 
 
 
@@ -62,7 +62,7 @@ int ** tablaResultadoAux;
 float ** promedios;
 int capacidadMochila=-1;
 int cantidadObjetos = 0;
-int array[2];
+int array[20];
 
 
 
@@ -126,6 +126,26 @@ void deleteTablesGrid(GtkWidget *widget)
 
 }
 
+void sortCopyPasta(){
+    char temp[20];
+    float tempNum;
+    for (int i = 0; i < cantidadObjetos - 1 ; i++)
+    {
+        for (int j = i + 1; j < cantidadObjetos; j++)
+        {
+            if (strcmp(strsAux[i], strsAux[j]) > 0)
+            {
+                strcpy(temp, strsAux[i]);
+                strcpy(strsAux[i], strsAux[j]);
+                strcpy(strsAux[j], temp);
+                tempNum = tabla[i][1];
+                tabla[i][1] = tabla[j][1];
+                tabla[j][1] = tempNum;
+            }
+        }
+    }
+}
+
 int on_btn_calcular_clicked(){
     deleteTablesGrid(tabla_solucion);
     gtk_label_set_text(GTK_LABEL(resultadoFinal), "");
@@ -140,19 +160,25 @@ int on_btn_calcular_clicked(){
     tabla = createFloatMatrix(cantidadObjetos, 2);
     promedios = createFloatMatrix(cantidadObjetos,1);
     tablaResultado = createFloatMatrix(cantidadObjetos+2, cantidadObjetos+1);
-   
 
     for(int i=1;i<=cantidadObjetos;i++){ 
         for(int j=0;j<2;j++){
-            
-                const gchar *cant_nodos;
-                cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
-                int valor = atoi(cant_nodos);
-                tabla[i-1][j] = valor;
+                if(j==1){
+                    const gchar *cant_nodos;
+                    cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
+                    int valor = atoi(cant_nodos);
+                    tabla[i-1][j] = valor;
+                }
+                else {
+                    const gchar *cant_nodos;
+                    cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
+                    strsAux[i-1]= cant_nodos;
+                }
 
         }
 
     }
+    sortCopyPasta();
     float r = 0.0;
     for(int t = 0;t <cantidadObjetos;t++){
         r+=tabla[t][1];
@@ -201,6 +227,12 @@ int on_btn_calcular_clicked(){
         }
         printf("\n");
     }
+    
+    for(int i = 0;i<cantidadObjetos;i++){
+        printf("%s\n", strsAux[i]); 
+        gtk_entry_set_text(gtk_grid_get_child_at(gridt,0,i+1),strsAux[i]);
+    }
+  
     CrearTabla();
 
 }
@@ -269,7 +301,7 @@ void CrearTabla(){
                     gtk_widget_show (box);  
                 }else{
                     char val[30];
-                    sprintf(val,"%d", tabla[j][i]);
+                    sprintf(val,"%d", j+1);
                     label = gtk_label_new (val);
                     gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos + 2));
                     box = gtk_box_new(0, 0);
