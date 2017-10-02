@@ -52,7 +52,7 @@ GtkWidget *resultadoFinal;
 
 GtkWidget *label;
 GtkWidget *box;
-char *strs[50]= {"Llave","Peso"};
+char *strs[50]= {"Llave","Valor"};
 char *strsAux[2000]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"};
 
 
@@ -173,8 +173,17 @@ int on_btn_calcular_clicked(){
                 if(j==1){
                     const gchar *cant_nodos;
                     cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
-                    int valor = atoi(cant_nodos);
-
+                    float valor;
+                    sscanf(cant_nodos, "%f", &valor);
+                    for(int i = 0 ; i <strlen(cant_nodos);i++){
+                        if(cant_nodos[i]==','){
+                            continue;
+                        }
+                        if(isdigit(cant_nodos[i])==FALSE){
+                            gtk_label_set_text(GTK_LABEL(result), "No puede haber letras en el valor y utilice \",\" para decimales.");
+                            return 0;
+                        }
+                    }
                     tabla[i-1][j] = valor;
                 }
                 else {
@@ -203,6 +212,8 @@ int on_btn_calcular_clicked(){
     strcpy(v,"Orden: \n\n");
     for(int i = 0; i < cantidadObjetos;i++){
         char val[10];
+        sprintf(val,"%d: ",i+1);
+        strcat(v,val);
         strcat(v,strsAux[i]);
         strcat(v," - ");
         sprintf(val,"%f\n",promedios[i][0]);
@@ -576,18 +587,13 @@ void writeFile(char* filename)
     file = fopen(filename, "w");
     
     fprintf(file, "%i\n", cantidadObjetos);
-    fprintf(file, "%i\n", capacidadMochila);
     const gchar *cant_nodos;
     for(int i=1;i<=cantidadObjetos;i++){ 
-        for(int j=2;j<5;j++){
+        for(int j=0;j<2;j++){
             const gchar *cant_nodos;
             cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
-            if(cant_nodos[0]=='-'){
-                fprintf(file, "%s\n", cant_nodos);
-            }else{
-                int valor = atoi(cant_nodos);
-                fprintf(file, "%i\n", valor);
-            }
+            fprintf(file, "%s\n", cant_nodos);
+            
         }
     }
 
@@ -626,21 +632,16 @@ void readFile(char* filename)
     FILE *file;
     file = fopen(filename, "r");
     char array[10];
+
     fgets(array, sizeof(array), file);
     strip(array);
-    //fscanf(file, "%i", &nnodos);
     cantidadObjetos = atoi(array);
     gtk_entry_set_text(cantObj,array);
 
-    fgets(array, sizeof(array), file);
-    strip(array);
-    //fscanf(file, "%i", &nnodos);
-    capacidadMochila = atoi(array);
-    gtk_entry_set_text(capacidad,array);
     on_acept_clicked();
 
     for(int i=1;i<=cantidadObjetos;i++){ 
-        for(int j=2;j<5;j++){        
+        for(int j=0;j<2;j++){        
 
             fgets(array, sizeof(array), file);
             strip(array); //Quita espacios null
