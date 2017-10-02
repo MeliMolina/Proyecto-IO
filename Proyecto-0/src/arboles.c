@@ -32,6 +32,7 @@ GtkWidget *filenameEntry;
 GtkWidget *guardar;
 GtkWidget *tabla_input;
 GtkWidget *tabla_solucion;
+GtkWidget *tabla_R;
 
 GtkWidget *table;
 GtkWidget *SalirDelPrograma;
@@ -43,6 +44,7 @@ GtkWidget *gridt;
 
 GtkWidget *cantObj;
 GtkWidget *capacidad;
+GtkWidget *orden;
 
 GtkWidget *result;
 GtkWidget *resultadoFinal;
@@ -84,6 +86,7 @@ int main(int argc, char *argv[])
 
     btn_calcular_SD = GTK_WIDGET(gtk_builder_get_object(builder, "btn_calcular_SD"));
     cantObj = GTK_WIDGET(gtk_builder_get_object(builder, "cantObj"));
+    orden = GTK_WIDGET(gtk_builder_get_object(builder, "orden"));
 
     guardar = GTK_WIDGET(gtk_builder_get_object(builder, "guardar_SD"));
     btn_cargar_SD = GTK_WIDGET(gtk_builder_get_object(builder, "btn_cargar_SD"));
@@ -91,6 +94,7 @@ int main(int argc, char *argv[])
     result = GTK_WIDGET(gtk_builder_get_object(builder, "result"));
     resultadoFinal = GTK_WIDGET(gtk_builder_get_object(builder, "resultadoFinal"));
     tabla_solucion = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_solucion"));
+    tabla_R = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_R"));
     tabla_input = GTK_WIDGET(gtk_builder_get_object(builder, "tabla_input"));
    
     capacidad = GTK_WIDGET(gtk_builder_get_object(builder, "capacidad"));
@@ -148,8 +152,10 @@ void sortCopyPasta(){
 
 int on_btn_calcular_clicked(){
     deleteTablesGrid(tabla_solucion);
+    deleteTablesGrid(tabla_R);
     gtk_label_set_text(GTK_LABEL(resultadoFinal), "");
     gtk_label_set_text(GTK_LABEL(result), "");
+    gtk_label_set_text(GTK_LABEL(orden), "");
 	/*
     tabla = createFloatMatrix(cantidadObjetos, 3);
     tablaCantidades = createFloatMatrix(capacidadMochila+1, cantidadObjetos);
@@ -160,6 +166,7 @@ int on_btn_calcular_clicked(){
     tabla = createFloatMatrix(cantidadObjetos, 2);
     promedios = createFloatMatrix(cantidadObjetos,1);
     tablaResultado = createFloatMatrix(cantidadObjetos+2, cantidadObjetos+1);
+    tablaResultadoAux = createMatrix(cantidadObjetos+2,cantidadObjetos+1);
 
     for(int i=1;i<=cantidadObjetos;i++){ 
         for(int j=0;j<2;j++){
@@ -167,6 +174,7 @@ int on_btn_calcular_clicked(){
                     const gchar *cant_nodos;
                     cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
                     int valor = atoi(cant_nodos);
+
                     tabla[i-1][j] = valor;
                 }
                 else {
@@ -179,6 +187,9 @@ int on_btn_calcular_clicked(){
 
     }
     sortCopyPasta();
+
+
+
     float r = 0.0;
     for(int t = 0;t <cantidadObjetos;t++){
         r+=tabla[t][1];
@@ -188,24 +199,34 @@ int on_btn_calcular_clicked(){
         promedios[i][0]= tabla[i][1]/r;
     }
 
-
+    char v[3000000];
+    strcpy(v,"Orden: \n\n");
+    for(int i = 0; i < cantidadObjetos;i++){
+        char val[10];
+        strcat(v,strsAux[i]);
+        strcat(v," - ");
+        sprintf(val,"%f\n",promedios[i][0]);
+        strcat(v,val);
+    }
+    gtk_label_set_text(GTK_LABEL(orden), v);
 
     for(int i = 1;i<cantidadObjetos+1;i++){
         for(int j = 1; j< cantidadObjetos+1;j++){
             if(i == j){
                 tablaResultado[i][j] += promedios[i-1][0];
+                tablaResultadoAux[i][j] = i;
             }
             //printf("%f  ",tablaResultado[i][j] );
         }
         //printf("\n");
     }
-    for(int i = 0;i<cantidadObjetos+2;i++){
+    /*for(int i = 0;i<cantidadObjetos+2;i++){
         for(int j = 0; j< cantidadObjetos+1;j++){
 
             printf("%f  ",tablaResultado[i][j] );
         }
         printf("\n");
-    }
+    }*/
 
     int i = 1;
     int j = 2;
@@ -220,21 +241,20 @@ int on_btn_calcular_clicked(){
         i =1;
         k++;
     }
-    for(int i = 0;i<cantidadObjetos+2;i++){
+    /*for(int i = 0;i<cantidadObjetos+2;i++){
         for(int j = 0; j< cantidadObjetos+1;j++){
 
             printf("%f  ",tablaResultado[i][j] );
         }
         printf("\n");
-    }
+    }*/
     
-    for(int i = 0;i<cantidadObjetos;i++){
-        printf("%s\n", strsAux[i]); 
+    for(int i = 0;i<cantidadObjetos;i++){ 
         gtk_entry_set_text(gtk_grid_get_child_at(gridt,0,i+1),strsAux[i]);
     }
   
     CrearTabla();
-
+    CrearTabla2();
 }
 
 void on_SalirDelPrograma_clicked()
@@ -253,20 +273,22 @@ int pumpumpum(int i, int j){
                 for(int p = i;p <= j;p++){
                     temp1 += promedios[p-1][0];
                 }
-                printf("A[%d][%d-1]: %f\n",i,j,tablaResultado[i][k-1]);
+                /*printf("A[%d][%d-1]: %f\n",i,j,tablaResultado[i][k-1]);
                 printf("A[%d+1][%d]: %f\n",i,j,tablaResultado[k+1][j]);
                 printf("i          : %f\n",promedios[i-1][0]);
                 printf("j          : %f\n",promedios[j-1][0]);
-                printf("sumaresult : %f\n\n", temp1);
+                printf("sumaresult : %f\n\n", temp1);*/
                 if(tablaResultado[i][j]==0){
                     tablaResultado[i][j]=temp1;
+                    tablaResultadoAux[i][j]=k;
                 }
                 else if(tablaResultado[i][j]>temp1){
                     tablaResultado[i][j]=temp1;
+                    tablaResultadoAux[i][j]=k;
                 }
 
             }
-            printf("%f\n",temp1 );
+            
 
             
   
@@ -282,7 +304,24 @@ void CrearTabla(){
     {
         for(int j = -1; j < cantidadObjetos; j++)
         {   
+            if(i==j+2){
+                        char val[30];
+                        sprintf(val,"%d", 0);
 
+                        label = gtk_label_new (val);
+                        gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
+
+                        box = gtk_box_new(0, 0);
+                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                        const GdkRGBA *color;
+                                            
+                        gdk_color_parse( "#AFC6EE", &color );
+                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                        gtk_grid_attach(GTK_GRID(grid2), box, j+2, i+1, 1, 1);
+
+                        gtk_widget_show (label);
+                        gtk_widget_show (box);  
+                    }
             if(i==0){
                 if(j==-1){
                     char val[30];
@@ -336,24 +375,43 @@ void CrearTabla(){
                     gtk_widget_show (box);
                 }
                 
-                else{    
-                    char val[30];
-                    sprintf(val,"%s", "asdf");
+                else{  
+                    if(tablaResultado[i][j+1]!=0){  
+                        char val[30];
+                        sprintf(val,"%f", tablaResultado[i][j+1]);
 
-                    label = gtk_label_new (val);
-                    gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
+                        label = gtk_label_new (val);
+                        gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
 
-                    box = gtk_box_new(0, 0);
-                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
-                    const GdkRGBA *color;
-                                        
-                    gdk_color_parse( "#AFC6EE", &color );
-                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
-                    gtk_grid_attach(GTK_GRID(grid2), box, j+2, i+1, 1, 1);
+                        box = gtk_box_new(0, 0);
+                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                        const GdkRGBA *color;
+                                            
+                        gdk_color_parse( "#AFC6EE", &color );
+                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                        gtk_grid_attach(GTK_GRID(grid2), box, j+2, i+1, 1, 1);
 
-                    gtk_widget_show (label);
-                    gtk_widget_show (box);   
-                }
+                        gtk_widget_show (label);
+                        gtk_widget_show (box);  } 
+                    }
+                    if(i==j){
+                        char val[30];
+                        sprintf(val,"%d", 0);
+
+                        label = gtk_label_new (val);
+                        gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
+
+                        box = gtk_box_new(0, 0);
+                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                        const GdkRGBA *color;
+                                            
+                        gdk_color_parse( "#AFC6EE", &color );
+                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                        gtk_grid_attach(GTK_GRID(grid2), box, j+2, i+1, 1, 1);
+
+                        gtk_widget_show (label);
+                        gtk_widget_show (box);  
+                    }
             }
         }
     }
@@ -363,7 +421,131 @@ void CrearTabla(){
     
 }
 
+void CrearTabla2(){
+     grid2 = gtk_grid_new ();
+    gtk_grid_set_row_spacing (grid2, 1);
+    gtk_grid_set_column_spacing (grid2, 1);
 
+    for (int i = 0; i <= cantidadObjetos+1; i++)
+    {
+        for(int j = -1; j < cantidadObjetos; j++)
+        {   
+            if(i==j+2){
+                        char val[30];
+                        sprintf(val,"%d", 0);
+
+                        label = gtk_label_new (val);
+                        gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
+
+                        box = gtk_box_new(0, 0);
+                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                        const GdkRGBA *color;
+                                            
+                        gdk_color_parse( "#AFC6EE", &color );
+                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                        gtk_grid_attach(GTK_GRID(grid2), box, j+2, i+1, 1, 1);
+
+                        gtk_widget_show (label);
+                        gtk_widget_show (box);  
+                    }
+            if(i==0){
+                if(j==-1){
+                    char val[30];
+                    sprintf(val,"%d", 0);
+                    label = gtk_label_new (val);
+                    gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos + 2));
+                    box = gtk_box_new(0, 0);
+                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                    const GdkRGBA *color;
+                        
+                    gdk_color_parse( "#467DD9", &color );
+                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j+2, i+1, 1, 1);
+
+                    gtk_widget_show (label);
+                    gtk_widget_show (box);  
+                }else{
+                    char val[30];
+                    sprintf(val,"%d", j+1);
+                    label = gtk_label_new (val);
+                    gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos + 2));
+                    box = gtk_box_new(0, 0);
+                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                    const GdkRGBA *color;
+                        
+                    gdk_color_parse( "#467DD9", &color );
+                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j+2, i+1, 1, 1);
+
+                    gtk_widget_show (label);
+                    gtk_widget_show (box);  
+                }
+            }
+            else{
+                if(j==-1){
+                    char val[30];
+                    sprintf(val,"%d", i);
+
+                    label = gtk_label_new (val);
+                    gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos + 2));
+
+                    box = gtk_box_new(0, 0);
+                    gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                    const GdkRGBA *color;
+                    
+                    gdk_color_parse( "#AFC6EE", &color );
+                    gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                    gtk_grid_attach(GTK_GRID(grid2), box, j+1, i+1, 1, 1);
+
+                    gtk_widget_show (label);
+                    gtk_widget_show (box);
+                }
+                
+                else{  
+                    if(tablaResultado[i][j+1]!=0){  
+                        char val[30];
+                        sprintf(val,"%d", tablaResultadoAux[i][j+1]);
+
+                        label = gtk_label_new (val);
+                        gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
+
+                        box = gtk_box_new(0, 0);
+                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                        const GdkRGBA *color;
+                                            
+                        gdk_color_parse( "#AFC6EE", &color );
+                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                        gtk_grid_attach(GTK_GRID(grid2), box, j+2, i+1, 1, 1);
+
+                        gtk_widget_show (label);
+                        gtk_widget_show (box);  } 
+                    }
+                    if(i==j){
+                        char val[30];
+                        sprintf(val,"%d", 0);
+
+                        label = gtk_label_new (val);
+                        gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
+
+                        box = gtk_box_new(0, 0);
+                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
+                        const GdkRGBA *color;
+                                            
+                        gdk_color_parse( "#AFC6EE", &color );
+                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
+                        gtk_grid_attach(GTK_GRID(grid2), box, j+2, i+1, 1, 1);
+
+                        gtk_widget_show (label);
+                        gtk_widget_show (box);  
+                    }
+            }
+        }
+    }
+
+    gtk_container_add (GTK_CONTAINER (tabla_R), grid2);
+    gtk_widget_show (grid2);   
+    
+}
 int on_guardar_SD_clicked ()
 {
     char * filename[250];
