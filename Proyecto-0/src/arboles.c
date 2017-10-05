@@ -690,7 +690,7 @@ int on_acept_clicked(){
     }
 
 
-    if(cantidadObjetos <= 0){
+    if(cantidadObjetos <= 0 &&cantidadObjetos >= 20){
         gtk_label_set_text(GTK_LABEL(result), "La cantidad de llaves tiene que ser mayor que 0.");
         return 0;
     }
