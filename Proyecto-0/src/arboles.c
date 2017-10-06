@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
     gtk_widget_set_tooltip_text(SalirDelPrograma, "Cierra el programa");
 
 
-    gtk_label_set_text(GTK_LABEL(result), "Utilice \"-\" para indicar cantidad infinito.");
+
     g_object_unref(builder);
     gtk_widget_show(window_SD);                         
                               
@@ -175,6 +175,14 @@ int on_btn_calcular_clicked(){
                     cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
                     float valor;
                     sscanf(cant_nodos, "%f", &valor);
+                    if(strlen(cant_nodos)==0){
+                    	gtk_label_set_text(GTK_LABEL(result), "Debe llenar todos los campos solicitados.");
+                            return 0;
+                    }
+                    if(strlen(cant_nodos)>50){
+                    	gtk_label_set_text(GTK_LABEL(result), "La llave debe de tener menos de 50 letras.");
+                            return 0;
+                    }
                     for(int i = 0 ; i <strlen(cant_nodos);i++){
                         if(cant_nodos[i]==','){
                             continue;
@@ -631,7 +639,7 @@ void readFile(char* filename)
 
     FILE *file;
     file = fopen(filename, "r");
-    char array[10];
+    char array[100];
 
     fgets(array, sizeof(array), file);
     strip(array);
@@ -690,8 +698,8 @@ int on_acept_clicked(){
     }
 
 
-    if(cantidadObjetos <= 0 &&cantidadObjetos >= 20){
-        gtk_label_set_text(GTK_LABEL(result), "La cantidad de llaves tiene que ser mayor que 0.");
+    if(cantidadObjetos <= 0 ||cantidadObjetos > 100){
+        gtk_label_set_text(GTK_LABEL(result), "La cantidad de llaves tiene que ser mayor que 0 y menor que 100.");
         return 0;
     }
 
