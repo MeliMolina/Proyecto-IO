@@ -217,17 +217,9 @@ int on_btn_calcular_clicked(){
                 tablaResultado[i][j] *= dimensiones[i+1][0];
                 tablaResultadoAux[i][j] = i;
             }
-            //printf("%f  ",tablaResultado[i][j] );
         }
-        //printf("\n");
     }
-    /*for(int i = 0;i<cantidadObjetos+2;i++){
-        for(int j = 0; j< cantidadObjetos+1;j++){
 
-            printf("%f  ",tablaResultado[i][j] );
-        }
-        printf("\n");
-    }*/
 
     printf("%s\n","dimensiones" );
     for(int n = 0; n < cantidadObjetos+1;n++){
@@ -270,14 +262,14 @@ int pumpumpum(int i, int j){
   
                 temp1 = tablaResultado[i][k-1] + tablaResultado[k+1][j];
                 temp2 = dimensiones[i-1][0]*dimensiones[j+1][0]*dimensiones[k][0];
-                printf("A[%d][%d-1]: %d\n",i,j,tablaResultado[i][k-1]);
+                /*printf("A[%d][%d-1]: %d\n",i,j,tablaResultado[i][k-1]);
                 printf("A[%d+1][%d]: %d\n",i,j,tablaResultado[k+1][j]);
                 printf("dim[%d-1][%d]: %d\n",i,j,dimensiones[i-1][0]);
                 printf("dim[%d+1][%d]: %d\n",i,j,dimensiones[k][0]);
                 printf("dim[%d][%d]  : %d\n\n",i,j,dimensiones[j+1][0]);
                 printf("i: %d-j: %d-k:%d\n", i,j,k);
                 printf("sumaresult1: %d\n", temp1);
-                printf("sumaresult2: %d\n\n", temp2);
+                printf("sumaresult2: %d\n\n", temp2);*/
                 temp1+=temp2;
                 if(tablaResultado[i][j]==0){
                     tablaResultado[i][j]=temp1;
