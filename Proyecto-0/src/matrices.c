@@ -210,8 +210,8 @@ int on_btn_calcular_clicked(){
 
     for(int i = 1;i<cantidadObjetos+2;i++){
         for(int j = 1; j< cantidadObjetos+2;j++){
-            tablaResultado[i][j]=1;
             if(i == j){
+                tablaResultado[i][j]=1;
                 tablaResultado[i][j] *= dimensiones[i-1][0];
                 tablaResultado[i][j] *= dimensiones[i][0];
                 tablaResultado[i][j] *= dimensiones[i+1][0];
@@ -229,11 +229,13 @@ int on_btn_calcular_clicked(){
         printf("\n");
     }*/
 
-
-
-/*
+    printf("%s\n","dimensiones" );
+    for(int n = 0; n < cantidadObjetos+1;n++){
+        printf("%d - ",dimensiones[n][0] );
+    }
+    printf("%s\n\n","dimensiones" );
     int i = 1;
-    int j = 2;
+    int j = 3;
     int k = 2;
     while(k < cantidadObjetos+1){
         
@@ -244,7 +246,7 @@ int on_btn_calcular_clicked(){
             
         i =1;
         k++;
-    }*/
+    }
 
     
   
@@ -260,20 +262,23 @@ void on_SalirDelPrograma_clicked()
 
 int pumpumpum(int i, int j){
 
-    int k = 0;
-            float temp1;
+    int k = 1;
+            int temp1;
+            int temp2;
 
             for(k = i; k<=j;k++){
   
                 temp1 = tablaResultado[i][k-1] + tablaResultado[k+1][j];
-                for(int p = i;p <= j;p++){
-                    temp1 += promedios[p-1][0];
-                }
-                /*printf("A[%d][%d-1]: %f\n",i,j,tablaResultado[i][k-1]);
-                printf("A[%d+1][%d]: %f\n",i,j,tablaResultado[k+1][j]);
-                printf("i          : %f\n",promedios[i-1][0]);
-                printf("j          : %f\n",promedios[j-1][0]);
-                printf("sumaresult : %f\n\n", temp1);*/
+                temp2 = dimensiones[i-1][0]*dimensiones[j+1][0]*dimensiones[k][0];
+                printf("A[%d][%d-1]: %d\n",i,j,tablaResultado[i][k-1]);
+                printf("A[%d+1][%d]: %d\n",i,j,tablaResultado[k+1][j]);
+                printf("dim[%d-1][%d]: %d\n",i,j,dimensiones[i-1][0]);
+                printf("dim[%d+1][%d]: %d\n",i,j,dimensiones[k][0]);
+                printf("dim[%d][%d]  : %d\n\n",i,j,dimensiones[j+1][0]);
+                printf("i: %d-j: %d-k:%d\n", i,j,k);
+                printf("sumaresult1: %d\n", temp1);
+                printf("sumaresult2: %d\n\n", temp2);
+                temp1+=temp2;
                 if(tablaResultado[i][j]==0){
                     tablaResultado[i][j]=temp1;
                     tablaResultadoAux[i][j]=k;
@@ -374,7 +379,7 @@ void CrearTabla(){
                         gtk_widget_show (box);
                 }
                 else{  
-                    if(tablaResultado[i][j+1]!=0){  
+                    
                         char val[30];
                         sprintf(val,"%d", tablaResultado[i][j+1]);
 
@@ -390,26 +395,9 @@ void CrearTabla(){
                         gtk_grid_attach(GTK_GRID(grid2), box, j+2, i+1, 1, 1);
 
                         gtk_widget_show (label);
-                        gtk_widget_show (box);  } 
-                    }
-                    if(i==j){
-                        char val[30];
-                        sprintf(val,"%d", 0);
-
-                        label = gtk_label_new (val);
-                        gtk_widget_set_size_request(label, 470/(cantidadObjetos + 2), 470/(cantidadObjetos+ 2));
-
-                        box = gtk_box_new(0, 0);
-                        gtk_box_pack_start(GTK_BOX(box), label, 0,0,0);  
-                        const GdkRGBA *color;
-                                            
-                        gdk_color_parse( "#AFC6EE", &color );
-                        gtk_widget_modify_bg(box, GTK_STATE_NORMAL, &color);
-                        gtk_grid_attach(GTK_GRID(grid2), box, j+2, i+1, 1, 1);
-
-                        gtk_widget_show (label);
                         gtk_widget_show (box);  
                     }
+                    
             }
         }
     }
@@ -484,7 +472,7 @@ void CrearTabla2(){
                         gtk_widget_show (box);
                 }
                 else{  
-                    if(tablaResultado[i][j+1]!=0){  
+                    
                         char val[30];
                         sprintf(val,"%d", tablaResultadoAux[i][j+1]);
 
@@ -501,7 +489,7 @@ void CrearTabla2(){
 
                         gtk_widget_show (label);
                         gtk_widget_show (box);  } 
-                    }
+                    
      
             }
         }
