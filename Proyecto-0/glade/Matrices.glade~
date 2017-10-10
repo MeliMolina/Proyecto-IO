@@ -4,7 +4,7 @@
   <requires lib="gtk+" version="3.12"/>
   <object class="GtkWindow" id="window_SD">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Problema de la Mochila</property>
+    <property name="title" translatable="yes">Multiplicación  de Matrices</property>
     <property name="window_position">center</property>
     <child>
       <object class="GtkFixed" id="cont_fijo_SD">
@@ -52,7 +52,7 @@
                   <object class="GtkLabel" id="label_titulo_SD">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Problema de la Mochila</property>
+                    <property name="label" translatable="yes">Multiplicación  de Matrices</property>
                     <property name="justify">center</property>
                     <attributes>
                       <attribute name="font-desc" value="DejaVu Serif Bold Italic 11"/>
@@ -108,8 +108,8 @@
                     </child>
                     <child>
                       <object class="GtkFixed" id="cont_datos_SD">
-                        <property name="width_request">470</property>
-                        <property name="height_request">470</property>
+                        <property name="width_request">339</property>
+                        <property name="height_request">468</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
@@ -121,8 +121,8 @@
                             <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkFixed" id="datos_SD">
-                                <property name="width_request">484</property>
-                                <property name="height_request">444</property>
+                                <property name="width_request">262</property>
+                                <property name="height_request">443</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <child>
@@ -131,7 +131,7 @@
                                     <property name="height_request">80</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">Cantidad de llaves</property>
+                                    <property name="label" translatable="yes">Número de matrices</property>
                                     <attributes>
                                       <attribute name="font-desc" value="DejaVu Serif Bold Italic 9"/>
                                     </attributes>
@@ -143,7 +143,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkScrolledWindow" id="scrolledwindow1">
-                                    <property name="width_request">190</property>
+                                    <property name="width_request">334</property>
                                     <property name="height_request">310</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
@@ -216,33 +216,8 @@
                                     <property name="can_focus">True</property>
                                   </object>
                                   <packing>
-                                    <property name="x">30</property>
+                                    <property name="x">21</property>
                                     <property name="y">7</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkScrolledWindow" id="scrolledwindow5">
-                                    <property name="width_request">198</property>
-                                    <property name="height_request">306</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="shadow_type">in</property>
-                                    <child>
-                                      <object class="GtkViewport" id="viewport5">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <child>
-                                          <object class="GtkLabel" id="orden">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="x">235</property>
-                                    <property name="y">105</property>
                                   </packing>
                                 </child>
                               </object>
@@ -343,7 +318,7 @@
                         <property name="height_request">80</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Tabla A</property>
+                        <property name="label" translatable="yes">Tabla M</property>
                       </object>
                       <packing>
                         <property name="x">-22</property>
@@ -387,7 +362,7 @@
                     <property name="height_request">80</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Tabla R</property>
+                    <property name="label" translatable="yes">Tabla P</property>
                   </object>
                   <packing>
                     <property name="x">546</property>

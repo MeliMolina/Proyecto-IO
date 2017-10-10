@@ -30,6 +30,8 @@ all: $(OBJS)
 	$(CC) -o Reemplazo_Equipos src/reemplazo_equipos.c $(LDFLAGS)
 	$(CC) -o Mochila src/mochila.c $(LDFLAGS)
 	$(CC) -o Arbol src/arboles.c $(LDFLAGS)
+    $(CC) -o Matrices src/matrices.c $(LDFLAGS)
+
 	./main_menu
     
 

@@ -158,7 +158,7 @@ void on_Button_Programa5_clicked(){
 }
 
 void on_Button_Programa6_clicked(){
-    system("./Pending &");
+    system("./Matrices &");
 	
 
 }
