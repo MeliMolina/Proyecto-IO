@@ -183,13 +183,10 @@ int on_btn_calcular_clicked(){
                     	gtk_label_set_text(GTK_LABEL(result), "Debe llenar todos los campos solicitados.");
                             return 0;
                     }
-                    if(strlen(cant_nodos)>50){
-                    	gtk_label_set_text(GTK_LABEL(result), "La llave debe de tener menos de 50 letras.");
-                            return 0;
-                    }
+           
                     for(int i = 0 ; i <strlen(cant_nodos);i++){
                         if(isdigit(cant_nodos[i])==FALSE){
-                            gtk_label_set_text(GTK_LABEL(result), "No puede haber letras en el valor y utilice \",\" para decimales.");
+                            gtk_label_set_text(GTK_LABEL(result), "No puede escribir letras en la dimensión.");
                             return 0;
                         }
                     }
@@ -249,25 +246,21 @@ int on_btn_calcular_clicked(){
             if(tablaResultadoAux[i][j]>0){
                 tablaResultadoAux[i][j]-=1; 
             }
-            printf("%d ",tablaResultadoAux[i][j]);
-            
         }
-        printf("\n");
-        
-    }
-    printf("\n\n");
-     for(int i = 2;i< cantidadObjetos;i++){
-        for(int j=0;j< cantidadObjetos;j++){
-            if(tablaResultadoAux[i][j]>0){
-                tablaResultadoAux2[i-2][j]+=tablaResultadoAux[i][j];
-            }
-            printf("%d ",tablaResultadoAux2[i-2][j]);
-        }
-        printf("\n");
     }
 
-        respuesta(0,cantidadObjetos-1);
-    
+     for(int i = 1;i< cantidadObjetos;i++){
+        for(int j=0;j< cantidadObjetos;j++){
+            if(tablaResultadoAux[i][j]>0){
+                tablaResultadoAux2[i-1][j]+=tablaResultadoAux[i][j];
+            }
+        }
+    }
+
+    strcpy(val,"Resultado: ");
+    respuesta(0,cantidadObjetos-1);
+    gtk_label_set_text(GTK_LABEL(result), val);
+
 }
 
 void on_SalirDelPrograma_clicked()
@@ -277,13 +270,13 @@ void on_SalirDelPrograma_clicked()
 
 void respuesta(int i,int j){
     if(i==j){
-        printf("A%ld",i+1);
+        strcat(val,strsAux[i]);
     }else{
-        printf("(");
+        strcat(val,"(");
         respuesta(i,tablaResultadoAux2[i][j]);
-        printf("x");
+        strcat(val,"x");
         respuesta(tablaResultadoAux2[i][j]+1,j);
-        printf(")");
+        strcat(val,")");
     }
     /*char *v[3000];
     strcpy(v,"");
@@ -296,7 +289,7 @@ void respuesta(int i,int j){
     respuesta
    }*/
     
-    //gtk_label_set_text(GTK_LABEL(result), v);
+    
    
 
 }
