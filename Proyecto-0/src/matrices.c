@@ -62,6 +62,7 @@ char *strsResult[2000]={"A","B","C","D","E","F","G","H","I","J","K","L","M","N",
 float ** tabla;
 int ** tablaResultado;
 int ** tablaResultadoAux;
+int ** tablaResultadoAux2;
 float ** promedios;
 int capacidadMochila=-1;
 int cantidadObjetos = 0;
@@ -168,6 +169,7 @@ int on_btn_calcular_clicked(){
     promedios = createFloatMatrix(cantidadObjetos,1);
     tablaResultado = createFloatMatrix(cantidadObjetos+2, cantidadObjetos+2);
     tablaResultadoAux = createMatrix(cantidadObjetos+2,cantidadObjetos+2);
+    tablaResultadoAux2 = createMatrix(cantidadObjetos+2,cantidadObjetos+2);
     dimensiones = createMatrix(cantidadObjetos+4,1);
 
     for(int i=1;i<=cantidadObjetos+1;i++){ 
@@ -242,7 +244,30 @@ int on_btn_calcular_clicked(){
   
     CrearTabla();
     CrearTabla2();
-    respuesta();
+    for(int i = 0;i< cantidadObjetos;i++){
+        for(int j=0;j< cantidadObjetos;j++){
+            if(tablaResultadoAux[i][j]>0){
+                tablaResultadoAux[i][j]-=1; 
+            }
+            printf("%d ",tablaResultadoAux[i][j]);
+            
+        }
+        printf("\n");
+        
+    }
+    printf("\n\n");
+     for(int i = 2;i< cantidadObjetos;i++){
+        for(int j=0;j< cantidadObjetos;j++){
+            if(tablaResultadoAux[i][j]>0){
+                tablaResultadoAux2[i-2][j]+=tablaResultadoAux[i][j];
+            }
+            printf("%d ",tablaResultadoAux2[i-2][j]);
+        }
+        printf("\n");
+    }
+
+        respuesta(0,cantidadObjetos-1);
+    
 }
 
 void on_SalirDelPrograma_clicked()
@@ -250,31 +275,28 @@ void on_SalirDelPrograma_clicked()
     gtk_widget_destroy(window_SD);
 }
 
-void respuesta(){
-    char v;
+void respuesta(int i,int j){
+    if(i==j){
+        printf("A%ld",i+1);
+    }else{
+        printf("(");
+        respuesta(i,tablaResultadoAux2[i][j]);
+        printf("x");
+        respuesta(tablaResultadoAux2[i][j]+1,j);
+        printf(")");
+    }
+    /*char *v[3000];
     strcpy(v,"");
-    dimensiones = createMatrix(cantidadObjetos+4,1);
-    const gchar *temp;
-
-    for(int i=0;i < cantidadObjetos;i++){
-        for(int j=0; j< cantidadObjetos;j++){
-            
-            if(tablaResultadoAux[i+1][j+1]>=i){
-                if(dimensiones[i][0]==0){
-                    strcat(v,strsAux[i]);
-                    strcat(v,")(");
-                    strsResult[i]=v;
-                    dimensiones[i][0]=1;
-                }
-                //strcat(strsAux[i],")(");
-                //strsResult[i]=temp;
-            }
-        }
-    }
-    for(int i = 0;i < cantidadObjetos;i++){
-        strcat(v,strsResult[i]);
-    }
-    gtk_label_set_text(GTK_LABEL(result), v);
+    
+   if(i == j){
+    char *temp[30];
+    sprinf(temp,"%s%d","A",i);
+    strcat(v,temp);
+   }else{
+    respuesta
+   }*/
+    
+    //gtk_label_set_text(GTK_LABEL(result), v);
    
 
 }
