@@ -54,6 +54,7 @@ GtkWidget *label;
 GtkWidget *box;
 char *strs[50]= {"Dimensión","MatrizDimensiones"};
 char *strsAux[2000]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"};
+char *strsResult[2000]={"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"};
 
 
 
@@ -221,11 +222,7 @@ int on_btn_calcular_clicked(){
     }
 
 
-    printf("%s\n","dimensiones" );
-    for(int n = 0; n < cantidadObjetos+1;n++){
-        printf("%d - ",dimensiones[n][0] );
-    }
-    printf("%s\n\n","dimensiones" );
+  
     int i = 1;
     int j = 3;
     int k = 2;
@@ -245,6 +242,7 @@ int on_btn_calcular_clicked(){
   
     CrearTabla();
     CrearTabla2();
+    respuesta();
 }
 
 void on_SalirDelPrograma_clicked()
@@ -252,6 +250,26 @@ void on_SalirDelPrograma_clicked()
     gtk_widget_destroy(window_SD);
 }
 
+void respuesta(){
+    char v[3000];
+    strcpy(v,"");
+    for(int i=0;i < cantidadObjetos;i++){
+        for(int j=0; j< cantidadObjetos;j++){
+            if(tablaResultadoAux[i+1][j+1]>=i){
+                const gchar *temp;
+                strcpy(temp,strsAux[i]);
+                strcat(strsAux[i],")(");
+                strsResult[i]=temp;
+            }
+        }
+    }
+    for(int i = 0;i < cantidadObjetos;i++){
+        strcat(v,strsResult[i]);
+    }
+    gtk_label_set_text(GTK_LABEL(result), v);
+   
+
+}
 int pumpumpum(int i, int j){
 
     int k = 1;
