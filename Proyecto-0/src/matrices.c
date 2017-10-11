@@ -251,15 +251,23 @@ void on_SalirDelPrograma_clicked()
 }
 
 void respuesta(){
-    char v[3000];
+    char v;
     strcpy(v,"");
+    dimensiones = createMatrix(cantidadObjetos+4,1);
+    const gchar *temp;
+
     for(int i=0;i < cantidadObjetos;i++){
         for(int j=0; j< cantidadObjetos;j++){
+            
             if(tablaResultadoAux[i+1][j+1]>=i){
-                const gchar *temp;
-                strcpy(temp,strsAux[i]);
-                strcat(strsAux[i],")(");
-                strsResult[i]=temp;
+                if(dimensiones[i][0]==0){
+                    strcat(v,strsAux[i]);
+                    strcat(v,")(");
+                    strsResult[i]=v;
+                    dimensiones[i][0]=1;
+                }
+                //strcat(strsAux[i],")(");
+                //strsResult[i]=temp;
             }
         }
     }
