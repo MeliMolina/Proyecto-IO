@@ -54,7 +54,7 @@ GtkWidget *label;
 GtkWidget *box;
 char *strs[50]= {"Dimensión","MatrizDimensiones"};
 char *strsAux[2000]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"};
-char *strsResult[2000]={"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"};
+
 
 
 
@@ -132,25 +132,6 @@ void deleteTablesGrid(GtkWidget *widget)
 
 }
 
-void sortCopyPasta(){
-    char temp[20];
-    float tempNum;
-    for (int i = 0; i < cantidadObjetos - 1 ; i++)
-    {
-        for (int j = i + 1; j < cantidadObjetos; j++)
-        {
-            if (strcmp(strsAux[i], strsAux[j]) > 0)
-            {
-                strcpy(temp, strsAux[i]);
-                strcpy(strsAux[i], strsAux[j]);
-                strcpy(strsAux[j], temp);
-                tempNum = tabla[i][1];
-                tabla[i][1] = tabla[j][1];
-                tabla[j][1] = tempNum;
-            }
-        }
-    }
-}
 
 int on_btn_calcular_clicked(){
     deleteTablesGrid(tabla_solucion);
@@ -191,9 +172,6 @@ int on_btn_calcular_clicked(){
                         }
                     }
                     dimensiones[i-1][0] = valor;
-                
-    
-
         }
 
     }
@@ -278,17 +256,6 @@ void respuesta(int i,int j){
         respuesta(tablaResultadoAux2[i][j]+1,j);
         strcat(val,")");
     }
-    /*char *v[3000];
-    strcpy(v,"");
-    
-   if(i == j){
-    char *temp[30];
-    sprinf(temp,"%s%d","A",i);
-    strcat(v,temp);
-   }else{
-    respuesta
-   }*/
-    
     
    
 
@@ -303,14 +270,6 @@ int pumpumpum(int i, int j){
   
                 temp1 = tablaResultado[i][k-1] + tablaResultado[k+1][j];
                 temp2 = dimensiones[i-1][0]*dimensiones[j+1][0]*dimensiones[k][0];
-                /*printf("A[%d][%d-1]: %d\n",i,j,tablaResultado[i][k-1]);
-                printf("A[%d+1][%d]: %d\n",i,j,tablaResultado[k+1][j]);
-                printf("dim[%d-1][%d]: %d\n",i,j,dimensiones[i-1][0]);
-                printf("dim[%d+1][%d]: %d\n",i,j,dimensiones[k][0]);
-                printf("dim[%d][%d]  : %d\n\n",i,j,dimensiones[j+1][0]);
-                printf("i: %d-j: %d-k:%d\n", i,j,k);
-                printf("sumaresult1: %d\n", temp1);
-                printf("sumaresult2: %d\n\n", temp2);*/
                 temp1+=temp2;
                 if(tablaResultado[i][j]==0){
                     tablaResultado[i][j]=temp1;
@@ -322,11 +281,6 @@ int pumpumpum(int i, int j){
                 }
 
             }
-            
-
-            
-  
-
 }
 
 void CrearTabla(){
@@ -563,8 +517,8 @@ void writeFile(char* filename)
     
     fprintf(file, "%i\n", cantidadObjetos);
     const gchar *cant_nodos;
-    for(int i=1;i<=cantidadObjetos;i++){ 
-        for(int j=0;j<2;j++){
+    for(int i=1;i<=cantidadObjetos+1;i++){ 
+        for(int j=0;j<1;j++){
             const gchar *cant_nodos;
             cant_nodos = gtk_entry_get_text(gtk_grid_get_child_at (gridt,j,i));
             fprintf(file, "%s\n", cant_nodos);
@@ -615,8 +569,8 @@ void readFile(char* filename)
 
     on_acept_clicked();
 
-    for(int i=1;i<=cantidadObjetos;i++){ 
-        for(int j=0;j<2;j++){        
+    for(int i=1;i<=cantidadObjetos+1;i++){ 
+        for(int j=0;j<1;j++){        
 
             fgets(array, sizeof(array), file);
             strip(array); //Quita espacios null

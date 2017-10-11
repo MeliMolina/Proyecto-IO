@@ -131,7 +131,7 @@
                                     <property name="height_request">80</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">Número de matrices</property>
+                                    <property name="label" translatable="yes">Cantidad de matrices</property>
                                     <attributes>
                                       <attribute name="font-desc" value="DejaVu Serif Bold Italic 9"/>
                                     </attributes>
