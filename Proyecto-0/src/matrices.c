@@ -71,6 +71,7 @@ int ** dimensiones;
 
 
 char val[300000];
+char res[300000];
 
 int main(int argc, char *argv[])
 {
@@ -235,7 +236,7 @@ int on_btn_calcular_clicked(){
         }
     }
 
-    strcpy(val,"Resultado: ");
+    strcpy(res,"Resultado: ");
     respuesta(0,cantidadObjetos-1);
     gtk_label_set_text(GTK_LABEL(result), val);
 
@@ -248,13 +249,13 @@ void on_SalirDelPrograma_clicked()
 
 void respuesta(int i,int j){
     if(i==j){
-        strcat(val,strsAux[i]);
+        strcat(res,strsAux[i]);
     }else{
-        strcat(val,"(");
+        strcat(res,"(");
         respuesta(i,tablaResultadoAux2[i][j]);
-        strcat(val,"x");
+        strcat(res,"x");
         respuesta(tablaResultadoAux2[i][j]+1,j);
-        strcat(val,")");
+        strcat(res,")");
     }
     
    
