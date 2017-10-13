@@ -53,7 +53,7 @@ GtkWidget *resultadoFinal;
 GtkWidget *label;
 GtkWidget *box;
 char *strs[50]= {"Dimensión","MatrizDimensiones"};
-char *strsAux[2000]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"};
+char *strsAux[2000]= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Z","A1","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2"};
 
 
 
@@ -172,6 +172,9 @@ int on_btn_calcular_clicked(){
                             return 0;
                         }
                     }
+                    if(valor > 99){
+                             gtk_label_set_text(GTK_LABEL(result), "Dimensión máxima de 99 :(");
+                            return 0;                    }
                     dimensiones[i-1][0] = valor;
         }
 
@@ -620,8 +623,8 @@ int on_acept_clicked(){
     }
 
 
-    if(cantidadObjetos <= 0 ||cantidadObjetos > 100){
-        gtk_label_set_text(GTK_LABEL(result), "La cantidad de llaves tiene que ser mayor que 0 y menor que 100.");
+    if(cantidadObjetos <= 0 ||cantidadObjetos > 50){
+        gtk_label_set_text(GTK_LABEL(result), "La cantidad de llaves tiene que ser mayor que 0 y menor que 50.");
         return 0;
     }
 
