@@ -238,7 +238,7 @@ int on_btn_calcular_clicked(){
 
     strcpy(res,"Resultado: ");
     respuesta(0,cantidadObjetos-1);
-    gtk_label_set_text(GTK_LABEL(result), val);
+    gtk_label_set_text(GTK_LABEL(result), res);
 
 }
 
